@@ -37,7 +37,6 @@ const MenuItemSelectedStyles = {
 }
 
 
-
 export function JobsHelper() {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [data, setData] = React.useState('Location')
