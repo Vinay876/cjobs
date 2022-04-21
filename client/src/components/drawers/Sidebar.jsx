@@ -30,13 +30,10 @@ export default function Sidebar({ commonProps }) {
             <React.Fragment key={'left'}>
                 <IconButton
                     size="large"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    color="inherit"
                     onClick={toggleDrawer('left', true)}
                     sx={{ ml: -2 }}
                     disableRipple>
-                    <MenuIcon />
+                    <MenuIcon sx={{color:'white'}} />
                 </IconButton>
                 <Drawer
                     anchor={'left'}
@@ -45,7 +42,7 @@ export default function Sidebar({ commonProps }) {
                     onOpen={toggleDrawer('left', true)}
                 >
                     <Box
-                        sx={{ width: 200 }}
+                        sx={{ width: 200,background:'rgb(156, 39, 176)',color:'white' ,height:'100%'}}
                         role="presentation"
                         // onClick={toggleDrawer('left', false)}  for closing the drawer only for links
                         onKeyDown={toggleDrawer('left', false)}
@@ -55,18 +52,18 @@ export default function Sidebar({ commonProps }) {
                             <ListItem sx={{ justifyContent: 'right', marginLeft: 0, overflowX: 'hiddenImportant' }} onClick={toggleDrawer('left', false)}>
                                 <CloseIcon />
                             </ListItem>
-                            <Box sx={{
+                            <Typography sx={{
                                 fontSize: '16px',
                                 userSelect: 'none',
                                 textTransform: 'none',
-                                color: 'black',
+                                color: 'inherit',
                                 padding: '0px 15px',
                                 mt: 1
                             }}>
                                 Login
-                            </Box>
+                            </Typography>
                             <Typography sx={{
-                                color: 'black',
+                                color: 'inherit',
                                 fontSize: '16px',
                                 height: '30px',
                                 userSelect: 'none',
