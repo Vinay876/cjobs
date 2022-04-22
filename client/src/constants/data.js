@@ -202,3 +202,23 @@ export const TrainingHelperData = {
         { name: 'Data Science Specialzations' },
     ],
 }
+
+
+export const UserHelperData = {
+    'Contact':[
+        {name:'Contact as Employers',url:'/chosen=contact-as-employers'},
+        {name:'Contact as Job seekers',url:'/chosen=contact-as-job-seekers'},
+    ],
+    'Login':[
+        {name:'Login as Employers',url:'/chosen=login-as-employers'},
+        {name:'Login as Job seekers',url:'/chosen=login-as-job-seekers'},
+    ],
+    'Register':[
+        {name:'Register as Employers',url:'/chosen=register-as-employers'},
+        {name:'Register as Job seekers',url:'/chosen=register-as-job-seekers'},
+    ],
+}
+
+export const SkillsData=[
+    'Java',"JavaScript",'Python','Ruby',"GoLang",'C','C#','C++'
+]
