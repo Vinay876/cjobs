@@ -8,6 +8,7 @@ To create server (backend) i used
 -> npm i body-parser cors twilio dotenv express node-fetch nodemon mongoose
 
 Why i use these packages:
+
     body-parser - for parsing the data
     cors - for removing cross origin errors
     dotenv - for saving static data at one point and use it in all backend
@@ -80,21 +81,26 @@ color - rgb(156, 39, 176)
 The changes in the commits. ( Here i store what changes i made for every commit)
 
 ->First Commit - 19-04-2022
+
     Created the template
 
 ->Second Commit - 20-04-2022
+
     Created the responsive navbar (using mui components)
 
 ->Third Commit - 21-04-2022
+
     Redesigned the navbar and added data to it.
     Created the Searchbar
 
 ->Fourth Commit - 22-04-2022
+
     Created page for  register
     Added backend for  register (using twilio and mongoose)
     Created pages for jobs, internships and trainings and but added nothing to them
 
 ->Fifth Commit - 24-04-2022
+
     Created page for  login
     Added backend for  login (using twilio and mongoose)
     Created pages for jobs, internships and trainings and but added nothing to them
