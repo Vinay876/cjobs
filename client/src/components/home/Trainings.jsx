@@ -8,7 +8,7 @@ export default function Trainings() {
         <>
             <Box sx={{ padding: '20px 50px' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: "700", }}>
+                    <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: "700",fontFamily:'Fredoka' }}>
                         Our Trainings
                     </Typography>
                     <Button variant='outlined' color='secondary' sx={{
@@ -20,6 +20,9 @@ export default function Trainings() {
                         }
                     }}>View All</Button>
                 </Box>
+                <Typography variant='h6' sx={{ color: 'black', fontWeight: "700",fontFamily:'Fredoka' }}>
+                        Learn new skills to boost your career
+                    </Typography>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', my: 8 }}>
                     {TrainingData.map((data, index) => {
                         const num = Math.random()

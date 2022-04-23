@@ -8,7 +8,7 @@ export default function Category() {
         <>
             <Box sx={{ padding: '20px 50px' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: "700", }}>
+                    <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: "700", fontFamily: 'Fredoka' }}>
                         With Popular Categories
                     </Typography>
                     <Button variant='outlined' color='secondary' sx={{
@@ -20,6 +20,9 @@ export default function Category() {
                         }
                     }}>View All</Button>
                 </Box>
+                <Typography variant='h6' sx={{ color: 'black', fontWeight: "700", fontFamily: 'Fredoka' }}>
+                    Choose the categories that fits you in.
+                </Typography>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', my: 8 }}>
                     {CategoryData.map((data, index) => {
                         const num = Math.random()

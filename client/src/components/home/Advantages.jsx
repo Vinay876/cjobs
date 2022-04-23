@@ -7,8 +7,11 @@ export default function Advnatages() {
         <>
             <Box sx={{ padding: '20px 50px' }}>
 
-                <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: "700", }}>
+                <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: "700", fontFamily: 'Fredoka' }}>
                     With Many Advantages
+                </Typography>
+                <Typography variant='h6' sx={{ color: 'black', fontWeight: "700", fontFamily: 'Fredoka' }}>
+                    The advantages you get when you search here.
                 </Typography>
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', my: 8 }}>
                     {AdvantageData.map((data, index) => {

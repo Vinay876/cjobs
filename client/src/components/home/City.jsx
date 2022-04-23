@@ -9,7 +9,7 @@ export default function City() {
 
             <Box sx={{ padding: '20px 50px' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: "700", }}>
+                    <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: "700",fontFamily:'Fredoka' }}>
                         In Popular Cities
                     </Typography>
                     <Button variant='outlined' color='secondary' sx={{
@@ -21,6 +21,9 @@ export default function City() {
                         }
                     }}>View All</Button>
                 </Box>
+                <Typography variant='h6' sx={{ color: 'black', fontWeight: "700",fontFamily:'Fredoka' }}>
+                        Choose the city that suites you.
+                    </Typography>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', my: 8 }}>
                     {CityData.map((data, index) => {
                         const num = Math.random()
