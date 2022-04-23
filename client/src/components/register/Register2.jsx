@@ -1,6 +1,6 @@
 // Register as job seeker
-// Register as employer
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
@@ -19,7 +19,7 @@ import { SkillsData } from '../../constants/data'
 
 const userData = {
   User_Name: '',
-  User_Designation: '',
+  User_Address: '',
   User_Email: '',
   User_Number: '',
   otp: '',
@@ -30,7 +30,8 @@ const userData = {
 }
 
 export default function Register2() {
-  const { setMessage, setMessageType, setShow } = React.useContext(LoginContext)
+  const navigate = useNavigate()
+  const { setMessage, setMessageType, setShow, encrypt } = React.useContext(LoginContext)
   const [resendTime, setResendTime] = React.useState(60)
   const [skills, setSkills] = React.useState([])
   const [data, setData] = React.useState(userData)
@@ -50,7 +51,7 @@ export default function Register2() {
   }
 
   function UserDataChecker() {
-    
+
     if (!data.User_Name || data.User_Name.length < 4) {
       setShow(true)
       setMessageType('error')
@@ -63,7 +64,7 @@ export default function Register2() {
       setMessage("Invalid User Email")
       return
     }
-    
+
     if (!data.User_Address || data.User_Address.length < 10) {
       setShow(true)
       setMessageType('error')
@@ -120,7 +121,7 @@ export default function Register2() {
     }
   }
 
-  async function RegisterAsEmployer() {
+  async function RegisterAsSeeker() {
     if (skills.length < 1) {
       setShow(true)
       setMessageType('error')
@@ -133,16 +134,25 @@ export default function Register2() {
       setMessage('Agree to terms & condition and Privacy policy')
       return
     }
-    const items = {
+
+    const response = await seekerRegister({
       User_Name: data.User_Name,
       User_Address: data.User_Address,
       User_Email: data.User_Email,
       User_Number: data.User_Number,
       Skills: skills
+    })
+    if (response === 'success') {
+      localStorage.setItem('INIT_DATA', JSON.stringify({
+        Seeker: true,
+        User_Name: encrypt(data.User_Name),
+        User_Address: encrypt(data.User_Address),
+        User_Email: encrypt(data.User_Email),
+        User_Number: encrypt(data.User_Number),
+      }))
+      navigate('/')
+      window.location.reload(false)
     }
-
-    const response = await seekerRegister(items)
-    console.log(response)
   }
 
 
@@ -383,7 +393,7 @@ export default function Register2() {
             </Typography>
           </Box>
           <Box sx={{ textAlign: 'center' }}>
-            <Button onClick={RegisterAsEmployer} color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none' }}>Register</Button>
+            <Button onClick={RegisterAsSeeker} color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none' }}>Register</Button>
           </Box>
         </Box>
       </Box>

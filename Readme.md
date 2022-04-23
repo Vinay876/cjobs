@@ -92,9 +92,15 @@ The changes in the commits. ( Here i store what changes i made for every commit)
         Added backend for  register (using twilio and mongoose)
         Created pages for jobs, internships and trainings and but added nothing to them
 
-    ->Fifth Commit - 24-04-2022
+    ->Fifth Commit - 23-04-2022
         Created page for  login
         Added backend for  login (using twilio and mongoose)
-        Created pages for jobs, internships and trainings and but added nothing to them
         Change Header also
-        Add things to homepage
+        Add things to homepage (just top headings)
+
+    ->Sixth Commit - 24-04-2022
+        Created page for  contact
+        Added backend for  contact (using twilio and mongoose)
+        Created pages for jobs, internships and trainings and add some things
+        Change responsive Header also
+        Add things to homepage (popular cities, advantages,etc.)

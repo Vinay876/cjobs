@@ -1,15 +1,17 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { Link, useMediaQuery } from '@mui/material';
-import Sidebar from '../drawers/Sidebar';
-import { AboutHelper, ContactHelper, InternshipHelper, JobsHelper, LoginHelper, RegisterHelper, TrainingsHelper } from '../helpers/header/Helper';
-
+import * as React from 'react'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
+import { Link, useMediaQuery } from '@mui/material'
+import Sidebar from '../drawers/Sidebar'
+import { AboutHelper, ContactHelper, InternshipHelper, JobsHelper, LoginHelper, RegisterHelper, TrainingsHelper } from '../helpers/header/Helper'
+import { LoginContext } from '../../context/Context'
+import { ProfileEmployer, ProfileSeeker } from '../helpers/header/Profile'
 
 function XLHeader() {
+    const { EmployerData, SeekerData } = React.useContext(LoginContext)
 
     return (
         <AppBar position="fixed" sx={{ backgroundColor: 'rgb(156, 39, 176)', color: '#000000' }}>
@@ -21,13 +23,33 @@ function XLHeader() {
                         </Typography>
                     </Link>
                     <Box sx={{ display: 'flex', my: 2 }}>
-                        <JobsHelper />
-                        <InternshipHelper />
-                        <TrainingsHelper />
-                        <ContactHelper />
-                        <LoginHelper />
-                        <RegisterHelper />
-                        <AboutHelper />
+                        {
+                            EmployerData.Employer ?
+                               <ProfileEmployer />
+                                :
+                                null
+                        }
+
+                        {
+                            SeekerData.Seeker ?
+                              <ProfileSeeker />
+                                :
+                                null
+                        }
+                        {
+                            (EmployerData.Employer || SeekerData.Seeker) ?
+                                null
+                                :
+                                <>
+                                    <JobsHelper />
+                                    <InternshipHelper />
+                                    <TrainingsHelper />
+                                    <ContactHelper />
+                                    <LoginHelper />
+                                    <RegisterHelper />
+                                    <AboutHelper />
+                                </>
+                        }
                     </Box>
                 </Toolbar>
             </Container>

@@ -222,3 +222,17 @@ export const UserHelperData = {
 export const SkillsData=[
     'Java',"JavaScript",'Python','Ruby',"GoLang",'C','C#','C++'
 ]
+
+
+export const ProfileHelperMenuData = {
+    'Employer':[
+        {name:'Profile',url:''},
+        {name:'My Requirements',url:''},
+        {name:'Logout',url:''},
+    ],
+    'Seeker':[
+        {name:'Profile',url:''},
+        {name:'My Applications',url:''},
+        {name:'Logout',url:''},
+    ]
+}
