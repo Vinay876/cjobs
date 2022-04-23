@@ -96,7 +96,8 @@ The changes in the commits. ( Here i store what changes i made for every commit)
         Created page for  login
         Added backend for  login (using twilio and mongoose)
         Change Header also
-        Add things to homepage (just top headings)
+        Add things to homepage 
+        Added firebase hosting
 
     ->Sixth Commit - 24-04-2022
         Created page for  contact
