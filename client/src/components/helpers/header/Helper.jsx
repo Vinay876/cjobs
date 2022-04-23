@@ -86,7 +86,12 @@ export function JobsHelper() {
             {JobHelperData[data].map((text, index) => {
               return (
                 <Box key={index} sx={{ textAlign: 'start', ml: 3 }}>
-                  <Typography sx={{ fontSize: '16px', my: 1.5, cursor: 'pointer' }}>
+                  <Typography sx={{
+                    fontSize: '16px', my: 1.5, cursor: 'pointer', '&:hover': {
+                      transform: 'scale(1.01)',
+                      color: "rgb(156, 39, 176)"
+                    }
+                  }}>
                     {text.name}
                   </Typography>
                 </Box>
@@ -146,7 +151,12 @@ export function InternshipHelper() {
             {InternshipHelperData[data].map((text, index) => {
               return (
                 <Box key={index} sx={{ textAlign: 'start', ml: 3 }}>
-                  <Typography sx={{ fontSize: '16px', my: 1.5, cursor: 'pointer' }}>
+                  <Typography sx={{
+                    fontSize: '16px', my: 1.5, cursor: 'pointer', '&:hover': {
+                      transform: 'scale(1.01)',
+                      color: "rgb(156, 39, 176)"
+                    }
+                  }}>
                     {text.name}
                   </Typography>
                 </Box>
@@ -232,7 +242,12 @@ export function TrainingsHelper() {
             {TrainingHelperData[data].map((text, index) => {
               return (
                 <Box key={index} sx={{ textAlign: 'start', ml: 3 }}>
-                  <Typography sx={{ fontSize: '16px', my: 1.5, cursor: 'pointer' }}>
+                  <Typography sx={{
+                    fontSize: '16px', my: 1.5, cursor: 'pointer', '&:hover': {
+                      transform: 'scale(1.01)',
+                      color: "rgb(156, 39, 176)"
+                    }
+                  }}>
                     {text.name}
                   </Typography>
                 </Box>
@@ -479,7 +494,7 @@ export function AboutHelper() {
       <Typography sx={{
         p: 1,
         cursor: 'pointer',
-        px:2,
+        px: 2,
         mx: 1,
         color: 'white',
         borderRadius: 1,

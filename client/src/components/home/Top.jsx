@@ -11,7 +11,7 @@ function Content({ isResponsive }) {
         <>
             {
                 EmployerData.Employer ?
-                    <Box sx={{ display: isResponsive ? 'block' : 'flex',textAlign:isResponsive?'center':'unset',m: '0px auto', my: 10, justifyContent: 'space-evenly', alignItems: 'center',  }}>
+                    <Box sx={{ display: isResponsive ? 'block' : 'flex',textAlign:isResponsive?'center':'unset',m: '0px auto', my: 14, justifyContent: 'space-evenly', alignItems: 'center',  }}>
                         <Box sx={{ width: isResponsive?'90%':'50%' }}>
                             <Typography sx={{ color: "rgb(156, 39, 176)", fontWeight: '800', fontFamily: 'Fredoka', fontSize: isResponsive?'35px':'60px' }}>
                                 Give Your Organization Best Employee
@@ -46,7 +46,7 @@ function Content({ isResponsive }) {
 
             {
                 SeekerData.Seeker ?
-                    <Box sx={{ display: isResponsive ? 'block' : 'flex',textAlign:isResponsive?'center':'unset',m: '0px auto', my: 10, justifyContent: 'space-evenly', alignItems: 'center',  }}>
+                    <Box sx={{ display: isResponsive ? 'block' : 'flex',textAlign:isResponsive?'center':'unset',m: '0px auto', my: 14, justifyContent: 'space-evenly', alignItems: 'center',  }}>
                         <Box sx={{ width: isResponsive?'90%':'50%' }}>
                             <Typography sx={{ color: "rgb(156, 39, 176)", fontWeight: '800', fontFamily: 'Fredoka', fontSize: isResponsive?'35px':'60px' }}>
                                 Give Your Dream Job in an instant
@@ -82,7 +82,7 @@ function Content({ isResponsive }) {
                 (EmployerData.Employer || SeekerData.Seeker) ?
                     null
                     :
-                    <Box sx={{ display: isResponsive ? 'block' : 'flex',textAlign:isResponsive?'center':'unset',m: '0px auto', my: 10, justifyContent: 'space-evenly', alignItems: 'center',  }}>
+                    <Box sx={{ display: isResponsive ? 'block' : 'flex',textAlign:isResponsive?'center':'unset',m: '0px auto', my: 14, justifyContent: 'space-evenly', alignItems: 'center',  }}>
                         <Box sx={{ width: isResponsive?'90%':'50%' }}>
                             <Typography sx={{ color: "rgb(156, 39, 176)", fontWeight: '800', fontFamily: 'Fredoka', fontSize: isResponsive?'35px':'60px' }}>
                                 Give Your Dream Job in an instant

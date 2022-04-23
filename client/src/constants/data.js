@@ -1,3 +1,39 @@
+import Delhi_NCR from '../assets/home/popular-cities/delhi_ncr.svg'
+import Bangalore from '../assets/home/popular-cities/bangalore.svg'
+import Chennai from '../assets/home/popular-cities/chennai.svg'
+import Hyderabad from '../assets/home/popular-cities/hyderabad.svg'
+import Kolkata from '../assets/home/popular-cities/kolkata.svg'
+import Mumbai from '../assets/home/popular-cities/mumbai.svg'
+import International from '../assets/home/popular-cities/international.svg'
+import Work_From_Home from '../assets/home/popular-cities/work_from_home.svg'
+
+import Design from '../assets/home/categories/design.svg'
+import Engineering from '../assets/home/categories/engineering.svg'
+import Humanities from '../assets/home/categories/humanities.svg'
+import MBA from '../assets/home/categories/mba.svg'
+import Media from '../assets/home/categories/media.svg'
+import NGO from '../assets/home/categories/ngo.svg'
+import Part_Time from '../assets/home/categories/part_time.svg'
+import Science from '../assets/home/categories/science.svg'
+
+
+import Advanced_Excel from '../assets/home/trainings/advanced_excel.svg'
+import AutoCAD from '../assets/home/trainings/autocad.svg'
+import Creative_Writing from '../assets/home/trainings/creative_writing.svg'
+import Digital_Marketing from '../assets/home/trainings/digital_marketing.svg'
+import Ethical_Hacking from '../assets/home/trainings/ethical_hacking.svg'
+import Machine_Learning from '../assets/home/trainings/machine_learning.svg'
+import Programming_with_Python from '../assets/home/trainings/programming_with_python.svg'
+import Web_Development from '../assets/home/trainings/web_development.svg'
+
+
+import Minimum_CTC_of_3_LPA from '../assets/home/advantages/ctc.svg'
+import Dream_companies from '../assets/home/advantages/dream.svg'
+import Verified_jobs from '../assets/home/advantages/verified.svg'
+
+
+
+
 export const InternshipHelperData = {
     'Location': [
         { name: 'Work From Home' },
@@ -87,16 +123,16 @@ export const JobHelperData = {
 
 export const TrainingHelperData = {
     'Most Popular': [
-        { tag:'',name: 'Web Development' },
-        { tag:'',name: 'Digital Marketing' },
-        { tag:'',name: 'Programmig with Python' },
-        { tag:'',name: 'AutoCAD' },
-        { tag:'',name: 'Advanced Excel' },
-        { tag:'',name: 'MachineLearning' },
-        { tag:'',name: 'Android App Development' },
-        { tag:'',name: 'Data Science' },
-        { tag:'',name: 'Programming with C & C++' },
-        { tag:'',name: 'Financial Modelling & Valuation' },
+        { tag: '', name: 'Web Development' },
+        { tag: '', name: 'Digital Marketing' },
+        { tag: '', name: 'Programmig with Python' },
+        { tag: '', name: 'AutoCAD' },
+        { tag: '', name: 'Advanced Excel' },
+        { tag: '', name: 'MachineLearning' },
+        { tag: '', name: 'Android App Development' },
+        { tag: '', name: 'Data Science' },
+        { tag: '', name: 'Programming with C & C++' },
+        { tag: '', name: 'Financial Modelling & Valuation' },
     ],
     'Programming': [
         { name: 'Programming With Python' },
@@ -205,34 +241,83 @@ export const TrainingHelperData = {
 
 
 export const UserHelperData = {
-    'Contact':[
-        {name:'Contact as Employers',url:'/chosen=contact-as-employers'},
-        {name:'Contact as Job seekers',url:'/chosen=contact-as-job-seekers'},
+    'Contact': [
+        { name: 'Contact as Employers', url: '/chosen=contact-as-employers' },
+        { name: 'Contact as Job seekers', url: '/chosen=contact-as-job-seekers' },
     ],
-    'Login':[
-        {name:'Login as Employers',url:'/chosen=login-as-employers'},
-        {name:'Login as Job seekers',url:'/chosen=login-as-job-seekers'},
+    'Login': [
+        { name: 'Login as Employers', url: '/chosen=login-as-employers' },
+        { name: 'Login as Job seekers', url: '/chosen=login-as-job-seekers' },
     ],
-    'Register':[
-        {name:'Register as Employers',url:'/chosen=register-as-employers'},
-        {name:'Register as Job seekers',url:'/chosen=register-as-job-seekers'},
+    'Register': [
+        { name: 'Register as Employers', url: '/chosen=register-as-employers' },
+        { name: 'Register as Job seekers', url: '/chosen=register-as-job-seekers' },
     ],
 }
 
-export const SkillsData=[
-    'Java',"JavaScript",'Python','Ruby',"GoLang",'C','C#','C++'
+export const SkillsData = [
+    'Java', "JavaScript", 'Python', 'Ruby', "GoLang", 'C', 'C#', 'C++'
 ]
 
 
 export const ProfileHelperMenuData = {
-    'Employer':[
-        {name:'Profile',url:''},
-        {name:'My Requirements',url:''},
-        {name:'Logout',url:''},
+    'Employer': [
+        { name: 'Profile', url: '' },
+        { name: 'My Requirements', url: '' },
+        { name: 'Logout', url: '' },
     ],
-    'Seeker':[
-        {name:'Profile',url:''},
-        {name:'My Applications',url:''},
-        {name:'Logout',url:''},
+    'Seeker': [
+        { name: 'Profile', url: '' },
+        { name: 'My Applications', url: '' },
+        { name: 'Logout', url: '' },
     ]
 }
+
+
+
+
+export const CategoryData = [
+    { url: Design, name: 'Design' },
+    { url: Engineering, name: 'Engineering' },
+    { url: Humanities, name: 'Humanities' },
+    { url: MBA, name: 'MBA' },
+    { url: Media, name: 'Media' },
+    { url: NGO, name: 'NGO' },
+    { url: Part_Time, name: 'Part Time' },
+    { url: Science, name: 'Science' },
+]
+
+
+
+export const CityData = [
+    { url: Delhi_NCR, name: 'Delhi-NCR' },
+    { url: Bangalore, name: 'Bangalore' },
+    { url: Chennai, name: 'Chennai' },
+    { url: Hyderabad, name: 'Hyderabad' },
+    { url: Kolkata, name: 'Kolkata' },
+    { url: Mumbai, name: 'Mumbai' },
+    { url: International, name: 'International' },
+    { url: Work_From_Home, name: 'Work From Home' },
+]
+
+
+
+export const TrainingData = [
+    { url: Advanced_Excel, name: 'Advanced Excel' },
+    { url: AutoCAD, name: 'AutoCAD' },
+    { url: Creative_Writing, name: 'Creative Writing' },
+    { url: Digital_Marketing, name: 'Digital Marketing' },
+    { url: Ethical_Hacking, name: 'Ethical Hacking' },
+    { url: Machine_Learning, name: 'Machine Learning' },
+    { url: Programming_with_Python, name: 'Programming with Python' },
+    { url: Web_Development, name: 'Web Development' },
+]
+
+
+
+export const AdvantageData = [
+    { url: Minimum_CTC_of_3_LPA, name: 'Minimum CTC of 3 LPA' },
+    { url: Dream_companies, name: 'Dream companies' },
+    { url: Verified_jobs, name: '100% verified jobs' },
+]
+
