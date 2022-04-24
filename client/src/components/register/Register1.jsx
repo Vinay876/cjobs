@@ -13,27 +13,27 @@ import WarningIcon from '@mui/icons-material/Warning';
 import DoneIcon from '@mui/icons-material/Done';
 import { sendOTP } from '../../api/otpSend'
 import { employerRegister } from '../../api/employer'
+import { useMediaQuery } from '@mui/material'
 
-const userData = {
-    Organization_Name: '',
-    Organization_Address: '',
-    Organization_Email: '',
-    Organization_Telephone: '',
-    User_Name: '',
-    User_Designation: '',
-    User_Email: '',
-    User_Number: '',
-    otp: '',
-    verified: false,
-    enteredOtp: '',
-    checked: true
-}
 
-export default function Register1() {
+function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
     const navigate = useNavigate()
     const { setMessage, setMessageType, setShow, encrypt } = React.useContext(LoginContext)
     const [resendTime, setResendTime] = React.useState(60)
-    const [data, setData] = React.useState(userData)
+    const [data, setData] = React.useState({
+        Organization_Name: '',
+        Organization_Address: '',
+        Organization_Email: '',
+        Organization_Telephone: '',
+        User_Name: '',
+        User_Designation: '',
+        User_Email: '',
+        User_Number: '',
+        otp: '',
+        verified: false,
+        enteredOtp: '',
+        checked: true
+    })
     const timeRef = React.useRef()
     const [displayForYourInformation, setDisplayForYourInformation] = React.useState(0)
     var validRegexForEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -91,6 +91,9 @@ export default function Register1() {
             setData(prev => {
                 return { ...prev, verified: true, otp: '' }
             })
+            setShow(true)
+            setMessageType('success')
+            setMessage('Number verified')
         } else {
             setShow(true)
             setMessageType('error')
@@ -150,7 +153,7 @@ export default function Register1() {
         })
         if (response === 'success') {
             localStorage.setItem('INIT_DATA', JSON.stringify({
-                Employer:true,
+                Employer: true,
                 Organization_Name: encrypt(data.Organization_Name),
                 Organization_Address: encrypt(data.Organization_Address),
                 Organization_Email: encrypt(data.Organization_Email),
@@ -168,19 +171,19 @@ export default function Register1() {
 
     return (
         <>
-            <Typography variant="h5" sx={{ textAlign: "center", color: "rgb(156, 39, 176)", fontWeight: '800', textTransform: 'uppercase', py: 2, fontFamily: 'Fredoka', borderBottom: '2px solid rgb(156, 39, 176)', width: '350px', m: '0px auto' }}>
+            <Typography variant="h5" sx={{ textAlign: "center", color: "rgb(156, 39, 176)", fontWeight: '800', textTransform: 'uppercase', py: 2, fontFamily: 'Fredoka', borderBottom: '2px solid rgb(156, 39, 176)', width: txtWidth, m: '0px auto' }}>
                 Register at CJOBS
             </Typography>
             <Typography sx={{ textAlign: "center", fontWeight: '800', py: 2, fontFamily: 'Fredoka', }}>
                 Register for your Organization and get best employees across india
             </Typography>
 
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Box sx={{ display: display, alignItems: 'center', justifyContent: 'space-between', textAlign: align }}>
                 <Box>
-                    <img src={require("../../assets/report/register_organisation.webp")} alt="Register" />
+                    <img src={require("../../assets/report/register_organisation.webp")} style={{ width: width }} alt="Register" />
                 </Box>
 
-                <Box sx={{ display: displayForYourInformation === 0 ? 'block' : 'none', width: "40%", m: '0px auto', mt: 5 }}>
+                <Box sx={{ display: displayForYourInformation === 0 ? 'block' : 'none', width: datawidth, m: '0px auto', mt: 5 }}>
                     <Box>
                         <Typography sx={{ fontSize: '16px', fontWeight: '600', marginTop: 3, color: 'rgb(156, 39, 176)' }}> Organization Name :</Typography>
                         <Box sx={{ my: 3 }}>
@@ -193,7 +196,7 @@ export default function Register1() {
                                 style={{
                                     border: '1px solid #000000',
                                     userSelect: 'none',
-                                    width: '100%',
+                                    width: inpwidth,
                                     height: '40px',
                                     fontSize: '14px',
                                     textAlign: 'center',
@@ -270,7 +273,7 @@ export default function Register1() {
                         }}>Next  </Button>
                     </Box>
                 </Box>
-                <Box sx={{ display: displayForYourInformation === 1 ? 'block' : 'none', width: "40%", m: '0px auto', mt: 5 }}>
+                <Box sx={{ display: displayForYourInformation === 1 ? 'block' : 'none', width: datawidth, m: '0px auto', mt: 5 }}>
                     <ArrowBackIcon sx={{ cursor: 'pointer' }} onClick={() => setDisplayForYourInformation(0)} />
                     <Box>
                         <Typography sx={{ fontSize: '16px', fontWeight: '600', marginTop: 3, color: 'rgb(156, 39, 176)' }}>Your Name :</Typography>
@@ -432,6 +435,31 @@ export default function Register1() {
                 </Box>
             </Box>
 
+        </>
+    )
+}
+
+
+export default function Register1() {
+
+    const xlMax = useMediaQuery('(max-width:2000px)');
+    const xlMin = useMediaQuery('(min-width:1100px)');
+    const mdMax = useMediaQuery('(max-width:1100px)');
+    const mdMin = useMediaQuery('(min-width:650px)');
+    const sm = useMediaQuery('(max-width:650px)');
+
+
+
+    return (
+        <>
+            {xlMax && xlMin && (
+                <Content display={'flex'} width={'auto'} align={'unset'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'40%'} />
+            )}
+            {!(xlMax && xlMin) && mdMax && mdMin && (
+                <Content display={'block'} width={'auto'} align={'center'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'60%'} />
+            )}
+            {sm && (<Content display={'block'} width={'80%'} align={'center'} inpwidth={'100%'} txtWidth={'280px'} datawidth={'60%'} />
+            )}
         </>
     )
 }

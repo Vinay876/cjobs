@@ -2,15 +2,16 @@ import React from 'react';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import MenuIcon from '@mui/icons-material/Menu';
 import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
-import ListItemText from '@mui/material/ListItemText';
 import CloseIcon from '@mui/icons-material/Close';
-import { Typography } from '@mui/material';
+import { ContactHelper, InternshipHelper, LoginHelper, RegisterHelper, TrainingHelper, JobHelper, AboutHelper } from '../helpers/sidebar/Helper';
+import { LoginContext } from '../../context/Context';
+import { ProfileEmployer,ProfileSeeker } from '../helpers/sidebar/Profile';
 
-export default function Sidebar({ commonProps }) {
+export default function Sidebar() {
+    const { SeekerData, EmployerData} = React.useContext(LoginContext)
     const [state, setState] = React.useState({
         left: false,
     });
@@ -33,7 +34,7 @@ export default function Sidebar({ commonProps }) {
                     onClick={toggleDrawer('left', true)}
                     sx={{ ml: -2 }}
                     disableRipple>
-                    <MenuIcon sx={{color:'white'}} />
+                    <MenuIcon sx={{ color: 'white' }} />
                 </IconButton>
                 <Drawer
                     anchor={'left'}
@@ -42,7 +43,7 @@ export default function Sidebar({ commonProps }) {
                     onOpen={toggleDrawer('left', true)}
                 >
                     <Box
-                        sx={{ width: 200,background:'rgb(156, 39, 176)',color:'white' ,height:'100%'}}
+                        sx={{ width: 250, background: 'white', color: 'rgb(156, 39, 176)', height: '100%' }}
                         role="presentation"
                         // onClick={toggleDrawer('left', false)}  for closing the drawer only for links
                         onKeyDown={toggleDrawer('left', false)}
@@ -52,36 +53,37 @@ export default function Sidebar({ commonProps }) {
                             <ListItem sx={{ justifyContent: 'right', marginLeft: 0, overflowX: 'hiddenImportant' }} onClick={toggleDrawer('left', false)}>
                                 <CloseIcon />
                             </ListItem>
-                            <Typography sx={{
-                                fontSize: '16px',
-                                userSelect: 'none',
-                                textTransform: 'none',
-                                color: 'inherit',
-                                padding: '0px 15px',
-                                mt: 1
-                            }}>
-                                Login
-                            </Typography>
-                            <Typography sx={{
-                                color: 'inherit',
-                                fontSize: '16px',
-                                height: '30px',
-                                userSelect: 'none',
-                                textTransform: 'none',
-                                paddingLeft: '16px',
-                                mt: 1
-                            }}>
-                                MyBookings
-                            </Typography>
+
                         </List>
-                        <Divider />
-                        <Divider />
-                        <ListItem button  >
-                            <ListItemText primary='Contact us' />
-                        </ListItem>
-                        <Typography sx={{ml:2}}>
-                            Email <a href="mailto:hello@housedeck.in">hello@housedeck.in</a>
-                        </Typography>
+
+                        {
+                            EmployerData.Employer ?
+                                <ProfileEmployer />
+                                :
+                                null
+                        }
+
+                        {
+                            SeekerData.Seeker ?
+                                <ProfileSeeker />
+                                :
+                                null
+                        }
+                        {
+                            (EmployerData.Employer || SeekerData.Seeker) ?
+                                null
+                                :
+                                <>
+                                    <LoginHelper />
+                                    <RegisterHelper />
+                                    <JobHelper />
+                                    <InternshipHelper />
+                                    <TrainingHelper />
+                                    <ContactHelper />
+                                    <AboutHelper />
+                                </>
+                        }
+
                     </Box>
                 </Drawer>
             </React.Fragment>

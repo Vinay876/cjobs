@@ -61,12 +61,12 @@ function XLHeader() {
 
 function MDHeader() {
     return (<>
-        <AppBar position="fixed" sx={{ backgroundColor: 'rgb(156, 39, 176)', color: '#000000' }}>
-            <Container maxWidth="2000px" sx={{ display: 'flex', alignItems: 'center' }}>
+        <AppBar position="fixed" sx={{ backgroundColor: 'rgb(156, 39, 176)', color: '#ffffff' }}>
+            <Container maxWidth="1160px" sx={{ display: 'flex', alignItems: 'center', }}>
                 <Sidebar />
-                <Link href='/' sx={{ textDecoration: "none" }}>
+                <Link href='/' sx={{ textDecoration: "none",m: "0px auto", }}>
                     <Typography
-                        sx={{ fontFamily: 'Fredoka', color: "white", fontWeight: "700", fontSize: '25px', m: "0px auto", letterSpacing: '2px' }} >
+                        sx={{ fontFamily: 'Fredoka', color: "white", fontWeight: "700", fontSize: '25px',  letterSpacing: '2px' }} >
                         CJOBS
                     </Typography>
                 </Link>

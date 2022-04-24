@@ -1,39 +1,46 @@
 import React from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import { useMediaQuery } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { CategoryData } from '../../constants/data'
-export default function Category() {
+
+function Content({ padding, width, justifyContent }) {
     return (
         <>
-            <Box sx={{ padding: '20px 50px' }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Box sx={{ padding: padding, textAlign: width === '170px' ? 'unset' : 'center' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
                     <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: "700", fontFamily: 'Fredoka' }}>
                         With Popular Categories
                     </Typography>
-                    <Button variant='outlined' color='secondary' sx={{
-                        boxShadow: 0,
-                        textTransform: 'none',
-                        '&:hover': {
-                            background: 'rgb(156, 39, 176)',
-                            color: 'white'
-                        }
-                    }}>View All</Button>
+                    {
+                        width === '170px' ?
+                            <Button variant='outlined' color='secondary' sx={{
+                                boxShadow: 0,
+                                textTransform: 'none',
+                                '&:hover': {
+                                    background: 'rgb(156, 39, 176)',
+                                    color: 'white'
+                                }
+                            }}>View All</Button>
+                            : null
+                    }
+
                 </Box>
                 <Typography variant='h6' sx={{ color: 'black', fontWeight: "700", fontFamily: 'Fredoka' }}>
                     Choose the categories that fits you in.
                 </Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', my: 8 }}>
+                <Box sx={{ display: 'flex', justifyContent: justifyContent, alignItems: 'center', flexWrap: padding === '20px 50px' ? 'unset' : 'wrap', my: 8 }}>
                     {CategoryData.map((data, index) => {
                         const num = Math.random()
                         return (
                             <Box key={index} sx={{
                                 textAlign: 'center',
-                                margin: 'auto 10px',
+                                margin: '10px 10px',
                                 padding: '16px 4px 24px',
                                 transition: '.2s all',
                                 cursor: 'pointer',
-                                width: '170px',
+                                width: width,
                                 height: '130px',
                                 // borderRadius: '1rem',
                                 borderTopLeftRadius: num > 0.5 ? '2rem' : 'none',
@@ -55,7 +62,46 @@ export default function Category() {
                         )
                     })}
                 </Box>
+                {
+                    width === '170px' ? null :
+                        <Button variant='outlined' color='secondary' sx={{
+                            boxShadow: 0,
+                            textTransform: 'none',
+                            '&:hover': {
+                                background: 'rgb(156, 39, 176)',
+                                color: 'white'
+                            }
+                        }}>View All</Button>
+
+                }
             </Box>
+        </>
+    )
+}
+
+
+
+
+export default function Category() {
+
+    const xlMax = useMediaQuery('(max-width:2000px)');
+    const xlMin = useMediaQuery('(min-width:1300px)');
+    const mdMax = useMediaQuery('(max-width:1300px)');
+    const mdMin = useMediaQuery('(min-width:650px)');
+    const sm = useMediaQuery('(max-width:650px)');
+
+
+
+    return (
+        <>
+            {xlMax && xlMin && (
+                <Content padding={'20px 50px'} width={'170px'} justifyContent={'space-between'} />
+            )}
+            {!(xlMax && xlMin) && mdMax && mdMin && (
+                <Content padding={'15px 20px'} width={'170px'} justifyContent={'space-evenly'} />
+            )}
+            {sm && (<Content padding={'10px 8px'} width={'140px'} justifyContent={'space-around'} />
+            )}
         </>
     )
 }

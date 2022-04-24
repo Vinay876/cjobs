@@ -2,28 +2,31 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { AdvantageData } from '../../constants/data'
-export default function Advnatages() {
+import { useMediaQuery } from '@mui/material'
+
+
+function Content({ padding, width, justifyContent, text }) {
     return (
         <>
-            <Box sx={{ padding: '20px 50px' }}>
+            <Box sx={{ padding: padding }}>
 
-                <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: "700", fontFamily: 'Fredoka' }}>
+                <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: "700", fontFamily: 'Fredoka', textAlign: text }}>
                     With Many Advantages
                 </Typography>
-                <Typography variant='h6' sx={{ color: 'black', fontWeight: "700", fontFamily: 'Fredoka' }}>
+                <Typography variant='h6' sx={{ color: 'black', fontWeight: "700", fontFamily: 'Fredoka', textAlign: text }}>
                     The advantages you get when you search here.
                 </Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', my: 8 }}>
+                <Box sx={{ display: 'flex', justifyContent: justifyContent, alignItems: 'center', flexWrap: padding === '20px 50px' ? 'unset' : 'wrap', my: 8, textAlign: 'center', m: '0px auto' }}>
                     {AdvantageData.map((data, index) => {
                         const num = Math.random()
                         return (
                             <Box key={index} sx={{
                                 textAlign: 'center',
-                                margin: 'auto 10px',
+                                margin: '10px 10px',
                                 padding: '16px 4px 24px',
                                 transition: '.2s all',
                                 cursor: 'pointer',
-                                width: '170px',
+                                width: width,
                                 height: '130px',
                                 // borderRadius: '1rem',
                                 borderTopLeftRadius: num > 0.5 ? '2rem' : 'none',
@@ -46,6 +49,31 @@ export default function Advnatages() {
                     })}
                 </Box>
             </Box>
+        </>
+    )
+}
+
+
+export default function Advnatages() {
+
+    const xlMax = useMediaQuery('(max-width:2000px)');
+    const xlMin = useMediaQuery('(min-width:1300px)');
+    const mdMax = useMediaQuery('(max-width:1300px)');
+    const mdMin = useMediaQuery('(min-width:650px)');
+    const sm = useMediaQuery('(max-width:650px)');
+
+
+
+    return (
+        <>
+            {xlMax && xlMin && (
+                <Content padding={'20px 50px'} width={'170px'} justifyContent={'center'} text={'unset'} />
+            )}
+            {!(xlMax && xlMin) && mdMax && mdMin && (
+                <Content padding={'15px 20px'} width={'170px'} justifyContent={'center'} text={'unset'} />
+            )}
+            {sm && (<Content padding={'10px 8px'} width={'140px'} justifyContent={'space-around'} text={'center'} />
+            )}
         </>
     )
 }

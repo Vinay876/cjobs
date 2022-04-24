@@ -15,6 +15,7 @@ import { sendOTP } from '../../api/otpSend'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { seekerRegister } from '../../api/seeker'
+import { useMediaQuery } from '@mui/material'
 import { SkillsData } from '../../constants/data'
 
 const userData = {
@@ -29,7 +30,7 @@ const userData = {
   open: false
 }
 
-export default function Register2() {
+function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
   const navigate = useNavigate()
   const { setMessage, setMessageType, setShow, encrypt } = React.useContext(LoginContext)
   const [resendTime, setResendTime] = React.useState(60)
@@ -111,6 +112,9 @@ export default function Register2() {
       setData(prev => {
         return { ...prev, verified: true, otp: '' }
       })
+      setShow(true)
+      setMessageType('success')
+      setMessage('Number verified')
     } else {
       setShow(true)
       setMessageType('error')
@@ -158,19 +162,19 @@ export default function Register2() {
 
   return (
     <>
-      <Typography variant="h5" sx={{ textAlign: "center", color: "rgb(156, 39, 176)", fontWeight: '800', textTransform: 'uppercase', py: 2, fontFamily: 'Fredoka', borderBottom: '2px solid rgb(156, 39, 176)', width: '350px', m: '0px auto' }}>
+      <Typography variant="h5" sx={{ textAlign: "center", color: "rgb(156, 39, 176)", fontWeight: '800', textTransform: 'uppercase', py: 2, fontFamily: 'Fredoka', borderBottom: '2px solid rgb(156, 39, 176)', width: txtWidth, m: '0px auto' }}>
         Register at CJOBS
       </Typography>
       <Typography sx={{ textAlign: "center", fontWeight: '800', py: 2, fontFamily: 'Fredoka', }}>
         Register here and get opportunities to work at best companies in India
       </Typography>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <Box sx={{  display: display, alignItems: 'center', justifyContent: 'space-between', textAlign: align  }}>
         <Box>
-          <img src={require("../../assets/report/register_seeker.webp")} alt="Register" />
+          <img src={require("../../assets/report/register_seeker.webp")} style={{ width: width }} alt="Register" />
         </Box>
 
-        <Box sx={{ display: displayForYourInformation === 0 ? 'block' : 'none', width: "40%", m: '0px auto', mt: 5 }}>
+        <Box sx={{ display: displayForYourInformation === 0 ? 'block' : 'none', width: datawidth, m: '0px auto', mt: 5 }}>
           <Box>
             <Typography sx={{ fontSize: '16px', fontWeight: '600', marginTop: 3, color: 'rgb(156, 39, 176)' }}> Your Name :</Typography>
             <Box sx={{ my: 3 }}>
@@ -183,7 +187,7 @@ export default function Register2() {
                 style={{
                   border: '1px solid #000000',
                   userSelect: 'none',
-                  width: '100%',
+                  width: inpwidth,
                   height: '40px',
                   fontSize: '14px',
                   textAlign: 'center',
@@ -202,7 +206,7 @@ export default function Register2() {
                 style={{
                   border: '1px solid #000000',
                   userSelect: 'none',
-                  width: '100%',
+                  width: inpwidth,
                   height: '40px',
                   fontSize: '14px',
                   textAlign: 'center',
@@ -221,7 +225,7 @@ export default function Register2() {
                 style={{
                   border: '1px solid #000000',
                   userSelect: 'none',
-                  width: '100%',
+                  width: inpwidth,
                   height: '40px',
                   fontSize: '14px',
                   textAlign: 'center',
@@ -243,7 +247,7 @@ export default function Register2() {
                 style={{
                   border: 'none',
                   userSelect: 'none',
-                  width: '100%',
+                  width: inpwidth,
                   height: '40px',
                   fontSize: '14px',
                   textAlign: 'center',
@@ -330,7 +334,7 @@ export default function Register2() {
             }}>Next  </Button>
           </Box>
         </Box>
-        <Box sx={{ display: displayForYourInformation === 1 ? 'block' : 'none', width: "40%", m: '0px auto', mt: 5 }}>
+        <Box sx={{ display: displayForYourInformation === 1 ? 'block' : 'none', width: datawidth, m: '0px auto', mt: 5 }}>
           <ArrowBackIcon sx={{ cursor: 'pointer' }} onClick={() => setDisplayForYourInformation(0)} />
 
           <Box>
@@ -344,7 +348,7 @@ export default function Register2() {
                 style={{
                   border: '1px solid #000000',
                   userSelect: 'none',
-                  width: '100%',
+                  width: inpwidth,
                   height: '40px',
                   fontSize: '14px',
                   textAlign: 'center',
@@ -399,5 +403,30 @@ export default function Register2() {
       </Box>
 
     </>
+  )
+}
+
+
+export default function Register2() {
+
+  const xlMax = useMediaQuery('(max-width:2000px)');
+  const xlMin = useMediaQuery('(min-width:1100px)');
+  const mdMax = useMediaQuery('(max-width:1100px)');
+  const mdMin = useMediaQuery('(min-width:650px)');
+  const sm = useMediaQuery('(max-width:650px)');
+
+
+
+  return (
+      <>
+          {xlMax && xlMin && (
+              <Content display={'flex'} width={'auto'} align={'unset'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'40%'} />
+          )}
+          {!(xlMax && xlMin) && mdMax && mdMin && (
+              <Content display={'block'} width={'auto'} align={'center'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'60%'} />
+          )}
+          {sm && (<Content display={'block'} width={'80%'} align={'center'} inpwidth={'100%'} txtWidth={'280px'} datawidth={'60%'} />
+          )}
+      </>
   )
 }

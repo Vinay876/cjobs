@@ -11,14 +11,14 @@ function Content({ isResponsive }) {
         <>
             {
                 EmployerData.Employer ?
-                    <Box sx={{ display: isResponsive ? 'block' : 'flex',textAlign:isResponsive?'center':'unset',m: '0px auto', my: 14, justifyContent: 'space-evenly', alignItems: 'center',  }}>
-                        <Box sx={{ width: isResponsive?'90%':'50%' }}>
-                            <Typography sx={{ color: "rgb(156, 39, 176)", fontWeight: '800', fontFamily: 'Fredoka', fontSize: isResponsive?'35px':'60px' }}>
+                    <Box sx={{ display: isResponsive ? 'block' : 'flex', textAlign: isResponsive ? 'center' : 'unset', m: '0px auto', my: 14, justifyContent: 'space-evenly', alignItems: 'center', }}>
+                        <Box sx={{ width: isResponsive ? '90%' : '50%', textAlign: isResponsive ? 'center' : 'unset', m: '0px auto', }}>
+                            <Typography sx={{ color: "rgb(156, 39, 176)", fontWeight: '800', fontFamily: 'Fredoka', fontSize: isResponsive ? '35px' : '60px' }}>
                                 Give Your Organization Best Employee
                             </Typography>
                             {
                                 isResponsive ?
-                                    <img src={require('../../assets/home/top.webp')} style={{width:'90%'}} alt="" /> : null
+                                    <img src={require('../../assets/home/top.webp')} style={{ width: '90%' }} alt="" /> : null
                             }
                             <Typography sx={{ color: "black", fontWeight: '800', fontFamily: 'Fredoka', fontSize: '18px' }}>
                                 Post a Requirement in our website and get best employee for the job.
@@ -46,14 +46,14 @@ function Content({ isResponsive }) {
 
             {
                 SeekerData.Seeker ?
-                    <Box sx={{ display: isResponsive ? 'block' : 'flex',textAlign:isResponsive?'center':'unset',m: '0px auto', my: 14, justifyContent: 'space-evenly', alignItems: 'center',  }}>
-                        <Box sx={{ width: isResponsive?'90%':'50%' }}>
-                            <Typography sx={{ color: "rgb(156, 39, 176)", fontWeight: '800', fontFamily: 'Fredoka', fontSize: isResponsive?'35px':'60px' }}>
+                    <Box sx={{ display: isResponsive ? 'block' : 'flex', textAlign: isResponsive ? 'center' : 'unset', m: '0px auto', my: 14, justifyContent: 'space-evenly', alignItems: 'center', }}>
+                        <Box sx={{ width: isResponsive ? '90%' : '50%', textAlign: isResponsive ? 'center' : 'unset', m: '0px auto', }}>
+                            <Typography sx={{ color: "rgb(156, 39, 176)", fontWeight: '800', fontFamily: 'Fredoka', fontSize: isResponsive ? '35px' : '60px' }}>
                                 Give Your Dream Job in an instant
                             </Typography>
                             {
                                 isResponsive ?
-                                    <img src={require('../../assets/home/home1.webp')}  style={{width:'90%'}} alt="" /> : null
+                                    <img src={require('../../assets/home/home1.webp')} style={{ width: '90%' }} alt="" /> : null
                             }
                             <Typography sx={{ color: "black", fontWeight: '800', fontFamily: 'Fredoka', fontSize: '18px' }}>
                                 Now no running from place to place and giving interviews<br /> Here in CJOBS you can apply for your dream job in your dream company
@@ -82,14 +82,14 @@ function Content({ isResponsive }) {
                 (EmployerData.Employer || SeekerData.Seeker) ?
                     null
                     :
-                    <Box sx={{ display: isResponsive ? 'block' : 'flex',textAlign:isResponsive?'center':'unset',m: '0px auto', my: 14, justifyContent: 'space-evenly', alignItems: 'center',  }}>
-                        <Box sx={{ width: isResponsive?'90%':'50%' }}>
-                            <Typography sx={{ color: "rgb(156, 39, 176)", fontWeight: '800', fontFamily: 'Fredoka', fontSize: isResponsive?'35px':'60px' }}>
+                    <Box sx={{ display: isResponsive ? 'block' : 'flex', textAlign: isResponsive ? 'center' : 'unset', m: '0px auto', my: 14, justifyContent: 'space-evenly', alignItems: 'center', }}>
+                        <Box sx={{ width: isResponsive ? '90%' : '50%', textAlign: isResponsive ? 'center' : 'unset', m: '0px auto', }}>
+                            <Typography sx={{ color: "rgb(156, 39, 176)", fontWeight: '800', fontFamily: 'Fredoka', fontSize: isResponsive ? '35px' : '60px' }}>
                                 Give Your Dream Job in an instant
                             </Typography>
                             {
                                 isResponsive ?
-                                    <img src={require('../../assets/home/home1.webp')}  style={{width:'90%'}} alt="" /> : null
+                                    <img src={require('../../assets/home/home1.webp')} style={{ width: '90%' }} alt="" /> : null
                             }
                             <Typography sx={{ color: "black", fontWeight: '800', fontFamily: 'Fredoka', fontSize: '18px' }}>
                                 Now no running from place to place and giving interviews<br /> Here in CJOBS you can apply for your dream job in your dream company

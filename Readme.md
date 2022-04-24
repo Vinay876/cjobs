@@ -101,7 +101,6 @@ The changes in the commits. ( Here i store what changes i made for every commit)
 
     ->Sixth Commit - 24-04-2022
         Created page for  contact
-        Added backend for  contact (using twilio and mongoose)
+        Added backend for  contact (using  mongoose)
         Created pages for jobs, internships and trainings and add some things
         Change responsive Header also
-        Add things to homepage (popular cities, advantages,etc.)
