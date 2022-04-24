@@ -59,11 +59,11 @@ export function JobsHelper() {
   return (
     <>
       <Box>
-      <Link href='/type=jobs&filter=&city=null&category=null' sx={{ textDecoration: 'none',color:'#000000' }}>
-        <Typography sx={{ p: 1, cursor: 'pointer', paddingLeft: "14px", paddingRight: '4px', mx: 1, borderRadius: 1, color: open ? 'rgb(156, 39, 176)' : 'white', display: 'flex', alignItems: 'center', background: open ? 'white' : 'none', }} onMouseEnter={handleClick}>
-          Jobs
-          {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-        </Typography>
+        <Link href='/type=jobs&filter=&city=null&category=null' sx={{ textDecoration: 'none', color: '#000000' }}>
+          <Typography sx={{ p: 1, cursor: 'pointer', paddingLeft: "14px", paddingRight: '4px', mx: 1, borderRadius: 1, color: open ? 'rgb(156, 39, 176)' : 'white', display: 'flex', alignItems: 'center', background: open ? 'white' : 'none', }} onMouseEnter={handleClick}>
+            Jobs
+            {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+          </Typography>
         </Link>
       </Box>
       <Menu
@@ -88,7 +88,7 @@ export function JobsHelper() {
             {JobHelperData[data].map((text, index) => {
               return (
                 <Box key={index} sx={{ textAlign: 'start', ml: 3 }}>
-                  <Link href={text.url} sx={{ textDecoration: 'none',color:'#000000' }}>
+                  <Link href={text.url} sx={{ textDecoration: 'none', color: '#000000' }}>
                     <Typography sx={{
                       fontSize: '16px', my: 1.5, cursor: 'pointer', '&:hover': {
                         transform: 'scale(1.01)',
@@ -129,11 +129,11 @@ export function InternshipHelper() {
   return (
     <>
       <Box>
-        <Link href='/type=internships&filter=&city=null&category=null' sx={{ textDecoration: 'none',color:'#000000' }}>
-        <Typography sx={{ p: 1, cursor: 'pointer', paddingLeft: "14px", paddingRight: '4px', mx: 1, borderRadius: 1, color: open ? 'rgb(156, 39, 176)' : 'white', display: 'flex', alignItems: 'center', background: open ? 'white' : 'none', }} onMouseEnter={handleClick}>
-          Internships
-          {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-        </Typography>
+        <Link href='/type=internships&filter=&city=null&category=null' sx={{ textDecoration: 'none', color: '#000000' }}>
+          <Typography sx={{ p: 1, cursor: 'pointer', paddingLeft: "14px", paddingRight: '4px', mx: 1, borderRadius: 1, color: open ? 'rgb(156, 39, 176)' : 'white', display: 'flex', alignItems: 'center', background: open ? 'white' : 'none', }} onMouseEnter={handleClick}>
+            Internships
+            {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+          </Typography>
         </Link>
       </Box>
       <Menu
@@ -157,7 +157,7 @@ export function InternshipHelper() {
             {InternshipHelperData[data].map((text, index) => {
               return (
                 <Box key={index} sx={{ textAlign: 'start', ml: 3 }}>
-                  <Link href={text.url} sx={{ textDecoration: 'none',color:'#000000' }}>
+                  <Link href={text.url} sx={{ textDecoration: 'none', color: '#000000' }}>
                     <Typography sx={{
                       fontSize: '16px', my: 1.5, cursor: 'pointer', '&:hover': {
                         transform: 'scale(1.01)',
@@ -197,10 +197,12 @@ export function TrainingsHelper() {
   return (
     <>
       <Box>
-        <Typography sx={{ p: 1, cursor: 'pointer', paddingLeft: "14px", paddingRight: '4px', mx: 1, borderRadius: 1, color: open ? 'rgb(156, 39, 176)' : 'white', display: 'flex', alignItems: 'center', background: open ? 'white' : 'none', }} onMouseEnter={handleClick}>
-          Trainings
-          {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-        </Typography>
+        <Link href='/trainings' sx={{ textDecoration: 'none', color: '#000000' }}>
+          <Typography sx={{ p: 1, cursor: 'pointer', paddingLeft: "14px", paddingRight: '4px', mx: 1, borderRadius: 1, color: open ? 'rgb(156, 39, 176)' : 'white', display: 'flex', alignItems: 'center', background: open ? 'white' : 'none', }} onMouseEnter={handleClick}>
+            Trainings
+            {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+          </Typography>
+        </Link>
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -250,14 +252,16 @@ export function TrainingsHelper() {
             {TrainingHelperData[data].map((text, index) => {
               return (
                 <Box key={index} sx={{ textAlign: 'start', ml: 3 }}>
-                  <Typography sx={{
-                    fontSize: '16px', my: 1.5, cursor: 'pointer', '&:hover': {
-                      transform: 'scale(1.01)',
-                      color: "rgb(156, 39, 176)"
-                    }
-                  }}>
-                    {text.name}
-                  </Typography>
+                  <Link href={text.url} sx={{ textDecoration: 'none', color: '#000000' }}>
+                    <Typography sx={{
+                      fontSize: '16px', my: 1.5, cursor: 'pointer', '&:hover': {
+                        transform: 'scale(1.01)',
+                        color: "rgb(156, 39, 176)"
+                      }
+                    }}>
+                      {text.name}
+                    </Typography>
+                  </Link>
                 </Box>
               )
             })}

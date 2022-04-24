@@ -8,6 +8,7 @@ import Home from './webpages/Home';
 import MyThings from './webpages/MyThings';
 import Profile from './webpages/Profile';
 import Services from './webpages/Services';
+import Trainings from './webpages/Trainings';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
 
           {/* For jobs and internship pages */}
           <Route exact path="/type=:id&filter=&city=:city&category=:category" element={<Services />} />
+
+          {/* For trainings */}
+          <Route exact path="/trainings/:id" element={<Trainings />} />
 
           {/* Profile  */}
           <Route exact path="/profile" element={<Profile />} />

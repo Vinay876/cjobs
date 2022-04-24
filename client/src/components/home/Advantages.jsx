@@ -16,7 +16,7 @@ function Content({ padding, width, justifyContent, text }) {
                 <Typography variant='h6' sx={{ color: 'black', fontWeight: "700", fontFamily: 'Fredoka', textAlign: text }}>
                     The advantages you get when you search here.
                 </Typography>
-                <Box sx={{ display: 'flex', justifyContent: justifyContent, alignItems: 'center', flexWrap: padding === '20px 50px' ? 'unset' : 'wrap', my: 8, textAlign: 'center', m: '0px auto' }}>
+                <Box sx={{ display: 'flex', justifyContent: justifyContent, alignItems: 'center', flexWrap: padding === '20px 50px' ? 'unset' : 'wrap',m: '0px auto', my: 8, textAlign: 'center',  }}>
                     {AdvantageData.map((data, index) => {
                         const num = Math.random()
                         return (

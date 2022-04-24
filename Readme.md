@@ -102,5 +102,13 @@ The changes in the commits. ( Here i store what changes i made for every commit)
     ->Sixth Commit - 24-04-2022
         Created page for  contact
         Added backend for  contact (using  mongoose)
-        Created pages for jobs, internships and trainings and add some things
-        Change responsive Header also
+        Created pages for jobs, internships and trainings and added nothing to them
+        Maked the whole website responsive (i.e., for evry size device)
+        add url to all of the links and created all the pages for internship and jobs and trainings
+        modified data and added url to all of them
+
+    ->Seventh Commit - 25-04-2022
+        Create Profile page (responsive)
+        Add accordian and filter and job and internship card to the job and internshipt page (responsive)
+        Add card in trainings page
+        Add things to about us page ( get inspiration from internshala )
