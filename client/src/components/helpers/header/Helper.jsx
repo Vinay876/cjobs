@@ -503,20 +503,22 @@ export function RegisterHelper() {
 export function AboutHelper() {
   return (
     <>
-      <Typography sx={{
-        p: 1,
-        cursor: 'pointer',
-        px: 2,
-        mx: 1,
-        color: 'white',
-        borderRadius: 1,
-        '&:hover': {
-          color: 'rgb(156, 39, 176)',
-          background: 'white'
-        }
-      }}>
-        About
-      </Typography>
+      <Link href='/about' sx={{ textDecoration: 'none', color: '#000000' }} >
+        <Typography sx={{
+          p: 1,
+          cursor: 'pointer',
+          px: 2,
+          mx: 1,
+          color: 'white',
+          borderRadius: 1,
+          '&:hover': {
+            color: 'rgb(156, 39, 176)',
+            background: 'white'
+          }
+        }}>
+          About
+        </Typography>
+      </Link>
     </>
   )
 }

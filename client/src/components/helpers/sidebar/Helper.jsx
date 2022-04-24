@@ -428,10 +428,12 @@ export function LoginHelper() {
 export function AboutHelper() {
     return (
         <>
-<Divider />
-            <Typography sx={{ color: 'rgb(156, 39, 176)',ml:4,mt:2 }}>
-                About
-            </Typography>
+            <Divider />
+            <Link href='/about' sx={{ textDecoration: 'none', color: '#000000' }} >
+                <Typography sx={{ color: 'rgb(156, 39, 176)', ml: 4, mt: 2 }}>
+                    About
+                </Typography>
+            </Link>
         </>
     )
 }
