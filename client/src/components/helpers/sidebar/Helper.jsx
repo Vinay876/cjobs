@@ -70,14 +70,16 @@ export function JobHelper() {
                                         {
                                             JobHelperData[text].map((datas, i) => {
                                                 return (
-                                                    <Typography key={i} sx={{
-                                                        color: "black", fontSize: '16px', my: 1,
-                                                        '&:hover': {
-                                                            transform: 'scale(1.01)'
-                                                        }
-                                                    }}>
-                                                        {datas.name}
-                                                    </Typography>
+                                                    <Link href={datas.url} sx={{ textDecoration: 'none', color: '#000000' }}>
+                                                        <Typography key={i} sx={{
+                                                            color: "black", fontSize: '16px', my: 1,
+                                                            '&:hover': {
+                                                                transform: 'scale(1.01)'
+                                                            }
+                                                        }}>
+                                                            {datas.name}
+                                                        </Typography>
+                                                    </Link>
                                                 )
                                             })
                                         }
@@ -156,14 +158,16 @@ export function InternshipHelper() {
                                         {
                                             InternshipHelperData[text].map((datas, i) => {
                                                 return (
-                                                    <Typography key={i} sx={{
-                                                        color: "black", fontSize: '16px', my: 1,
-                                                        '&:hover': {
-                                                            transform: 'scale(1.01)'
-                                                        }
-                                                    }}>
-                                                        {datas.name}
-                                                    </Typography>
+                                                    <Link href={datas.url} sx={{ textDecoration: 'none', color: '#000000' }}>
+                                                        <Typography key={i} sx={{
+                                                            color: "black", fontSize: '16px', my: 1,
+                                                            '&:hover': {
+                                                                transform: 'scale(1.01)'
+                                                            }
+                                                        }}>
+                                                            {datas.name}
+                                                        </Typography>
+                                                    </Link>
                                                 )
                                             })
                                         }
@@ -241,14 +245,16 @@ export function TrainingHelper() {
                                         {
                                             TrainingHelperData[text].map((datas, i) => {
                                                 return (
-                                                    <Typography key={i} sx={{
-                                                        color: "black", fontSize: '16px', my: 1,
-                                                        '&:hover': {
-                                                            transform: 'scale(1.01)'
-                                                        }
-                                                    }}>
-                                                        {datas.name}
-                                                    </Typography>
+                                                    <Link href={datas.url} sx={{ textDecoration: 'none', color: '#000000' }}>
+                                                        <Typography key={i} sx={{
+                                                            color: "black", fontSize: '16px', my: 1,
+                                                            '&:hover': {
+                                                                transform: 'scale(1.01)'
+                                                            }
+                                                        }}>
+                                                            {datas.name}
+                                                        </Typography>
+                                                    </Link>
                                                 )
                                             })
                                         }
