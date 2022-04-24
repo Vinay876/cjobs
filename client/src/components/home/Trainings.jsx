@@ -69,6 +69,7 @@ function Content({ padding, width, justifyContent }) {
                         <Link href='/trainings' sx={{ textDecoration: 'none', color: '#000000' }}>
                             <Button variant='outlined' color='secondary' sx={{
                                 boxShadow: 0,
+                                mt:-8,
                                 textTransform: 'none',
                                 '&:hover': {
                                     background: 'rgb(156, 39, 176)',

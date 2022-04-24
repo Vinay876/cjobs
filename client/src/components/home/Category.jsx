@@ -9,7 +9,7 @@ function Content({ padding, width, justifyContent }) {
     return (
         <>
             <Box sx={{ padding: padding, textAlign: width === '170px' ? 'unset' : 'center' }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
+                <Box sx={{  display: width === '170px' ? 'flex': 'block', justifyContent: 'space-between', alignItems: 'center', }}>
                     <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: "700", fontFamily: 'Fredoka' }}>
                         With Popular Categories
                     </Typography>
@@ -70,6 +70,7 @@ function Content({ padding, width, justifyContent }) {
                         <Link href='/type=jobs&filter=&city=null&category=null' sx={{ textDecoration: 'none', color: '#000000' }}>
                             <Button variant='outlined' color='secondary' sx={{
                                 boxShadow: 0,
+                                mt:-8,
                                 textTransform: 'none',
                                 '&:hover': {
                                     background: 'rgb(156, 39, 176)',
