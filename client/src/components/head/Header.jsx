@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { Link, useMediaQuery } from '@mui/material'
 import Sidebar from '../drawers/Sidebar'
-import { AboutHelper, ContactHelper, InternshipHelper, JobsHelper, LoginHelper, RegisterHelper, TrainingsHelper } from '../helpers/header/Helper'
+import { AboutHelper, ContactHelper, InternshipHelper, JobsHelper, LoginHelper, PostHelper, RegisterHelper, TrainingsHelper } from '../helpers/header/Helper'
 import { LoginContext } from '../../context/Context'
 import { ProfileEmployer, ProfileSeeker } from '../helpers/header/Profile'
 
@@ -25,14 +25,17 @@ function XLHeader() {
                     <Box sx={{ display: 'flex', my: 2 }}>
                         {
                             EmployerData.Employer ?
-                               <ProfileEmployer />
+                                <>
+                                    <PostHelper />
+                                    <ProfileEmployer />
+                                </>
                                 :
                                 null
                         }
 
                         {
                             SeekerData.Seeker ?
-                              <ProfileSeeker />
+                                <ProfileSeeker />
                                 :
                                 null
                         }
@@ -64,9 +67,9 @@ function MDHeader() {
         <AppBar position="fixed" sx={{ backgroundColor: 'rgb(156, 39, 176)', color: '#ffffff' }}>
             <Container maxWidth="1160px" sx={{ display: 'flex', alignItems: 'center', }}>
                 <Sidebar />
-                <Link href='/' sx={{ textDecoration: "none",m: "0px auto", }}>
+                <Link href='/' sx={{ position: 'absolute', left: '50%', transform: 'translate(-50%)', textDecoration: "none", }}>
                     <Typography
-                        sx={{ fontFamily: 'Fredoka', color: "white", fontWeight: "700", fontSize: '25px',  letterSpacing: '2px' }} >
+                        sx={{ fontFamily: 'Fredoka', color: "white", fontWeight: "700", fontSize: '25px', letterSpacing: '2px' }} >
                         CJOBS
                     </Typography>
                 </Link>

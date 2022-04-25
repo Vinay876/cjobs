@@ -1,4 +1,4 @@
-// login as employer
+// post as job
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
@@ -8,31 +8,69 @@ import '../../css/login.css'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { LoginContext } from '../../context/Context'
 import Tooltip from '@mui/material/Tooltip';
-import WarningIcon from '@mui/icons-material/Warning';
 import DoneIcon from '@mui/icons-material/Done';
 import { useMediaQuery } from '@mui/material'
-import { sendOTP } from '../../api/otpSend'
+import { v4 as uuidV4 } from 'uuid'
+import { employerContact } from '../../api/contact'
 import { employerLogin } from '../../api/employer'
 
-const userData = {
-    Organization_Name: '',
-    Organization_Email: '',
-    User_Name: '',
-    User_Email: '',
-    User_Number: '',
-    otp: '',
-    verified: false,
-    enteredOtp: '',
-}
-
-function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
+function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
     const navigate = useNavigate()
-    const { setMessage, setMessageType, setShow, encrypt } = React.useContext(LoginContext)
-    const [resendTime, setResendTime] = React.useState(60)
-    const [data, setData] = React.useState(userData)
-    const timeRef = React.useRef()
-    const [displayForYourInformation, setDisplayForYourInformation] = React.useState(0)
+    const { setMessage, setMessageType, setShow, decrypt, EmployerData } = React.useContext(LoginContext)
+    const [skills, setSkills] = React.useState([])
+    const [perks, setPerks] = React.useState([])
     var validRegexForEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const [data, setData] = React.useState({
+        Organization_Name: '',
+        Organization_Email: '',
+        Organization_Website: '',
+        Organization_Details: '',
+        User_Name: '',
+        User_Designation: '',
+        User_Email: '',
+        Job_Type: '',
+        Job_Location: '',
+        Start_Date: '',
+        Apply_By: '',
+        About_Internship: '',
+        Who_can_apply: '',
+        Number_of_openings: '',
+        id: uuidV4(),
+        open: false
+    })
+
+    React.useEffect(() => {
+        GetData()
+    }, [])
+
+    const GetData = async () => {
+        if (EmployerData.Employer) {
+            const response = await employerLogin({
+                Organization_Name: decrypt(EmployerData.Organization_Name),
+                Organization_Email: decrypt(EmployerData.Organization_Email),
+                User_Name: decrypt(EmployerData.User_Name),
+                User_Email: decrypt(EmployerData.User_Email),
+                User_Number: decrypt(EmployerData.User_Number),
+            })
+            if (response) {
+                setData(prev => {
+                    return {
+                        ...prev,
+                        User_id: response.User_id,
+                        Organization_Name: response.Organization_Name,
+                        Organization_Email: response.Organization_Email,
+                        Organization_Website: response.Organization_Website,
+                        Organization_Details: response.Organization_Details,
+                        User_Name: response.User_Name,
+                        User_Designation: response.User_Designation,
+                        User_Email: response.User_Email,
+                    }
+                })
+            }
+        }
+    }
+
+    const [displayForYourInformation, setDisplayForYourInformation] = React.useState(0)
 
     function OrganizationDataChecker() {
         if (!data.Organization_Email.match(validRegexForEmail)) {
@@ -50,55 +88,17 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
         setDisplayForYourInformation(1)
     }
 
-    async function NumberVerifier() {
-        clearInterval(timeRef.current);
-        setResendTime(60);
-        const response = await sendOTP({ Number: `+91${data.User_Number}` })
-        if (response) {
-            setShow(true)
-            setMessageType('success')
-            setMessage('OTP sent.')
-            setData(prev => {
-                return { ...prev, otp: response.slice(0, 6) }
-            })
-        }
-        timeRef.current = setInterval(() => {
-            setResendTime((time) => time - 1)
-        }, 1000);
-    }
-    if (resendTime === 0) {
-        clearInterval(timeRef.current)
-    }
-
-    const verifyOTP = () => {
-        if (data.otp === data.enteredOtp) {
-            setData(prev => {
-                return { ...prev, verified: true, otp: '' }
-            })
-            setShow(true)
-            setMessageType('success')
-            setMessage('Number verified')
-        } else {
-            setShow(true)
-            setMessageType('error')
-            setMessage('Incorrect OTP')
-            setData(prev => {
-                return { ...prev, verified: false }
-            })
-        }
-    }
-
-    async function RegisterAsEmployer() {
-        if (!data.User_Email.match(validRegexForEmail)) {
-            setShow(true)
-            setMessageType('error')
-            setMessage("Invalid User Email")
-            return
-        }
+    async function EmployerDataChecker() {
         if (!data.User_Name || data.User_Name.length < 4) {
             setShow(true)
             setMessageType('error')
             setMessage('User Name is not Valid.')
+            return
+        }
+        if (!data.User_Email.match(validRegexForEmail)) {
+            setShow(true)
+            setMessageType('error')
+            setMessage("Invalid User Email")
             return
         }
         if (!data.User_Number || data.User_Number.length < 8) {
@@ -107,54 +107,52 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
             setMessage('User Number is not valid.')
             return
         }
-        // if (!data.verified) {
-        //     setShow(true)
-        //     setMessageType('warning')
-        //     setMessage('User Number is not verified.')
-        //     return
-        // }
-        const response = await employerLogin({
+        if (!data.verified) {
+            setShow(true)
+            setMessageType('warning')
+            setMessage('User Number is not verified.')
+            return
+        }
+        setDisplayForYourInformation(2)
+    }
+
+    async function DataSend() {
+        if (!data.query || data.query.length < 10) {
+            setShow(true)
+            setMessageType('warning')
+            setMessage('Query must be specific.')
+            return
+        }
+        const response = await employerContact({
             Organization_Name: data.Organization_Name,
             Organization_Email: data.Organization_Email,
             User_Name: data.User_Name,
+            User_Designation: data.User_Designation,
             User_Email: data.User_Email,
             User_Number: data.User_Number,
+            Query: data.query
         })
-        if (response) {
-            localStorage.setItem('INIT_DATA', JSON.stringify({
-                Employer: true,
-                User_id:response.User_id,
-                Organization_Name: encrypt(response.Organization_Name),
-                Organization_Address: encrypt(response.Organization_Address),
-                Organization_Email: encrypt(response.Organization_Email),
-                Organization_Telephone: encrypt(response.Organization_Telephone),
-                User_Name: encrypt(response.User_Name),
-                User_Designation: encrypt(response.User_Designation),
-                User_Email: encrypt(response.User_Email),
-                User_Number: encrypt(response.User_Number),
-            }));
+        if (response === 'success') {
             navigate('/')
-            window.location.reload(false)
-        } else {
             setShow(true)
-            setMessageType('error')
-            setMessage('Your Entries are incorrect check them or try again later')
+            setMessageType('success')
+            setMessage('Query Sent')
+            return
         }
     }
-
 
     return (
         <>
             <Typography variant="h5" sx={{ textAlign: "center", color: "rgb(156, 39, 176)", fontWeight: '800', textTransform: 'uppercase', py: 2, fontFamily: 'Fredoka', borderBottom: '2px solid rgb(156, 39, 176)', width: txtWidth, m: '0px auto' }}>
-                Login at CJOBS
+                Contact us
             </Typography>
             <Typography sx={{ textAlign: "center", fontWeight: '800', py: 2, fontFamily: 'Fredoka', }}>
-                Login for your Organization and get best employees across india
+                Contact us if there is anything you are not sure about.<br /> We will help you anytime<br /> I haven't added this yet so contact us is dummy for that
             </Typography>
 
-            <Box sx={{ display: display, alignItems: 'center', justifyContent: 'space-between',textAlign: align }}>
+            <Box sx={{ display: display, alignItems: 'center', justifyContent: 'space-between', textAlign: align }}>
                 <Box>
-                    <img src={require("../../assets/report/register_organisation.webp")} style={{ width: width }} alt="Login" />
+                    <img src={require("../../assets/report/contact.webp")} style={{ width: width }} alt="Contact" />
                 </Box>
 
                 <Box sx={{ display: displayForYourInformation === 0 ? 'block' : 'none', width: datawidth, m: '0px auto', mt: 5 }}>
@@ -164,7 +162,9 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
                             <input
                                 placeholder='Name'
                                 type='text'
-                                onChange={e => setData(prev => {
+                                defaultValue={EmployerData.Employer ? data.Organization_Name : null}
+                                disabled={data.verified ? true : false}
+                                onChange={(e) => setData(prev => {
                                     return { ...prev, Organization_Name: e.target.value }
                                 })}
                                 style={{
@@ -183,7 +183,9 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
                             <input
                                 placeholder='Email'
                                 type='text'
-                                onChange={e => setData(prev => {
+                                defaultValue={EmployerData.Employer ? data.Organization_Email : null}
+                                disabled={data.verified ? true : false}
+                                onChange={(e) => setData(prev => {
                                     return { ...prev, Organization_Email: e.target.value }
                                 })}
                                 style={{
@@ -217,8 +219,31 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
                             <input
                                 placeholder='Your Name'
                                 type='text'
-                                onChange={e => setData(prev => {
+                                defaultValue={EmployerData.Employer ? data.User_Name : null}
+                                disabled={data.verified ? true : false}
+                                onChange={(e) => setData(prev => {
                                     return { ...prev, User_Name: e.target.value }
+                                })}
+                                style={{
+                                    border: '1px solid #000000',
+                                    userSelect: 'none',
+                                    width: inpwidth,
+                                    height: '40px',
+                                    fontSize: '14px',
+                                    textAlign: 'center',
+                                }} />
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Typography sx={{ fontSize: '16px', fontWeight: '600', marginTop: 3, color: 'rgb(156, 39, 176)' }}> Your Designation :</Typography>
+                        <Box sx={{ my: 3 }}>
+                            <input
+                                placeholder='Your Designation'
+                                type='text'
+                                defaultValue={EmployerData.Employer ? data.User_Designation : null}
+                                disabled={data.verified ? true : false}
+                                onChange={(e) => setData(prev => {
+                                    return { ...prev, User_Designation: e.target.value }
                                 })}
                                 style={{
                                     border: '1px solid #000000',
@@ -236,7 +261,9 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
                             <input
                                 placeholder='Your Email'
                                 type='text'
-                                onChange={e => setData(prev => {
+                                defaultValue={EmployerData.Employer ? data.User_Email : null}
+                                disabled={data.verified ? true : false}
+                                onChange={(e) => setData(prev => {
                                     return { ...prev, User_Email: e.target.value }
                                 })}
                                 style={{
@@ -257,8 +284,9 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
                             <input
                                 placeholder='Your Phone Number'
                                 type='Number'
+                                defaultValue={EmployerData.Employer ? data.User_Number : null}
                                 disabled={data.verified ? true : false}
-                                onChange={e => setData(prev => {
+                                onChange={(e) => setData(prev => {
                                     return { ...prev, User_Number: e.target.value }
                                 })}
                                 style={{
@@ -269,77 +297,39 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
                                     fontSize: '14px',
                                     textAlign: 'center',
                                 }} />
-                            {
-                                data.User_Number.length === 10 ?
-                                    <Box>
-                                        {
-                                            data.verified ?
-                                                <Tooltip title="Verified" placement="top" arrow>
-                                                    <DoneIcon sx={{ fontSize: '24px', color: 'green', px: 1, }} />
-                                                </Tooltip>
-                                                :
-                                                <Tooltip title="Click to verify" placement="top" arrow>
-                                                    <WarningIcon onClick={NumberVerifier} sx={{ cursor: 'pointer', fontSize: '20px', color: 'red', px: 1, }} />
-                                                </Tooltip>
-                                        }
-                                    </Box>
-                                    :
-                                    null
-                            }
+                            <Tooltip title="Verified" placement="top" arrow>
+                                <DoneIcon sx={{ fontSize: '24px', color: 'green', px: 1, }} />
+                            </Tooltip>
                         </Box>
                     </Box>
-                    {
-                        data.otp ?
-                            <Box sx={{ margin: '0px auto', }}>
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <Typography sx={{ fontSize: '14px', fontWeight: '600', textALign: 'start', color: 'rgb(156, 39, 176)' }}>Enter OTP : </Typography>
-                                    <Box sx={{ textAlign: 'center' }}>
-                                        <Typography sx={{ pointerEvents: resendTime === 0 ? 'auto' : 'none', opacity: resendTime === 0 ? '1' : '0.6', cursor: resendTime === 0 ? 'pointer' : 'no-drop', fontSize: '16px', mr: 1, color: resendTime === 0 ? 'rgb(156, 39, 176)' : 'black' }} onClick={() => NumberVerifier()}>
-                                            Resend {
-                                                resendTime === 0 ? null :
-                                                    <span>in 0:{resendTime < 10 ? `0${resendTime}` : resendTime}</span>
-                                            }
-                                        </Typography>
-                                    </Box>
-                                </Box>
-
-                                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
-                                    <input
-                                        placeholder='OTP'
-                                        type='number'
-                                        onChange={e => setData(prev => {
-                                            return { ...prev, enteredOtp: e.target.value }
-                                        })}
-                                        style={{
-                                            border: "1px solid black",
-                                            userSelect: 'none',
-                                            width: '50%',
-                                            height: '35px',
-                                            fontSize: '14px',
-                                            textAlign: 'center',
-                                            margin: '5px auto',
-                                        }} />
-                                </Box>
-                                <Box sx={{ textAlign: 'center', my: 2 }}>
-                                    <Button sx={{
-                                        boxShadow: 0,
-                                        textTransform: 'none',
-                                        px: 2,
-                                        '&:hover': {
-                                            background: 'rgb(156, 39, 176)',
-                                            color: 'white'
-                                        }
-                                    }} color='secondary' variant='outlined' onClick={verifyOTP}>
-                                        Verify
-                                    </Button>
-                                </Box>
-
-                            </Box>
-                            :
-                            null
-                    }
                     <Box sx={{ textAlign: 'center' }}>
-                        <Button onClick={RegisterAsEmployer} color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none' }}>Login</Button>
+                        <Button onClick={EmployerDataChecker} color="secondary" variant='outlined' sx={{ boxShadow: 0, textTransform: 'none' }}>Next</Button>
+                    </Box>
+                </Box>
+                <Box sx={{ display: displayForYourInformation === 2 ? 'block' : 'none', width: datawidth, m: '0px auto', mt: 5 }}>
+                    <ArrowBackIcon sx={{ cursor: 'pointer' }} onClick={() => setDisplayForYourInformation(1)} />
+                    <Box>
+                        <Typography sx={{ fontSize: '16px', fontWeight: '600', marginTop: 3, color: 'rgb(156, 39, 176)' }}>Your Query :</Typography>
+                        <Box sx={{ my: 3 }}>
+                            <textarea
+                                placeholder='Your Query'
+                                type='text'
+                                onChange={(e) => setData(prev => {
+                                    return { ...prev, query: e.target.value }
+                                })}
+                                style={{
+                                    border: '1px solid #000000',
+                                    userSelect: 'none',
+                                    width: inpwidth,
+                                    height: '300px',
+                                    fontSize: '14px',
+                                    resize: 'none',
+                                    textAlign: 'center',
+                                }} />
+                        </Box>
+                    </Box>
+                    <Box sx={{ textAlign: 'center' }}>
+                        <Button onClick={DataSend} color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none' }}>Send</Button>
                     </Box>
                 </Box>
             </Box>
@@ -349,16 +339,17 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
 }
 
 
-export default function Login1() {
+
+export default function Post1() {
 
     const xlMax = useMediaQuery('(max-width:2000px)');
     const xlMin = useMediaQuery('(min-width:1100px)');
     const mdMax = useMediaQuery('(max-width:1100px)');
     const mdMin = useMediaQuery('(min-width:650px)');
     const sm = useMediaQuery('(max-width:650px)');
-  
-  
-  
+
+
+
     return (
         <>
             {xlMax && xlMin && (
@@ -371,4 +362,4 @@ export default function Login1() {
             )}
         </>
     )
-  }
+}

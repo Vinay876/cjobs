@@ -5,6 +5,8 @@ import Contact2 from '../components/contact/Contact2'
 import Header from '../components/head/Header'
 import Login1 from '../components/login/Login1'
 import Login2 from '../components/login/Login2'
+import Post1 from '../components/Post/Post1'
+import Post2 from '../components/Post/Post2'
 import Register1 from '../components/register/Register1'
 import Register2 from '../components/register/Register2'
 
@@ -31,6 +33,12 @@ export default function LoginReportRegister() {
             }
             {
                 id === 'contact-as-job-seekers' ? <Contact2 /> : null
+            }
+            {
+                id === 'post-a-job' ? <Post1 /> : null
+            }
+            {
+                id === 'post-an-internship' ? <Post2 /> : null
             }
         </>
     )

@@ -1,6 +1,10 @@
 import mongoose from 'mongoose'
 
 const employerSchema = new mongoose.Schema({
+    User_id:{
+        type: String,
+        required: true
+    },
     Organization_Name: {
         type: String,
         required: true
@@ -14,6 +18,12 @@ const employerSchema = new mongoose.Schema({
         required: true
     },
     Organization_Telephone: {
+        type: String,
+    },
+    Organization_Details:{
+        type: String,
+    },
+    Organization_Website:{
         type: String,
     },
     User_Name: {

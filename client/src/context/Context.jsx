@@ -47,6 +47,7 @@ const ContextProvider = ({ children }) => {
         } catch (err) {
             localStorage.setItem('INIT_DATA', JSON.stringify({
                 Employer: true,
+                User_id:'',
                 Organization_Name: '',
                 Organization_Address: '',
                 Organization_Email: '',
@@ -75,6 +76,7 @@ const ContextProvider = ({ children }) => {
         } catch (err) {
             localStorage.setItem('INIT_DATA', JSON.stringify({
                 Seeker: true,
+                User_id:'',
                 User_Name: '',
                 User_Address: '',
                 User_Email: '',
@@ -94,6 +96,7 @@ const ContextProvider = ({ children }) => {
         if (EmployerData.Employer) {
             localStorage.setItem('INIT_DATA', JSON.stringify({
                 Employer: false,
+                User_id:'',
                 Organization_Name: '',
                 Organization_Address: '',
                 Organization_Email: '',
@@ -108,6 +111,7 @@ const ContextProvider = ({ children }) => {
         if (SeekerData.Seeker) {
             localStorage.setItem('INIT_DATA', JSON.stringify({
                 Seeker: false,
+                User_id:'',
                 User_Name: '',
                 User_Address: '',
                 User_Email: '',

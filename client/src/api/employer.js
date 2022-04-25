@@ -20,3 +20,14 @@ export const employerLogin = async (data) => {
     console.log('Error while calling employer' + error);
   }
 }
+
+
+export const employerUpdate = async (data) => {
+  try {
+    const response = await axios.post(`${URL}/update-employer`, data)
+    return response.data
+  } catch (error) {
+    console.log('Error while calling employer' + error);
+  }
+}
+

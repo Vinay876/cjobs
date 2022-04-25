@@ -1,6 +1,10 @@
 import mongoose from 'mongoose'
 
 const seekerSchema = new mongoose.Schema({
+    User_id:{
+        type: String,
+        required: true
+    },
     User_Name: {
         type: String,
         required: true

@@ -16,6 +16,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { seekerRegister } from '../../api/seeker'
 import { useMediaQuery } from '@mui/material'
+import { v4 as uuidV4 } from 'uuid'
 import { SkillsData } from '../../constants/data'
 
 const userData = {
@@ -27,10 +28,11 @@ const userData = {
   verified: false,
   enteredOtp: '',
   checked: true,
-  open: false
+  open: false,
+  id: uuidV4()
 }
 
-function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
+function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
   const navigate = useNavigate()
   const { setMessage, setMessageType, setShow, encrypt } = React.useContext(LoginContext)
   const [resendTime, setResendTime] = React.useState(60)
@@ -140,15 +142,17 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
     }
 
     const response = await seekerRegister({
+      User_id: data.id,
       User_Name: data.User_Name,
       User_Address: data.User_Address,
       User_Email: data.User_Email,
       User_Number: data.User_Number,
-      Skills: skills
+      Skills: skills,
     })
     if (response === 'success') {
       localStorage.setItem('INIT_DATA', JSON.stringify({
         Seeker: true,
+        User_id: data.id,
         User_Name: encrypt(data.User_Name),
         User_Address: encrypt(data.User_Address),
         User_Email: encrypt(data.User_Email),
@@ -169,7 +173,7 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
         Register here and get opportunities to work at best companies in India
       </Typography>
 
-      <Box sx={{  display: display, alignItems: 'center', justifyContent: 'space-between', textAlign: align  }}>
+      <Box sx={{ display: display, alignItems: 'center', justifyContent: 'space-between', textAlign: align }}>
         <Box>
           <img src={require("../../assets/report/register_seeker.webp")} style={{ width: width }} alt="Register" />
         </Box>
@@ -369,18 +373,30 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
               data.open ?
                 <Box sx={{ textAlign: 'center', }}>
                   {
-                    SkillsData.map(datas =>
-                      <Typography sx={{
-                        color: 'rgb(156, 39, 176)', py: 1, my: 1, cursor: 'pointer',
-                        '&:hover': {
-                          background: 'rgb(156, 39, 176)',
-                          color: 'white',
-                          borderRadius: 1
-                        }
-                      }} onClick={skillAdder}>
-                        {datas}
-                      </Typography>
-                    )
+                    SkillsData.map((datas, index) => {
+                      var inIncluded = false
+                      if (skills.includes(datas)) {
+                        inIncluded = true
+                      }
+                      return (
+                        <Typography
+                          key={index}
+                          sx={{
+                            color: inIncluded ? 'white' : 'rgb(156, 39, 176)',
+                            background: inIncluded ? 'rgb(156, 39, 176)' : 'white',
+                            py: 1,
+                            my: 1,
+                            cursor: 'pointer',
+                            '&:hover': {
+                              background: 'rgb(156, 39, 176)',
+                              color: 'white',
+                              borderRadius: 1
+                            }
+                          }} onClick={skillAdder}>
+                          {datas}
+                        </Typography>
+                      )
+                    })
                   }
                 </Box>
 
@@ -418,15 +434,15 @@ export default function Register2() {
 
 
   return (
-      <>
-          {xlMax && xlMin && (
-              <Content display={'flex'} width={'auto'} align={'unset'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'40%'} />
-          )}
-          {!(xlMax && xlMin) && mdMax && mdMin && (
-              <Content display={'block'} width={'auto'} align={'center'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'60%'} />
-          )}
-          {sm && (<Content display={'block'} width={'80%'} align={'center'} inpwidth={'100%'} txtWidth={'280px'} datawidth={'60%'} />
-          )}
-      </>
+    <>
+      {xlMax && xlMin && (
+        <Content display={'flex'} width={'auto'} align={'unset'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'40%'} />
+      )}
+      {!(xlMax && xlMin) && mdMax && mdMin && (
+        <Content display={'block'} width={'auto'} align={'center'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'60%'} />
+      )}
+      {sm && (<Content display={'block'} width={'80%'} align={'center'} inpwidth={'100%'} txtWidth={'280px'} datawidth={'60%'} />
+      )}
+    </>
   )
 }

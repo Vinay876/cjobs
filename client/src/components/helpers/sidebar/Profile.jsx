@@ -52,7 +52,7 @@ export function ProfileEmployer() {
                         {
                             ProfileHelperMenuData['Employer'].map((datas, i) => {
                                 return (
-                                    <Link key={i} href={datas.url} sx={{ textDecoration: 'none' }}>
+                                    <Link key={i} href={datas.name === 'Profile' ? `${datas.url}=${EmployerData.User_id}` : datas.url} sx={{ textDecoration: 'none' }}>
                                         <Typography
                                             onClick={datas.name === 'Logout' ? logout : null}
                                             sx={{
@@ -76,7 +76,7 @@ export function ProfileEmployer() {
 
 
 export function ProfileSeeker() {
-    const { EmployerData, decrypt, logout } = React.useContext(LoginContext)
+    const { SeekerData, decrypt, logout } = React.useContext(LoginContext)
     const [expanded, setExpanded] = React.useState(false);
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -100,7 +100,7 @@ export function ProfileSeeker() {
                 >
                     <Typography sx={{ p: 1, cursor: 'pointer', color: 'rgb(156, 39, 176)', display: 'flex', alignItems: 'center', }} >
                         <AccountCircleIcon sx={{ mr: 0.6, ml: -1 }} />
-                        {decrypt(EmployerData.User_Name)}
+                        {decrypt(SeekerData.User_Name)}
                     </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -108,7 +108,7 @@ export function ProfileSeeker() {
                         {
                             ProfileHelperMenuData['Seeker'].map((datas, i) => {
                                 return (
-                                    <Link key={i} href={datas.url} sx={{ textDecoration: 'none' }}>
+                                    <Link key={i} href={datas.name === 'Profile' ? `${datas.url}=${SeekerData.User_id}` : datas.url} sx={{ textDecoration: 'none' }}>
                                         <Typography
                                             onClick={datas.name === 'Logout' ? logout : null}
                                             sx={{

@@ -62,7 +62,7 @@ Why i use these packages:
 
 Here is the url where i am hosting the website right now
 
-    https://cjobs-ad6b9.firebaseapp.com/
+    https://cjobs-3c223.firebaseapp.com/
 
 The theme of the website is
 
@@ -113,7 +113,11 @@ The changes in the commits. ( Here i store what changes i made for every commit)
         modified data and added url to all of them
 
     ->Seventh Commit - 25-04-2022
-        Create Profile page (responsive)
-        Add accordian and filter and job and internship card to the job and internshipt page (responsive)
-        Add card in trainings page
-        Add things to about us page ( get inspiration from internshala )
+        Create Profile with updator page fro employer and seeker (responsive)
+        Add top and filter and job and internship card to the job and internshipt page (responsive)
+        Created the template for the post
+        Redesigned the post and used User_id a feature to view companies profiles
+
+    ->Eight Commit - 26-04-2022
+        Make employer to post a recruitment (job or internship)
+        The seeker to view the job with tags

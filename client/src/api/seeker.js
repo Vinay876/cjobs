@@ -23,3 +23,11 @@ export const seekerLogin = async (data) => {
   }
 }
 
+export const seekerUpdate = async (data) => {
+  try {
+    const response = await axios.post(`${URL}/update-seeker`, data)
+    return response.data
+  } catch (error) {
+    console.log('Error while calling employer' + error);
+  }
+}

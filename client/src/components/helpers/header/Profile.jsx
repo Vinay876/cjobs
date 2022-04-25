@@ -12,7 +12,7 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 
 export function ProfileEmployer() {
-    const { EmployerData, decrypt,logout } = React.useContext(LoginContext)
+    const { EmployerData, decrypt, logout } = React.useContext(LoginContext)
     const [anchorEl, setAnchorEl] = React.useState(null)
     const [data, setData] = React.useState('Profile')
     const open = Boolean(anchorEl);
@@ -46,7 +46,7 @@ export function ProfileEmployer() {
                         {
                             ProfileHelperMenuData['Employer'].map((text, index) => {
                                 return (
-                                    <Link key={index} href={text.url} sx={{ textDecoration: 'none', color: "#000000" }} onClick={text.name === 'Logout' ? logout : null}>
+                                    <Link key={index} href={text.name === 'Profile' ? `${text.url}=${EmployerData.User_id}` : text.url} sx={{ textDecoration: 'none', color: "#000000" }} onClick={text.name === 'Logout' ? logout : null}>
                                         <MenuItem
                                             sx={data === text.name ?
                                                 {
@@ -87,7 +87,7 @@ export function ProfileEmployer() {
 
 
 export function ProfileSeeker() {
-    const { SeekerData, decrypt ,logout } = React.useContext(LoginContext)
+    const { SeekerData, decrypt, logout } = React.useContext(LoginContext)
     const [anchorEl, setAnchorEl] = React.useState(null)
     const [data, setData] = React.useState('Profile')
     const open = Boolean(anchorEl);
@@ -128,7 +128,7 @@ export function ProfileSeeker() {
                         {
                             ProfileHelperMenuData['Seeker'].map((text, index) => {
                                 return (
-                                    <Link key={index} href={text.url} sx={{ textDecoration: 'none', color: "#000000" }} onClick={text.name === 'Logout' ? logout : null}>
+                                    <Link key={index} href={text.name==='Profile'?`${text.url}=${SeekerData.User_id}`:text.url} sx={{ textDecoration: 'none', color: "#000000" }} onClick={text.name === 'Logout' ? logout : null}>
                                         <MenuItem
                                             sx={data === text.name ?
                                                 {

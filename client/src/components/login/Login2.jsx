@@ -22,7 +22,7 @@ const userData = {
     enteredOtp: '',
 }
 
-function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
+function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
     const navigate = useNavigate()
     const { setMessage, setMessageType, setShow, encrypt } = React.useContext(LoginContext)
     const [resendTime, setResendTime] = React.useState(60)
@@ -105,6 +105,7 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
         if (response) {
             localStorage.setItem('INIT_DATA', JSON.stringify({
                 Seeker: true,
+                User_id: response.User_id,
                 User_Name: encrypt(response.User_Name),
                 User_Address: encrypt(response.User_Address),
                 User_Email: encrypt(response.User_Email),
@@ -122,14 +123,14 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
 
     return (
         <>
-            <Typography variant="h5" sx={{ textAlign: "center", color: "rgb(156, 39, 176)", fontWeight: '800', textTransform: 'uppercase', py: 2, fontFamily: 'Fredoka', borderBottom: '2px solid rgb(156, 39, 176)',  width: txtWidth, m: '0px auto' }}>
+            <Typography variant="h5" sx={{ textAlign: "center", color: "rgb(156, 39, 176)", fontWeight: '800', textTransform: 'uppercase', py: 2, fontFamily: 'Fredoka', borderBottom: '2px solid rgb(156, 39, 176)', width: txtWidth, m: '0px auto' }}>
                 Login at CJOBS
             </Typography>
             <Typography sx={{ textAlign: "center", fontWeight: '800', py: 2, fontFamily: 'Fredoka', }}>
                 Login here and get opportunities to work at best companies in India
             </Typography>
 
-            <Box sx={{ display: display, alignItems: 'center', justifyContent: 'space-between',textAlign: align   }}>
+            <Box sx={{ display: display, alignItems: 'center', justifyContent: 'space-between', textAlign: align }}>
                 <Box>
                     <img src={require("../../assets/report/register_seeker.webp")} style={{ width: width }} alt="Login" />
                 </Box>
@@ -147,7 +148,7 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
                                 style={{
                                     border: '1px solid #000000',
                                     userSelect: 'none',
-                                     width: inpwidth,
+                                    width: inpwidth,
                                     height: '40px',
                                     fontSize: '14px',
                                     textAlign: 'center',
@@ -166,7 +167,7 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
                                 style={{
                                     border: '1px solid #000000',
                                     userSelect: 'none',
-                                     width: inpwidth,
+                                    width: inpwidth,
                                     height: '40px',
                                     fontSize: '14px',
                                     textAlign: 'center',
@@ -188,7 +189,7 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
                                 style={{
                                     border: 'none',
                                     userSelect: 'none',
-                                     width: inpwidth,
+                                    width: inpwidth,
                                     height: '40px',
                                     fontSize: '14px',
                                     textAlign: 'center',
@@ -281,9 +282,9 @@ export default function Login2() {
     const mdMax = useMediaQuery('(max-width:1100px)');
     const mdMin = useMediaQuery('(min-width:650px)');
     const sm = useMediaQuery('(max-width:650px)');
-  
-  
-  
+
+
+
     return (
         <>
             {xlMax && xlMin && (
@@ -296,4 +297,4 @@ export default function Login2() {
             )}
         </>
     )
-  }
+}

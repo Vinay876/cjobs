@@ -6,12 +6,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { ContactHelper, InternshipHelper, LoginHelper, RegisterHelper, TrainingHelper, JobHelper, AboutHelper } from '../helpers/sidebar/Helper';
+import { ContactHelper, InternshipHelper, LoginHelper, RegisterHelper, TrainingHelper, JobHelper, AboutHelper, PostHelper } from '../helpers/sidebar/Helper';
 import { LoginContext } from '../../context/Context';
-import { ProfileEmployer,ProfileSeeker } from '../helpers/sidebar/Profile';
+import { ProfileEmployer, ProfileSeeker } from '../helpers/sidebar/Profile';
 
 export default function Sidebar() {
-    const { SeekerData, EmployerData} = React.useContext(LoginContext)
+    const { SeekerData, EmployerData } = React.useContext(LoginContext)
     const [state, setState] = React.useState({
         left: false,
     });
@@ -58,7 +58,10 @@ export default function Sidebar() {
 
                         {
                             EmployerData.Employer ?
-                                <ProfileEmployer />
+                                <>
+                                    <ProfileEmployer />
+                                    <PostHelper />
+                                </>
                                 :
                                 null
                         }

@@ -1,42 +1,66 @@
-// Register as employer
+// update as employer
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import '../../css/login.css'
-import { v4 as uuidV4 } from 'uuid'
-import Checkbox from '@mui/material/Checkbox'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { LoginContext } from '../../context/Context'
 import Tooltip from '@mui/material/Tooltip';
-import WarningIcon from '@mui/icons-material/Warning';
 import DoneIcon from '@mui/icons-material/Done';
-import { sendOTP } from '../../api/otpSend'
-import { employerRegister } from '../../api/employer'
+import { employerUpdate } from '../../api/employer'
 import { useMediaQuery } from '@mui/material'
+import { employerLogin } from '../../api/employer'
 
 
 function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
-    const navigate = useNavigate()
-    const { setMessage, setMessageType, setShow, encrypt } = React.useContext(LoginContext)
-    const [resendTime, setResendTime] = React.useState(60)
+    const { setMessage, setMessageType, setShow, decrypt, EmployerData, encrypt } = React.useContext(LoginContext)
     const [data, setData] = React.useState({
+        User_id: '',
         Organization_Name: '',
         Organization_Address: '',
         Organization_Email: '',
         Organization_Telephone: '',
+        Organization_Details: '',
+        Organization_Website: '',
         User_Name: '',
         User_Designation: '',
         User_Email: '',
         User_Number: '',
-        otp: '',
-        verified: false,
-        enteredOtp: '',
-        checked: true,
-        id: uuidV4()
     })
-    const timeRef = React.useRef()
+    React.useEffect(() => {
+        GetData()
+    }, [])
+
+    const GetData = async () => {
+        if (EmployerData.Employer) {
+            const response = await employerLogin({
+                Organization_Name: decrypt(EmployerData.Organization_Name),
+                Organization_Email: decrypt(EmployerData.Organization_Email),
+                User_Name: decrypt(EmployerData.User_Name),
+                User_Email: decrypt(EmployerData.User_Email),
+                User_Number: decrypt(EmployerData.User_Number),
+            })
+            if (response) {
+                setData(prev => {
+                    return {
+                        ...prev,
+                        User_id: response.User_id,
+                        Organization_Name: response.Organization_Name,
+                        Organization_Email: response.Organization_Email,
+                        Organization_Address: response.Organization_Address,
+                        Organization_Telephone: response.Organization_Telephone,
+                        Organization_Website: response.Organization_Website,
+                        Organization_Details: response.Organization_Details,
+                        User_Name: response.User_Name,
+                        User_Designation: response.User_Designation,
+                        User_Email: response.User_Email,
+                        User_Number: response.User_Number,
+                    }
+                })
+            }
+        }
+    }
     const [displayForYourInformation, setDisplayForYourInformation] = React.useState(0)
     var validRegexForEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -68,45 +92,24 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
         setDisplayForYourInformation(1)
     }
 
-    async function NumberVerifier() {
-        clearInterval(timeRef.current);
-        setResendTime(60);
-        const response = await sendOTP({ Number: `+91${data.User_Number}` })
-        if (response) {
-            setShow(true)
-            setMessageType('success')
-            setMessage('OTP sent.')
-            setData(prev => {
-                return { ...prev, otp: response.slice(0, 6) }
-            })
-        }
-        timeRef.current = setInterval(() => {
-            setResendTime((time) => time - 1)
-        }, 1000);
-    }
-    if (resendTime === 0) {
-        clearInterval(timeRef.current)
-    }
-
-    const verifyOTP = () => {
-        if (data.otp === data.enteredOtp) {
-            setData(prev => {
-                return { ...prev, verified: true, otp: '' }
-            })
-            setShow(true)
-            setMessageType('success')
-            setMessage('Number verified')
-        } else {
+    function DetailsChecker() {
+        if (!data.Organization_Website || data.Organization_Website.length < 4) {
             setShow(true)
             setMessageType('error')
-            setMessage('Incorrect OTP')
-            setData(prev => {
-                return { ...prev, verified: false }
-            })
+            setMessage('Website is not valid.')
+            return
         }
+        if (!data.Organization_Details || data.Organization_Details.length < 4) {
+            setShow(true)
+            setMessageType('error')
+            setMessage('Detail is too short.')
+            return
+        }
+        setDisplayForYourInformation(2)
     }
 
-    async function RegisterAsEmployer() {
+
+    async function UpdateAsEmployer() {
         if (!data.User_Email.match(validRegexForEmail)) {
             setShow(true)
             setMessageType('error')
@@ -131,36 +134,24 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
             setMessage('User Number is not valid.')
             return
         }
-        if (!data.verified) {
-            setShow(true)
-            setMessageType('warning')
-            setMessage('User Number is not verified.')
-        }
-        if (!data.checked) {
-            setShow(true)
-            setMessageType('warning')
-            setMessage('Agree to terms & condition and Privacy policy')
-            return
-        }
 
-        const response = await employerRegister({
-            User_id: data.id,
+        const response = await employerUpdate({
+            User_id: data.User_id,
             Organization_Name: data.Organization_Name,
-            Organization_Address: data.Organization_Address,
             Organization_Email: data.Organization_Email,
+            Organization_Address: data.Organization_Address,
             Organization_Telephone: data.Organization_Telephone,
-            Organization_Website:'',
-            Organization_Details:'',
+            Organization_Website: data.Organization_Website,
+            Organization_Details: data.Organization_Details,
             User_Name: data.User_Name,
             User_Designation: data.User_Designation,
             User_Email: data.User_Email,
             User_Number: data.User_Number,
         })
-        console.log(data);
-        if (response === 'success') {
+        if (response) {
             localStorage.setItem('INIT_DATA', JSON.stringify({
                 Employer: true,
-                User_id: data.id,
+                User_id: data.User_id,
                 Organization_Name: encrypt(data.Organization_Name),
                 Organization_Address: encrypt(data.Organization_Address),
                 Organization_Email: encrypt(data.Organization_Email),
@@ -170,7 +161,6 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                 User_Email: encrypt(data.User_Email),
                 User_Number: encrypt(data.User_Number),
             }));
-            navigate('/')
             window.location.reload(false)
         }
     }
@@ -179,15 +169,15 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
     return (
         <>
             <Typography variant="h5" sx={{ textAlign: "center", color: "rgb(156, 39, 176)", fontWeight: '800', textTransform: 'uppercase', py: 2, fontFamily: 'Fredoka', borderBottom: '2px solid rgb(156, 39, 176)', width: txtWidth, m: '0px auto' }}>
-                Register at CJOBS
+                Your Profile
             </Typography>
             <Typography sx={{ textAlign: "center", fontWeight: '800', py: 2, fontFamily: 'Fredoka', }}>
-                Register for your Organization and get best employees across india
+                Edit your profile to give people more information about your organization
             </Typography>
 
             <Box sx={{ display: display, alignItems: 'center', justifyContent: 'space-between', textAlign: align }}>
                 <Box>
-                    <img src={require("../../assets/report/register_organisation.webp")} style={{ width: width }} alt="Register" />
+                    <img src={require("../../assets/report/update-employers.webp")} style={{ width: width }} alt="Update" />
                 </Box>
 
                 <Box sx={{ display: displayForYourInformation === 0 ? 'block' : 'none', width: datawidth, m: '0px auto', mt: 5 }}>
@@ -197,6 +187,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                             <input
                                 placeholder='Name'
                                 type='text'
+                                defaultValue={data.Organization_Name}
                                 onChange={e => setData(prev => {
                                     return { ...prev, Organization_Name: e.target.value }
                                 })}
@@ -216,6 +207,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                             <input
                                 placeholder='Email'
                                 type='text'
+                                defaultValue={data.Organization_Email}
                                 onChange={e => setData(prev => {
                                     return { ...prev, Organization_Email: e.target.value }
                                 })}
@@ -235,6 +227,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                             <input
                                 placeholder='Address'
                                 type='text'
+                                defaultValue={data.Organization_Address}
                                 onChange={e => setData(prev => {
                                     return { ...prev, Organization_Address: e.target.value }
                                 })}
@@ -254,6 +247,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                             <input
                                 placeholder='Telephone'
                                 type='Number'
+                                defaultValue={data.Organization_Telephone}
                                 onChange={e => setData(prev => {
                                     return { ...prev, Organization_Telephone: e.target.value }
                                 })}
@@ -283,11 +277,68 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                 <Box sx={{ display: displayForYourInformation === 1 ? 'block' : 'none', width: datawidth, m: '0px auto', mt: 5 }}>
                     <ArrowBackIcon sx={{ cursor: 'pointer' }} onClick={() => setDisplayForYourInformation(0)} />
                     <Box>
+                        <Typography sx={{ fontSize: '16px', fontWeight: '600', marginTop: 3, color: 'rgb(156, 39, 176)' }}> Organization Website :</Typography>
+                        <Box sx={{ my: 3 }}>
+                            <input
+                                placeholder='Web Address'
+                                type='text'
+                                defaultValue={data.Organization_Website}
+                                onChange={e => setData(prev => {
+                                    return { ...prev, Organization_Website: e.target.value }
+                                })}
+                                style={{
+                                    border: '1px solid #000000',
+                                    userSelect: 'none',
+                                    width: inpwidth,
+                                    height: '40px',
+                                    fontSize: '14px',
+                                    textAlign: 'center',
+                                }} />
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Typography sx={{ fontSize: '16px', fontWeight: '600', marginTop: 3, color: 'rgb(156, 39, 176)' }}> Organization Details :</Typography>
+                        <Box sx={{ my: 3 }}>
+                            <textarea
+                                placeholder='Organization Details'
+                                type='text'
+                                defaultValue={data.Organization_Details}
+                                onChange={(e) => setData(prev => {
+                                    return { ...prev, Organization_Details: e.target.value }
+                                })}
+                                style={{
+                                    border: '1px solid #000000',
+                                    userSelect: 'none',
+                                    width: inpwidth,
+                                    height: '300px',
+                                    fontSize: '14px',
+                                    resize: 'none',
+                                    textAlign: 'center',
+                                }} />
+                        </Box>
+                    </Box>
+
+                    <Box sx={{ textAlign: 'center' }}>
+                        <Button onClick={DetailsChecker} color="secondary" variant='outlined' sx={{
+                            boxShadow: 0,
+                            textTransform: 'none',
+                            px: 2,
+                            '&:hover': {
+                                background: 'rgb(156, 39, 176)',
+                                color: 'white'
+                            }
+                        }}>Next </Button>
+                    </Box>
+                </Box>
+                <Box sx={{ display: displayForYourInformation === 2 ? 'block' : 'none', width: datawidth, m: '0px auto', mt: 5 }}>
+                    <ArrowBackIcon sx={{ cursor: 'pointer' }} onClick={() => setDisplayForYourInformation(1)} />
+                    <Box>
                         <Typography sx={{ fontSize: '16px', fontWeight: '600', marginTop: 3, color: 'rgb(156, 39, 176)' }}>Your Name :</Typography>
                         <Box sx={{ my: 3 }}>
                             <input
                                 placeholder='Your Name'
                                 type='text'
+                                defaultValue={data.User_Name}
                                 onChange={e => setData(prev => {
                                     return { ...prev, User_Name: e.target.value }
                                 })}
@@ -307,6 +358,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                             <input
                                 placeholder='Your Email'
                                 type='text'
+                                defaultValue={data.User_Email}
                                 onChange={e => setData(prev => {
                                     return { ...prev, User_Email: e.target.value }
                                 })}
@@ -326,6 +378,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                             <input
                                 placeholder='Your Designation'
                                 type='text'
+                                defaultValue={data.User_Designation}
                                 onChange={e => setData(prev => {
                                     return { ...prev, User_Designation: e.target.value }
                                 })}
@@ -347,10 +400,8 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                             <input
                                 placeholder='Your Phone Number'
                                 type='Number'
-                                disabled={data.verified ? true : false}
-                                onChange={e => setData(prev => {
-                                    return { ...prev, User_Number: e.target.value }
-                                })}
+                                disabled={true}
+                                defaultValue={data.User_Number}
                                 style={{
                                     border: 'none',
                                     userSelect: 'none',
@@ -359,95 +410,22 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                                     fontSize: '14px',
                                     textAlign: 'center',
                                 }} />
-                            {
-                                data.User_Number.length === 10 ?
-                                    <Box>
-                                        {
-                                            data.verified ?
-                                                <Tooltip title="Verified" placement="top" arrow>
-                                                    <DoneIcon sx={{ fontSize: '24px', color: 'green', px: 1, }} />
-                                                </Tooltip>
-                                                :
-                                                <Tooltip title="Click to verify" placement="top" arrow>
-                                                    <WarningIcon onClick={NumberVerifier} sx={{ cursor: 'pointer', fontSize: '20px', color: 'red', px: 1, }} />
-                                                </Tooltip>
-                                        }
-                                    </Box>
-                                    :
-                                    null
-                            }
+                            <Tooltip title="Verified" placement="top" arrow>
+                                <DoneIcon sx={{ fontSize: '24px', color: 'green', px: 1, }} />
+                            </Tooltip>
                         </Box>
                     </Box>
-                    {
-                        data.otp ?
-                            <Box sx={{ margin: '0px auto', }}>
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <Typography sx={{ fontSize: '14px', fontWeight: '600', textALign: 'start', color: 'rgb(156, 39, 176)' }}>Enter OTP : </Typography>
-                                    <Box sx={{ textAlign: 'center' }}>
-                                        <Typography sx={{ pointerEvents: resendTime === 0 ? 'auto' : 'none', opacity: resendTime === 0 ? '1' : '0.6', cursor: resendTime === 0 ? 'pointer' : 'no-drop', fontSize: '16px', mr: 1, color: resendTime === 0 ? 'rgb(156, 39, 176)' : 'black' }} onClick={() => NumberVerifier()}>
-                                            Resend {
-                                                resendTime === 0 ? null :
-                                                    <span>in 0:{resendTime < 10 ? `0${resendTime}` : resendTime}</span>
-                                            }
-                                        </Typography>
-                                    </Box>
-                                </Box>
-
-                                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
-                                    <input
-                                        placeholder='OTP'
-                                        type='number'
-                                        onChange={e => setData(prev => {
-                                            return { ...prev, enteredOtp: e.target.value }
-                                        })}
-                                        style={{
-                                            border: "1px solid black",
-                                            userSelect: 'none',
-                                            width: '50%',
-                                            height: '35px',
-                                            fontSize: '14px',
-                                            textAlign: 'center',
-                                            margin: '5px auto',
-                                        }} />
-                                </Box>
-                                <Box sx={{ textAlign: 'center', my: 2 }}>
-                                    <Button sx={{
-                                        boxShadow: 0,
-                                        textTransform: 'none',
-                                        px: 2,
-                                        '&:hover': {
-                                            background: 'rgb(156, 39, 176)',
-                                            color: 'white'
-                                        }
-                                    }} color='secondary' variant='outlined' onClick={verifyOTP}>
-                                        Verify
-                                    </Button>
-                                </Box>
-
-                            </Box>
-                            :
-                            null
-                    }
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Checkbox required={true} defaultChecked={true} color="secondary" onClick={() => setData(prev => {
-                            return { ...prev, checked: !data.checked }
-                        })} />
-                        <Typography sx={{ color: 'black', fontSize: '16px' }}>
-                            I agreed to all terms & conditions and Privacy Poilicy
-                        </Typography>
-                    </Box>
                     <Box sx={{ textAlign: 'center' }}>
-                        <Button onClick={RegisterAsEmployer} color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none' }}>Register</Button>
+                        <Button onClick={UpdateAsEmployer} color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none' }}>Update</Button>
                     </Box>
                 </Box>
             </Box>
-
         </>
     )
 }
 
 
-export default function Register1() {
+export default function Profile1() {
 
     const xlMax = useMediaQuery('(max-width:2000px)');
     const xlMin = useMediaQuery('(min-width:1100px)');

@@ -30,7 +30,7 @@ function App() {
           <Route exact path="/trainings/:id" element={<Trainings />} />
 
           {/* Profile  */}
-          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/profile=:profile" element={<Profile />} />
 
 
           {/* My Requirements and my Applications comes here  */}

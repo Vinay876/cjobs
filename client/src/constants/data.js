@@ -254,6 +254,14 @@ export const UserHelperData = {
     ],
 }
 
+
+export const PostHelperData = {
+    'Post': [
+        { name: 'Post a Job', url: '/chosen=post-a-job' },
+        { name: 'Post an Internship', url: '/chosen=post-an-internship' },
+    ],
+}
+
 export const SkillsData = [
     'Java', "JavaScript", 'Python', 'Ruby', "GoLang", 'C', 'C#', 'C++'
 ]

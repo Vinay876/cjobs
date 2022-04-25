@@ -7,7 +7,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 import Divider from '@mui/material/Divider'
 import '../../../css/helper.css'
-import { InternshipHelperData, JobHelperData, TrainingHelperData, UserHelperData } from '../../../constants/data'
+import { InternshipHelperData, JobHelperData, PostHelperData, TrainingHelperData, UserHelperData } from '../../../constants/data'
 import { Link } from '@mui/material'
 
 
@@ -522,3 +522,81 @@ export function AboutHelper() {
     </>
   )
 }
+
+
+
+
+export function PostHelper() {
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [data, setData] = React.useState('Register as Employers')
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuChange = (event) => {
+    setData(event.currentTarget.textContent)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setData('Register as Employers')
+  };
+  return (
+    <>
+      <Box>
+        <Typography sx={{ p: 1, cursor: 'pointer', paddingLeft: "14px", paddingRight: '4px', mx: 1, borderRadius: 1, color: open ? 'rgb(156, 39, 176)' : 'white', display: 'flex', alignItems: 'center', background: open ? 'white' : 'none', }} onMouseEnter={handleClick}>
+          Post a Recruitment
+          {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+        </Typography>
+      </Box>
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        sx={{ mt: 1 }}
+        onClose={handleClose}
+      >
+        <Box sx={{ display: "flex", width: "auto", height: 'auto' }} onMouseLeave={() => handleClose()}>
+          <Box sx={{ overflowY: 'scroll' }}>
+            {
+              PostHelperData['Post'].map((text, index) => {
+                return (
+                  <Link key={index} href={text.url} sx={{ textDecoration: 'none', color: "#000000" }}>
+                    <MenuItem
+                      sx={data === text.name ?
+                        {
+                          background: 'rgb(156, 39, 176)',
+                          py: 1,
+                          userSelect: 'none',
+                          cursor: 'pointer',
+                          color: "white",
+                          '&:hover': {
+                            background: 'rgb(156, 39, 176)',
+                            py: 1,
+                            userSelect: 'none',
+                            cursor: 'pointer',
+                            wordWrap: 'break-word',
+                            color: "white",
+                          }
+                        }
+                        :
+                        {
+                          cursor: 'pointer',
+                          userSelect: 'none',
+                          py: 1
+                        }
+                      }
+                      onMouseEnter={handleMenuChange}>
+                      {text.name}
+                    </MenuItem>
+                  </Link>
+                )
+              })
+            }
+          </Box>
+        </Box>
+      </Menu>
+    </>
+  )
+}
+

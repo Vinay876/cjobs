@@ -1,7 +1,7 @@
 import React from 'react'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { InternshipHelperData, JobHelperData, TrainingHelperData, UserHelperData } from '../../../constants/data'
+import { InternshipHelperData, JobHelperData, PostHelperData, TrainingHelperData, UserHelperData } from '../../../constants/data'
 import { Divider, Link } from '@mui/material'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -44,7 +44,7 @@ export function JobHelper() {
                         Jobs
                     </Typography>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails sx={{ mt: -3 }}>
                     {
                         Object.keys(JobHelperData).map((text, index) => {
                             return (
@@ -132,7 +132,7 @@ export function InternshipHelper() {
                         Internships
                     </Typography>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails sx={{ mt: -3 }}>
                     {
                         Object.keys(InternshipHelperData).map((text, index) => {
                             return (
@@ -218,7 +218,7 @@ export function TrainingHelper() {
                         Trainings
                     </Typography>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails sx={{ mt: -3 }}>
                     {
                         Object.keys(TrainingHelperData).map((text, index) => {
                             return (
@@ -302,7 +302,7 @@ export function ContactHelper() {
                         Contact
                     </Typography>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails sx={{ mt: -2 }}>
                     {
                         UserHelperData['Contact'].map((datas, i) => {
                             return (
@@ -353,7 +353,7 @@ export function RegisterHelper() {
                         Register
                     </Typography>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails sx={{ mt: -2 }}>
                     {
                         UserHelperData['Register'].map((datas, i) => {
                             return (
@@ -406,7 +406,7 @@ export function LoginHelper() {
                         Login
                     </Typography>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails sx={{ mt: -2 }}>
                     {
                         UserHelperData['Login'].map((datas, i) => {
                             return (
@@ -430,6 +430,59 @@ export function LoginHelper() {
     )
 }
 
+
+
+export function PostHelper() {
+    const [expanded, setExpanded] = React.useState(false);
+    const handleChange = (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
+    };
+
+
+
+    return (
+        <>
+            <Accordion
+                expanded={expanded === `panel1`}
+                onChange={handleChange(`panel1`)}
+                disableGutters
+                sx={AccordianStyle}>
+                <AccordionSummary
+                    sx={{
+                        color: 'rgb(156, 39, 176)',
+                        flexDirection: 'row-reverse',
+                        p: 1,
+                        my: 0,
+                    }}
+                    expandIcon={<ExpandMoreIcon sx={{ color: 'rgb(156, 39, 176)', }} />}
+                >
+                    <Typography sx={{ color: 'rgb(156, 39, 176)', }}>
+                        Post a Recruitment
+                    </Typography>
+                </AccordionSummary>
+                <AccordionDetails sx={{ mt: -2 }}>
+                    {
+                        PostHelperData['Post'].map((datas, i) => {
+                            return (
+                                <Link key={i} href={datas.url} sx={{ textDecoration: 'none' }}>
+                                    <Typography
+                                        sx={{
+                                            color: "black", fontSize: '16px', my: 1,
+                                            '&:hover': {
+                                                transform: 'scale(1.01)'
+                                            }
+                                        }}>
+                                        {datas.name}
+                                    </Typography>
+                                </Link>
+                            )
+                        })
+                    }
+                </AccordionDetails>
+            </Accordion>
+        </>
+    )
+}
 
 export function AboutHelper() {
     return (
