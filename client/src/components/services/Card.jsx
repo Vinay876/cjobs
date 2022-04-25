@@ -44,7 +44,7 @@ function Content({ width, display, moneyType,duration }) {
                         <Typography sx={{ color: 'black', opacity: "0.7", fontSize: '18px', ml: 1 }}>city</Typography>
                     </Box>
                     <Divider light={false} sx={{ mt: 1 }} />
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: display === 'block' ? 'center' : 'space-between', flexWrap: 'wrap', mt: 1, }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', mt: 1, }}>
                         <Box>
                             <Typography sx={{ display: 'flex', alignItems: 'center', }}>
                                 <PlayCircleFilledIcon sx={{ fontSize: '1.2rem' }} />
