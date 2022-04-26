@@ -39,7 +39,7 @@ export default function Profile() {
 }
 
 
-function Login() {
+export function Login() {
   return (
     <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }}>
       <Typography variant='h5' sx={{ color: 'rgb(156, 39, 176)', fontWeight: '700', textAlign: 'center' }}>

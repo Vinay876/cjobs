@@ -40,7 +40,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
   const [data, setData] = React.useState(userData)
   const timeRef = React.useRef()
   const [displayForYourInformation, setDisplayForYourInformation] = React.useState(0)
-  var validRegexForEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  var validRegexForEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^,cursor:'pointer' _`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 
   function skillAdder(event) {
@@ -358,11 +358,11 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                   textAlign: 'center',
                 }} />
               {
-                data.open ? <ExpandLessIcon sx={{ p: 1.2, fontSize: '25px', color: 'white', background: 'rgb(156,39,176)' }} onClick={() => setData(prev => {
+                data.open ? <ExpandLessIcon sx={{ p: 1.2, fontSize: '25px', color: 'white', background: 'rgb(156,39,176)',cursor:'pointer'  }} onClick={() => setData(prev => {
                   return { ...prev, open: !data.open }
                 })} />
                   :
-                  <ExpandMoreIcon sx={{ p: 1.2, fontSize: '25px', color: 'white', background: 'rgb(156,39,176)' }} onClick={() => setData(prev => {
+                  <ExpandMoreIcon sx={{ p: 1.2, fontSize: '25px', color: 'white', background: 'rgb(156,39,176)',cursor:'pointer'  }} onClick={() => setData(prev => {
                     return { ...prev, open: !data.open }
                   })} />
               }

@@ -257,11 +257,11 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                                     textAlign: 'center',
                                 }} />
                             {
-                                data.open ? <ExpandLessIcon sx={{ p: 1.2, fontSize: '25px', color: 'white', background: 'rgb(156,39,176)' }} onClick={() => setData(prev => {
+                                data.open ? <ExpandLessIcon sx={{ p: 1.2, fontSize: '25px', color: 'white', background: 'rgb(156,39,176)',cursor:'pointer'  }} onClick={() => setData(prev => {
                                     return { ...prev, open: !data.open }
                                 })} />
                                     :
-                                    <ExpandMoreIcon sx={{ p: 1.2, fontSize: '25px', color: 'white', background: 'rgb(156,39,176)' }} onClick={() => setData(prev => {
+                                    <ExpandMoreIcon sx={{ p: 1.2, fontSize: '25px', color: 'white', background: 'rgb(156,39,176)',cursor:'pointer'  }} onClick={() => setData(prev => {
                                         return { ...prev, open: !data.open }
                                     })} />
                             }

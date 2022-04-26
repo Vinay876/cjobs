@@ -120,4 +120,12 @@ The changes in the commits. ( Here i store what changes i made for every commit)
 
     ->Eight Commit - 26-04-2022
         Make employer to post a recruitment (job or internship)
-        The seeker to view the job with tags
+        Jobs and internships can be viewed by employer itself and by every other people (tags not included)
+        Added my recruitments page for employer where it can see his postings (jobs and internships both)
+
+    ->Ninth Commit - 27-04-2022
+        Add filters to the internship and the jobs page
+        On clicking view details a perwson can view the details of the post (make that page)
+        In the home search bar make searching available for companies and made other viewers profile page for other
+        Add qna and documentation for the website
+        Restyle the card and make it smaller in size.

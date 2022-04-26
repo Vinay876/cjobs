@@ -11,6 +11,7 @@ import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import MoneyIcon from '@mui/icons-material/Money';
 import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import Chip from '@mui/material/Chip';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import InfoIcon from '@mui/icons-material/Info';
 
 function Content({ width, display, data }) {
@@ -36,14 +37,13 @@ function Content({ width, display, data }) {
                 }
             }}>
                 <CardContent sx={{ textAlign: 'start', width: "100%" }}>
-                    <Typography sx={{ color: 'rgb(156, 39, 176)', fontSize: '25px', fontWeight: '700', fontFamily: 'Fredoka' }}>{data.Job_Type}</Typography>
+                    <Typography sx={{ color: 'rgb(156, 39, 176)', fontSize: '25px', fontWeight: '700', fontFamily: 'Fredoka' }}>{data.Internship_Type}</Typography>
                     <Typography sx={{ color: 'black', opacity: "0.8", fontSize: '18px', mt: 1 }}>{data.Organization_Name}</Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', mt: 1 }}>
                         <LocationOnIcon sx={{ fontSize: '20px', }} />
-                        <Typography sx={{ color: 'black', opacity: "0.7", fontSize: '16px', ml: 1 }}>{data.Job_Location}</Typography>
+                        <Typography sx={{ color: 'black', opacity: "0.7", fontSize: '16px', ml: 1 }}>{data.Internship_Location}</Typography>
                     </Box>
-                    <Typography sx={{ color: 'black', opacity: "0.8", fontSize: '16px', mt: 1 }}>Posted on - {data.Job_Post_Date.slice(0, 10)}</Typography>
-
+                    <Typography sx={{ color: 'black', opacity: "0.8", fontSize: '16px', mt: 1 }}>Posted on - {data.Internship_Post_Date.slice(0,10)}</Typography>
                     <Divider light={false} sx={{ mt: 1 }} />
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', mt: 1, }}>
                         <Box>
@@ -53,20 +53,26 @@ function Content({ width, display, data }) {
                             </Typography>
                             <Typography sx={{ color: 'black', textAlign: 'center' }}>{data.Start_Date}</Typography>
                         </Box>
-
+                        <Box>
+                            <Typography sx={{ display: 'flex', alignItems: 'center', }}>
+                                <CalendarTodayIcon sx={{ fontSize: '1.2rem' }} />
+                                <span style={{ marginLeft: '6px' }}>Duration</span>
+                            </Typography>
+                            <Typography sx={{ color: 'black', textAlign: 'center' }}>{data.Internship_Duration}</Typography>
+                        </Box>
                         <Box>
                             <Typography sx={{ display: 'flex', alignItems: 'center', }}>
                                 <MoneyIcon sx={{ fontSize: '1.2rem' }} />
-                                <span style={{ marginLeft: '6px' }}>Salary</span>
+                                <span style={{ marginLeft: '6px' }}>Stipend</span>
                             </Typography>
-                            <Typography sx={{ color: 'black', textAlign: 'center',  }}>&#8377; {data.Salary}</Typography>
+                            <Typography sx={{ color: 'black', textAlign: 'center', ml: display === 'block' ? 'unset' : 2 }}>&#8377; {data.Stipend}</Typography>
                         </Box>
                         <Box>
                             <Typography sx={{ display: 'flex', alignItems: 'center', }}>
                                 <QueryBuilderIcon sx={{ fontSize: '1.2rem' }} />
                                 <span style={{ marginLeft: '6px' }}>Apply by</span>
                             </Typography>
-                            <Typography sx={{ color: 'black', textAlign: 'center', }}>{data.Apply_By}</Typography>
+                            <Typography sx={{ color: 'black', textAlign: 'center', ml: display === 'block' ? 'unset' : 1 }}>{data.Apply_By}</Typography>
                         </Box>
                     </Box>
 
@@ -78,7 +84,7 @@ function Content({ width, display, data }) {
                     <Box sx={{ display: display, alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', mt: 3, px: 1, textAlign: 'center' }}>
                         <Box sx={{ display: display, alignItems: 'center' }}>
                             {
-                                data.Job_Tags.map((datas, index) => {
+                                data.Internship_Tags.map((datas, index) => {
                                     return (
                                         <>
                                             <Chip sx={{ ml: 1, fontSize: '14px', color: 'black', marginTop: display === 'block' ? '10px' : 0 }} label={datas} />
@@ -88,7 +94,7 @@ function Content({ width, display, data }) {
                             }
                         </Box>
                         <Box sx={{ marginTop: display === 'block' ? '20px' : 0 }}>
-                            <Link href={`/job=${data.Job_id}`} sx={{ textDecoration: 'none', color: 'rgb(156, 39, 176)', fontSize: '16px', fontFamily: "Fredoka", }}>View details</Link>
+                            <Link href={`/internship=${data.Internship_id}`} sx={{ textDecoration: 'none', color: 'rgb(156, 39, 176)', fontSize: '16px', fontFamily: "Fredoka", }}>View details</Link>
                         </Box>
                     </Box>
                 </CardContent>
@@ -99,7 +105,7 @@ function Content({ width, display, data }) {
 
 
 
-export default function ServiceCard({ data }) {
+export default function ServiceCard2({ data }) {
 
     const xlMax = useMediaQuery('(max-width:2000px)');
     const xlMin = useMediaQuery('(min-width:1000px)');

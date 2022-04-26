@@ -267,6 +267,21 @@ export const SkillsData = [
 ]
 
 
+export const postJobTags = [
+    'Web Development', 'Digital Marketing','Content writing','Computer Science','Graphic design','Finance','HR','Architecture',
+    'Mechanical','Law','Electronics','Civil','Campus Ambassador','Enginnering','MBA','Part Time','Humanities','Science','For Women'
+]
+
+export const postInternshipTags = [
+    'Web Development', 'Digital Marketing','Content writing','Computer Science','Graphic design','Finance','HR','Architecture',
+    'Mechanical','Law','Electronics','Civil','Campus Ambassador','Enginnering','MBA','Part Time','Humanities','Science','For Women','With Job offer'
+]
+
+export const PerksInternships = [
+    'Internship Certificate', 'Job offer','Letter of recommendation','Flexible work hours','Informal dress code'
+]
+
+
 export const ProfileHelperMenuData = {
     'Employer': [
         { name: 'Profile', url: '/profile' },
