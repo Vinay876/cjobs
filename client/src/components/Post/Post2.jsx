@@ -80,7 +80,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
     }
   }
 
-  const [displayForYourInformation, setDisplayForYourInformation] = React.useState(4)
+  const [displayForYourInformation, setDisplayForYourInformation] = React.useState(0)
 
 
   function skillAdder(event) {
