@@ -107,15 +107,11 @@ function Content({ width, display, data }) {
 
 
 export default function ServiceCard2({ data }) {
-
     const xlMax = useMediaQuery('(max-width:2000px)');
     const xlMin = useMediaQuery('(min-width:1000px)');
     const mdMax = useMediaQuery('(max-width:1000px)');
     const mdMin = useMediaQuery('(min-width:550px)');
     const sm = useMediaQuery('(max-width:550px)');
-
-
-
     return (
         <>
             {xlMax && xlMin && (
