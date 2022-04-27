@@ -885,7 +885,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                               color: 'white',
                               borderRadius: 1
                             }
-                          }} onClick={skillAdder}>
+                          }} onClick={perkAdder}>
                           {datas}
                         </Typography>
                       )

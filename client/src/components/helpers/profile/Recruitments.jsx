@@ -1,13 +1,12 @@
 import React from 'react'
-import { LoginContext } from '../../context/Context'
-import { internshipFetching, jobFetching } from '../../api/postFetch'
-import ServiceCard from '../services/Card'
+import ServiceCard from '../../services/Card'
 import PropTypes from 'prop-types'
 import Tabs from '@mui/material/Tabs'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Tab from '@mui/material/Tab'
-import ServiceCard2 from '../services/Card2'
+import ServiceCard2 from '../../services/Card2'
+import { internshipOtherFetching, jobOtherFetching } from '../../../api/postFetch'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
@@ -43,8 +42,7 @@ TabPanel.propTypes = {
     value: PropTypes.number.isRequired,
 }
 
-export default function MyRecruitments() {
-    const { EmployerData, decrypt } = React.useContext(LoginContext)
+export default function Recruitments({ id }) {
     const [data, setData] = React.useState([])
     const [value, setValue] = React.useState(0);
 
@@ -59,14 +57,7 @@ export default function MyRecruitments() {
 
     async function getJobsData() {
         setData([])
-        const response = await jobFetching({
-            Organization_Name: decrypt(EmployerData.Organization_Name),
-            Organization_Email: decrypt(EmployerData.Organization_Email),
-            User_Name: decrypt(EmployerData.User_Name),
-            User_Email: decrypt(EmployerData.User_Email),
-            User_Number: decrypt(EmployerData.User_Number),
-            User_id: EmployerData.User_id
-        })
+        const response = await jobOtherFetching({ id: id })
         if (response) {
             setData(response)
         }
@@ -74,14 +65,7 @@ export default function MyRecruitments() {
 
     async function getInternshipsData() {
         setData([])
-        const response = await internshipFetching({
-            Organization_Name: decrypt(EmployerData.Organization_Name),
-            Organization_Email: decrypt(EmployerData.Organization_Email),
-            User_Name: decrypt(EmployerData.User_Name),
-            User_Email: decrypt(EmployerData.User_Email),
-            User_Number: decrypt(EmployerData.User_Number),
-            User_id: EmployerData.User_id
-        })
+        const response = await internshipOtherFetching({ id: id })
         if (response) {
             setData(response)
         }

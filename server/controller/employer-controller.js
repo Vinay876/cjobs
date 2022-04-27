@@ -32,7 +32,7 @@ export const employerLogin = async (req, res) => {
             User_Name: req.body.User_Name,
             User_Email: req.body.User_Email,
             User_Number: req.body.User_Number,
-        }, { "User_id": 1, "Organization_Name": 1, "Organization_Address": 1, "Organization_Email": 1,"Organization_Website":1,"Organization_Details":1, "Organization_Telephone": 1, "User_Name": 1, "User_Designation": 1, "User_Email": 1, "User_Number": 1 });
+        }, { "User_id": 1, "Organization_Name": 1, "Organization_Address": 1, "Organization_Email": 1, "Organization_Website": 1, "Organization_Details": 1, "Organization_Telephone": 1, "User_Name": 1, "User_Designation": 1, "User_Email": 1, "User_Number": 1 });
         if (user) {
             return res.send(user)
         }
@@ -62,6 +62,39 @@ export const employerUpdate = async (req, res) => {
             return res.status(500).json('failed');
         }
 
+    } catch (error) {
+        console.log('error in catch', error);
+        return res.status(500).json('failed');
+    }
+}
+
+
+export const employerFindAll = async (req, res) => {
+    try {
+        const user = await Employer.find({},{});
+        if (user) {
+            return res.send(user.filter(data=>data.Organization_Name.toLowerCase().includes(req.body.item)))
+        }
+        else {
+            console.log('error in catch', error);
+            return res.status(500).json('failed');
+        }
+    } catch (error) {
+        console.log('error in catch', error);
+        return res.status(500).json('failed');
+    }
+}
+
+export const employerView = async (req, res) => {
+    try {
+        const user = await Employer.find({User_id:req.body.id},{});
+        if (user) {
+            return res.send(user)
+        }
+        else {
+            console.log('error in catch', error);
+            return res.status(500).json('failed');
+        }
     } catch (error) {
         console.log('error in catch', error);
         return res.status(500).json('failed');

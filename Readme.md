@@ -125,7 +125,14 @@ The changes in the commits. ( Here i store what changes i made for every commit)
 
     ->Ninth Commit - 27-04-2022
         Add filters to the internship and the jobs page
-        On clicking view details a perwson can view the details of the post (make that page)
+        On clicking view details a person can view the details of the post (make that page)
         In the home search bar make searching available for companies and made other viewers profile page for other
-        Add qna and documentation for the website
         Restyle the card and make it smaller in size.
+
+    ->tenth Commit - 28-04-2022
+        A person can apply on that internship make that option. (create new collection or store data in previous is your option.)
+        Onclick apply now first it willbe redirected towards profile component to check if user want to update or not
+        Then it will redirected to the application page and after click on apply a confirm box opens to take last that are you sure to want to apply if yes then the 
+        the application will be sent.
+        And the applied bar will be appear on user my application internship or job section
+        And also employer can see the data that is filled by the seeker

@@ -23,7 +23,6 @@ function Content({ width, display, data }) {
                 textAlign: 'center',
                 padding: 2,
                 transition: '.2s all',
-                cursor: 'pointer',
                 display: "flex",
                 color: 'rgb(156, 39, 176)',
                 alignItems: "center",
@@ -37,46 +36,48 @@ function Content({ width, display, data }) {
                 }
             }}>
                 <CardContent sx={{ textAlign: 'start', width: "100%" }}>
-                    <Typography sx={{ color: 'rgb(156, 39, 176)', fontSize: '25px', fontWeight: '700', fontFamily: 'Fredoka' }}>{data.Internship_Type}</Typography>
-                    <Typography sx={{ color: 'black', opacity: "0.8", fontSize: '18px', mt: 1 }}>{data.Organization_Name}</Typography>
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', mt: 1 }}>
+                    <Typography sx={{ color: 'rgb(156, 39, 176)', fontSize: '22px', fontWeight: '700', fontFamily: 'Fredoka' }}>{data.Internship_Type}</Typography>
+                    <Link sx={{ textDecoration: 'none', }} href={`/other=${data.User_id}`}>
+                        <Typography sx={{ color: 'black', fontSize: '16px', }}>{data.Organization_Name}</Typography>
+                    </Link>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', }}>
                         <LocationOnIcon sx={{ fontSize: '20px', }} />
-                        <Typography sx={{ color: 'black', opacity: "0.7", fontSize: '16px', ml: 1 }}>{data.Internship_Location}</Typography>
+                        <Typography sx={{ color: 'black', fontSize: '16px', ml: 1 }}>{data.Internship_Location}</Typography>
                     </Box>
-                    <Typography sx={{ color: 'black', opacity: "0.8", fontSize: '16px', mt: 1 }}>Posted on - {data.Internship_Post_Date.slice(0,10)}</Typography>
-                    <Divider light={false} sx={{ mt: 1 }} />
+                    <Typography sx={{ color: 'black', opacity: "0.8", fontSize: '16px', }}>Posted on - {data.Internship_Post_Date.slice(0, 10)}</Typography>
+                    <Divider light={false} sx={{}} />
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', mt: 1, }}>
                         <Box>
-                            <Typography sx={{ display: 'flex', alignItems: 'center', }}>
+                            <Typography sx={{ display: 'flex', alignItems: 'center', fontSize: '16px' }}>
                                 <PlayCircleFilledIcon sx={{ fontSize: '1.2rem' }} />
                                 <span style={{ marginLeft: '6px' }}>Start Date</span>
                             </Typography>
-                            <Typography sx={{ color: 'black', textAlign: 'center' }}>{data.Start_Date}</Typography>
+                            <Typography sx={{ color: 'black', textAlign: 'center', fontSize: '16px' }}>{data.Start_Date}</Typography>
                         </Box>
                         <Box>
-                            <Typography sx={{ display: 'flex', alignItems: 'center', }}>
+                            <Typography sx={{ display: 'flex', alignItems: 'center', fontSize: '16px' }}>
                                 <CalendarTodayIcon sx={{ fontSize: '1.2rem' }} />
                                 <span style={{ marginLeft: '6px' }}>Duration</span>
                             </Typography>
-                            <Typography sx={{ color: 'black', textAlign: 'center' }}>{data.Internship_Duration}</Typography>
+                            <Typography sx={{ color: 'black', textAlign: 'center', fontSize: '16px' }}>{data.Internship_Duration}</Typography>
                         </Box>
                         <Box>
-                            <Typography sx={{ display: 'flex', alignItems: 'center', }}>
+                            <Typography sx={{ display: 'flex', alignItems: 'center', fontSize: '16px' }}>
                                 <MoneyIcon sx={{ fontSize: '1.2rem' }} />
                                 <span style={{ marginLeft: '6px' }}>Stipend</span>
                             </Typography>
-                            <Typography sx={{ color: 'black', textAlign: 'center', ml: display === 'block' ? 'unset' : 2 }}>&#8377; {data.Stipend}</Typography>
+                            <Typography sx={{ color: 'black', textAlign: 'center', ml: display === 'block' ? 'unset' : 2, fontSize: '16px' }}>&#8377; {data.Stipend}</Typography>
                         </Box>
                         <Box>
-                            <Typography sx={{ display: 'flex', alignItems: 'center', }}>
+                            <Typography sx={{ display: 'flex', alignItems: 'center', fontSize: '16px' }}>
                                 <QueryBuilderIcon sx={{ fontSize: '1.2rem' }} />
                                 <span style={{ marginLeft: '6px' }}>Apply by</span>
                             </Typography>
-                            <Typography sx={{ color: 'black', textAlign: 'center', ml: display === 'block' ? 'unset' : 1 }}>{data.Apply_By}</Typography>
+                            <Typography sx={{ color: 'black', textAlign: 'center', ml: display === 'block' ? 'unset' : 1, fontSize: '16px' }}>{data.Apply_By}</Typography>
                         </Box>
                     </Box>
 
-                    <Box sx={{ display: 'flex', alignItems: 'flex-start', flexWrap: 'erap', px: width === '90%' ? 0 : 2, mt: 4 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start', flexWrap: 'erap', px: width === '90%' ? 0 : 2, my: 2 }}>
                         <InfoIcon sx={{ fontSize: '1.2rem', marginTop: '2px' }} />
                         <Typography sx={{ fontSize: '16px', color: 'black', ml: 1 }}>{data.Short_Description}</Typography>
                     </Box>

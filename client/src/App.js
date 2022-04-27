@@ -4,8 +4,10 @@ import ContextProvider from './context/Context';
 import Unknown from './webpages/404';
 import About from './webpages/About';
 import LoginReportRegister from './webpages/Chosen';
+import Description from './webpages/Description';
 import Home from './webpages/Home';
 import MyThings from './webpages/MyThings';
+import OtherProfiles from './webpages/Other';
 import Profile from './webpages/Profile';
 import Services from './webpages/Services';
 import Trainings from './webpages/Trainings';
@@ -25,6 +27,13 @@ function App() {
 
           {/* For jobs and internship pages */}
           <Route exact path="/type=:id&filter=&city=:city&category=:category" element={<Services />} />
+
+
+          <Route exact path="/other=:id" element={<OtherProfiles />} />
+
+          <Route exact path="/:type=:id" element={<Description />} />
+
+
 
           {/* For trainings */}
           <Route exact path="/trainings/:id" element={<Trainings />} />

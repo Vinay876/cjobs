@@ -36,6 +36,15 @@ const ContextProvider = ({ children }) => {
         var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
         return decryptedData
     }
+    
+  function toTitle(str) {
+    return str.replace(
+      /\w\S*/g,
+      function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      }
+    );
+  }
 
     function loadEmployerData() {
         try {
@@ -122,7 +131,7 @@ const ContextProvider = ({ children }) => {
     return (
         <LoginContext.Provider value={{
             message, setMessage, messageType,
-            setMessageType, show, setShow, handleAlertClose, encrypt, decrypt, EmployerData, SeekerData,logout
+            setMessageType, show, setShow, handleAlertClose, encrypt, decrypt, EmployerData, SeekerData,logout,toTitle
         }}>
             {children}
             < Snackbar open={show} autoHideDuration={6000} onClose={handleAlertClose}>

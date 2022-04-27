@@ -31,3 +31,14 @@ export const employerUpdate = async (data) => {
   }
 }
 
+
+export const employerView = async (data) => {
+  try {
+    const response = await axios.post(`${URL}/view-employer`, data)
+    return response.data
+  } catch (error) {
+    console.log('Error while calling employer' + error);
+  }
+}
+
+
