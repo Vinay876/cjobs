@@ -129,10 +129,16 @@ The changes in the commits. ( Here i store what changes i made for every commit)
         In the home search bar make searching available for companies and made other viewers profile page for other
         Restyle the card and make it smaller in size.
 
-    ->tenth Commit - 28-04-2022
+    ->Tenth Commit - 28-04-2022
         A person can apply on that internship make that option. (create new collection or store data in previous is your option.)
         Onclick apply now first it willbe redirected towards profile component to check if user want to update or not
         Then it will redirected to the application page and after click on apply a confirm box opens to take last that are you sure to want to apply if yes then the 
         the application will be sent.
         And the applied bar will be appear on user my application internship or job section
         And also employer can see the data that is filled by the seeker
+
+    ->Eleventh Commit - Don't know (if I want to do)
+        Do documentaion
+        Do qna
+        Write about us
+        Write Trainings 

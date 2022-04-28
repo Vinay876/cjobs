@@ -6,7 +6,7 @@ import Profile2 from '../components/profile/Profile2'
 
 export default function Application() {
     const [forOtherDisplay, setForOtherDisplay] = React.useState(true)
-    const { id, typeId } = useParams()
+    const { id, typeId,employer } = useParams()
     console.log(id);
     return (
         <>
@@ -16,7 +16,7 @@ export default function Application() {
                 forOtherDisplay ?
                     <Profile2 forOtherDisplay={forOtherDisplay} setForOtherDisplay={setForOtherDisplay} id={id} />
                     :
-                    <Apply id={id} typeId={typeId} />
+                    <Apply id={id} typeId={typeId} employerID={employer} />
             }
         </>
     )

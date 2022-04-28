@@ -30,6 +30,7 @@ export const jobSingleFetching = async (data) => {
     }
 }
 
+
 export const jobFetchingAll = async (data) => {
     try {
         const response = await axios.post(`${URL}/find-job-all`, data)
@@ -98,6 +99,25 @@ export const postApplication = async (data) => {
 export const findApplication = async (data) => {
     try {
         const response = await axios.post(`${URL}/find-application`, data)
+        return response.data
+    } catch (error) {
+        console.log('Error while calling employer' + error);
+    }
+}
+
+
+export const getApplications = async (data) => {
+    try {
+        const response = await axios.post(`${URL}/get-application`, data)
+        return response.data
+    } catch (error) {
+        console.log('Error while calling employer' + error);
+    }
+}
+
+export const getSingleApplications = async (data) => {
+    try {
+        const response = await axios.post(`${URL}/get-single-application`, data)
         return response.data
     } catch (error) {
         console.log('Error while calling employer' + error);

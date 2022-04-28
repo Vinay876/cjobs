@@ -201,6 +201,10 @@ const applicationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    Employer_id: {
+        type: String,
+        required: true
+    },
     Type: {
         type: String,
         required: true

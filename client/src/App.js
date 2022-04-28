@@ -6,6 +6,7 @@ import About from './webpages/About';
 import Application from './webpages/Application';
 import LoginReportRegister from './webpages/Chosen';
 import Description from './webpages/Description';
+import Forms from './webpages/Forms';
 import Home from './webpages/Home';
 import MyThings from './webpages/MyThings';
 import OtherProfiles from './webpages/Other';
@@ -30,15 +31,16 @@ function App() {
           <Route exact path="/type=:id&filter=&city=:city&category=:category" element={<Services />} />
 
           {/* For viewing the profiles of others */}
-          <Route exact path="/other=:id" element={<OtherProfiles />} />
+          <Route exact path="/other=:type=:id" element={<OtherProfiles />} />
 
           {/* For description oj jobs and internships */}
           <Route exact path="/description-:type=:id&applied=:applied" element={<Description />} />
 
           {/* for applying for jobs and internships */}
-          <Route exact path="/type=:id/apply=:typeId" element={<Application />} />
+          <Route exact path="/type=:id/apply=:typeId&employer=:employer" element={<Application />} />
 
-
+          {/* for viewing other submitted forms  */}
+          <Route exact path="/post=:post/user=:user/type=:type" element={<Forms />} />
 
           {/* For trainings */}
           <Route exact path="/trainings/:id" element={<Trainings />} />

@@ -285,7 +285,8 @@ export const PerksInternships = [
 export const ProfileHelperMenuData = {
     'Employer': [
         { name: 'Profile', url: '/profile' },
-        { name: 'My Requirements', url: '/my-requirements' },
+        { name: 'My Recruitments', url: '/my-recruitments' },
+        { name: 'Recieved Applications', url: '/application-recieved' },
         { name: 'Logout', url: '/' },
     ],
     'Seeker': [

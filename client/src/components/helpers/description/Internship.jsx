@@ -153,19 +153,24 @@ function Content({ id, width, applied }) {
                             <Typography variant="h7" sx={{ fontFamily: 'Fredoka', }}>{data.Number_of_openings}</Typography>
                         </Box>
                         {
-                            applied ? null :
-                                SeekerData.Seeker ?
-                                    <Box sx={{ textAlign: 'center' }}>
-                                        <Link href={`type=internship/apply=${data.Internship_id}`} sx={{ textDecoration: 'none' }}>
-                                            <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none', cursor: 'pointer' }}>Apply Now </Button>
-                                        </Link>
-                                    </Box>
-                                    :
-                                    <Tooltip title="Please Login before appliying" key={data.name} placement="top" arrow>
-                                        <Box sx={{ textAlign: 'center' }}>
-                                            <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none', cursor: 'no-drop', pointerEvents: 'none' }}>Apply Now </Button>
-                                        </Box>
-                                    </Tooltip>
+                             applied === 'true' ? null :
+                                <>
+                                    {
+                                        SeekerData.Seeker ?
+                                            <Box sx={{ textAlign: 'center' }}>
+                                                <Link href={`type=internship/apply=${data.Internship_id}&employer=${data.User_id}`} sx={{ textDecoration: 'none' }}>
+                                                    <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none', cursor: 'pointer' }}>Apply Now </Button>
+                                                </Link>
+                                            </Box>
+                                            :
+                                            <Tooltip title="Please Login before appliying" key={data.name} placement="top" arrow>
+                                                <Box sx={{ textAlign: 'center' }}>
+                                                    <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none', cursor: 'no-drop', pointerEvents: 'none' }}>Apply Now </Button>
+                                                </Box>
+                                            </Tooltip>
+                                    }
+                                </>
+
                         }
                     </Box>
                     : <Typography sx={{ top: '50%', left: '50%', transform: 'translate(-50%,-50%)', fontSize: '30px', fontWeight: '700' }}>Something Went Wrong Try again Later.</Typography>

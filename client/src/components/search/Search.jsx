@@ -47,7 +47,7 @@ function XLSearch() {
                     <Box sx={{ position: 'absolute', zIndex: 1000, width: '40%', background: 'white', m: '0px auto', left: '50%', transform: 'translate(-50%)', border: '1px solid black', mt: 1 }}>
                         {data.map((datas, index) => {
                             return (
-                                <Link key={index} href={`/other=${datas.User_id}`} sx={{
+                                <Link key={index} href={`/other=employer=${datas.User_id}`} sx={{
                                     textDecoration: 'none',
                                 }}>
                                     <Box sx={{
@@ -109,7 +109,7 @@ function MDSearch() {
                     <Box sx={{ position: 'absolute', zIndex: 1000, width: '40%', background: 'white', m: '0px auto', left: '50%', transform: 'translate(-50%)', border: '1px solid black', mt: 1 }}>
                         {data.map((datas, index) => {
                             return (
-                                <Link key={index} href={`/other=${datas.User_id}`} sx={{
+                                <Link key={index} href={`/other=employer=${datas.User_id}`} sx={{
                                     textDecoration: 'none',
                                 }}>
                                     <Box sx={{

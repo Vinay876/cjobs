@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Header from '../components/head/Header'
 import MyApplications from '../components/mythings/MyApplications';
 import MyRecruitments from '../components/mythings/MyRecruitments';
+import Recieved from '../components/mythings/Recieved';
 import { LoginContext } from '../context/Context';
 import { Login } from './Profile';
 
@@ -18,16 +19,21 @@ export default function MyThings() {
         EmployerData.Employer || SeekerData.Seeker ?
           <>
             {
-              id === 'my-requirements' ?
+              id === 'my-recruitments' ?
                 <MyRecruitments /> : null
             }
             {
               id === 'my-applications' ?
-                <MyApplications /> : null
+                <MyApplications id={''} applied={false} /> : null
             }
           </>
-          : 
+          :
           <Login />
+      }
+
+      {
+        id === 'application-recieved' ?
+          <Recieved /> : null
       }
 
     </>

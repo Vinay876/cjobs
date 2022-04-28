@@ -96,7 +96,7 @@ export default function Services() {
               data.length !== 0 ?
                 data.map((datas, index) => {
                   return (
-                    <ServiceCard key={index} data={datas} />
+                    <ServiceCard key={index} data={datas} applied={false} />
                   )
                 }) : <Typography sx={{my:5,fontWeight: '700', color: "black", fontFamily: 'Fredoka',textAlign:'center' }}>
                   Not Posted Yet!
@@ -113,7 +113,7 @@ export default function Services() {
               data.length !== 0 ?
                 data.map((datas, index) => {
                   return (
-                    <ServiceCard2 key={index} data={datas} />
+                    <ServiceCard2 key={index} data={datas} applied={false} />
                   )
                 }) : <Typography sx={{my:5,fontWeight: '700', color: "black", fontFamily: 'Fredoka',textAlign:'center' }}>
                   Not Posted Yet!

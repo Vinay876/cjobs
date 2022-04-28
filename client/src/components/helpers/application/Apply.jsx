@@ -4,7 +4,7 @@ import { LoginContext } from '../../../context/Context'
 import { postApplication } from '../../../api/postFetch'
 import { useNavigate } from 'react-router-dom'
 
-function Content({ id, typeId, display, width, align, inpwidth, txtWidth, datawidth }) {
+function Content({ id, typeId, display, width, align, inpwidth, txtWidth, datawidth, employerID }) {
     const navigate = useNavigate()
     const { toTitle, setShow, setMessageType, setMessage, SeekerData } = React.useContext(LoginContext)
     const [data, setData] = React.useState({
@@ -29,12 +29,19 @@ function Content({ id, typeId, display, width, align, inpwidth, txtWidth, datawi
             const response = await postApplication({
                 User_id: SeekerData.User_id,
                 Post_id: typeId,
+                Employer_id: employerID,
                 Type: toTitle(id),
                 Answer1: data.Answer1,
                 Answer2: data.Answer2,
                 Application_Post_Date: new Date()
             })
-            if (response) {
+            if (response === 'Application Already existed') {
+                setShow(true)
+                setMessageType('error')
+                setMessage(`Already applied for this ${toTitle(id)}.`)
+                return
+            }
+            else if (response == 'success') {
                 navigate('/')
                 setShow(true)
                 setMessageType('success')
@@ -121,7 +128,7 @@ function Content({ id, typeId, display, width, align, inpwidth, txtWidth, datawi
 
 
 
-export default function Apply({ id, typeId }) {
+export default function Apply({ id, typeId, employerID }) {
 
     const xlMax = useMediaQuery('(max-width:2000px)');
     const xlMin = useMediaQuery('(min-width:1100px)');
@@ -134,12 +141,12 @@ export default function Apply({ id, typeId }) {
     return (
         <>
             {xlMax && xlMin && (
-                <Content display={'flex'} width={'auto'} align={'unset'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'40%'} id={id} typeId={typeId} />
+                <Content display={'flex'} width={'auto'} align={'unset'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'40%'} id={id} typeId={typeId} employerID={employerID} />
             )}
             {!(xlMax && xlMin) && mdMax && mdMin && (
-                <Content display={'block'} width={'auto'} align={'center'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'60%'} id={id} typeId={typeId} />
+                <Content display={'block'} width={'auto'} align={'center'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'60%'} id={id} typeId={typeId} employerID={employerID} />
             )}
-            {sm && (<Content display={'block'} width={'80%'} align={'center'} inpwidth={'100%'} txtWidth={'280px'} datawidth={'60%'} id={id} typeId={typeId} />
+            {sm && (<Content display={'block'} width={'80%'} align={'center'} inpwidth={'100%'} txtWidth={'280px'} datawidth={'60%'} id={id} typeId={typeId} employerID={employerID} />
             )}
         </>
     )

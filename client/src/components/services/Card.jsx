@@ -13,7 +13,7 @@ import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import Chip from '@mui/material/Chip';
 import InfoIcon from '@mui/icons-material/Info';
 
-function Content({ width, display, data ,applied}) {
+function Content({ width, display, data, applied }) {
     return (
         <>
             <Card sx={{
@@ -36,7 +36,7 @@ function Content({ width, display, data ,applied}) {
             }}>
                 <CardContent sx={{ textAlign: 'start', width: "100%" }}>
                     <Typography sx={{ color: 'rgb(156, 39, 176)', fontSize: '22px', fontWeight: '700', fontFamily: 'Fredoka', }}>{data.Job_Type}</Typography>
-                    <Link sx={{ textDecoration: 'none', }} href={`/other=${data.User_id}`}>
+                    <Link sx={{ textDecoration: 'none', }} href={`/other=employer=${data.User_id}`}>
                         <Typography sx={{ color: 'black', fontSize: '16px', }}>{data.Organization_Name}</Typography>
                     </Link>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', fontSize: '16px' }}>
@@ -44,6 +44,7 @@ function Content({ width, display, data ,applied}) {
                         <Typography sx={{ color: 'black', opacity: "0.7", fontSize: '16px', ml: 1 }}>{data.Job_Location}</Typography>
                     </Box>
                     <Typography sx={{ color: 'black', opacity: "0.8", fontSize: '16px' }}>Posted on - {data.Job_Post_Date.slice(0, 10)}</Typography>
+
 
                     <Divider light={false} sx={{ mt: 1 }} />
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', fontSize: '16px', }}>
@@ -100,7 +101,7 @@ function Content({ width, display, data ,applied}) {
 
 
 
-export default function ServiceCard({ data ,applied}) {
+export default function ServiceCard({ data, applied }) {
 
     const xlMax = useMediaQuery('(max-width:2000px)');
     const xlMin = useMediaQuery('(min-width:1000px)');

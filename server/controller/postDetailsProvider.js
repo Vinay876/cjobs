@@ -41,6 +41,8 @@ export const jobSingleFinding = async (req, res) => {
     }
 }
 
+
+
 export const jobOtherFinding = async (req, res) => {
     try {
         const user = await Job.find({
@@ -158,20 +160,3 @@ export const internshipFindingAll = async (req, res) => {
 }
 
 
-export const ApplicationFinding = async (req, res) => {
-    try {
-        const user = await Application.find({
-            User_id: req.body.User_id
-        }, {});
-        if (user) {
-            return res.send(user.filter(data=>data.Type.toLowerCase().includes(req.body.type)))
-        }
-        else {
-            return res.status(500).json('failed');
-        }
-
-    } catch (error) {
-        console.log('error in catch', error);
-        return res.status(500).json('failed');
-    }
-}

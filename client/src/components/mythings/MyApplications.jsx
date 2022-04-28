@@ -43,10 +43,9 @@ TabPanel.propTypes = {
     value: PropTypes.number.isRequired,
 }
 
-export default function MyApplications() {
+export default function MyApplications({id,applied}) {
     const { SeekerData } = React.useContext(LoginContext)
     const [data, setData] = React.useState([])
-    const [data2, setData2] = React.useState([])
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -59,11 +58,20 @@ export default function MyApplications() {
     }, [])
 
     async function GetData(type) {
+        var response = ''
         setData([])
-        const response = await findApplication({
-            User_id: SeekerData.User_id,
-            type: type
-        })
+        if(id){
+            response = await findApplication({
+                User_id:id,
+                type: type
+            })
+        }else {
+            response = await findApplication({
+                User_id: SeekerData.User_id,
+                type: type
+            })
+        }
+        
         if (response) {
             setData(response)
         }
@@ -81,16 +89,15 @@ export default function MyApplications() {
                 {
                     data.length === 0 ?
                         <>
-                            <Typography sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', fontWeight: '700', color: "black", fontFamily: 'Fredoka' }}>
+                            <Typography sx={{mt:10,textAlign:'center',fontWeight: '700', color: "black", fontFamily: 'Fredoka' }}>
                                 Not Applied Yet!
                             </Typography>
                         </>
                         :
                         data.map((datas, index) => {
-
                             return (
                                 <>
-                                    <GetID key={index} Post_id={datas.Post_id} Type={datas.Type} />
+                                    <GetID key={index} Post_id={datas.Post_id} Type={datas.Type} applied={applied} />
                                 </>
                             )
                         })
@@ -101,7 +108,7 @@ export default function MyApplications() {
                 {
                     data.length === 0 ?
                         <>
-                            <Typography sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', fontWeight: '700', color: "black", fontFamily: 'Fredoka' }}>
+                            <Typography sx={{mt:10,textAlign:'center',fontWeight: '700', color: "black", fontFamily: 'Fredoka' }}>
                                 Not Applied Yet!
                             </Typography>
                         </>
@@ -109,7 +116,7 @@ export default function MyApplications() {
                         data.map((datas, index) => {
                             return (
                                 <>
-                                    <GetID key={index} Post_id={datas.Post_id} Type={datas.Type} />
+                                    <GetID key={index} Post_id={datas.Post_id} Type={datas.Type} applied={applied} />
                                 </>
                             )
                         })
@@ -120,7 +127,7 @@ export default function MyApplications() {
 }
 
 
-function GetID({ Post_id, Type }) {
+function GetID({ Post_id, Type,applied }) {
     const [data, setData] = React.useState([])
     React.useEffect(() => {
         GetPostData()
@@ -151,10 +158,10 @@ function GetID({ Post_id, Type }) {
             {
                 Type === 'Internship' ?
                     data.length === 0 ? null :
-                        <ServiceCard2 applied={true} data={data} />
+                        <ServiceCard2 applied={applied} data={data} />
                     :
                     data.length === 0 ? null :
-                        <ServiceCard applied={true} data={data} />
+                        <ServiceCard applied={applied} data={data} />
             }
         </Box>
     )

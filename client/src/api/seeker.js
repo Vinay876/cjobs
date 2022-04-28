@@ -31,3 +31,13 @@ export const seekerUpdate = async (data) => {
     console.log('Error while calling employer' + error);
   }
 }
+
+
+export const seekerFind = async (data) => {
+  try {
+    const response = await axios.post(`${URL}/find-seeker`, data)
+    return response.data
+  } catch (error) {
+    console.log('Error while calling employer' + error);
+  }
+}

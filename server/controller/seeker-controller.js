@@ -54,7 +54,25 @@ export const seekerUpdate = async (req, res) => {
             return res.send(user)
         }
         else {
-            console.log('error in catch', error);
+            return res.status(500).json('failed');
+        }
+
+    } catch (error) {
+        console.log('error in catch', error);
+        return res.status(500).json('failed');
+    }
+}
+
+export const seekerFind = async (req, res) => {
+    try {
+
+        const user = await Seeker.findOne({
+            User_id: req.body.User_id
+        }, {});
+        if (user) {
+            return res.send(user)
+        }
+        else {
             return res.status(500).json('failed');
         }
 

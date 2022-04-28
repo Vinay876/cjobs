@@ -9,7 +9,7 @@ import { useMediaQuery } from '@mui/material'
 import Chip from '@mui/material/Chip';
 import { LoginContext } from '../../../context/Context';
 
-function Content({ id, width,applied }) {
+function Content({ id, width, applied }) {
     const { SeekerData } = React.useContext(LoginContext)
     const [data, setData] = React.useState([])
     React.useEffect(() => {
@@ -130,21 +130,25 @@ function Content({ id, width,applied }) {
                             <Typography variant="h7" sx={{ fontFamily: 'Fredoka', }}>{data.Number_of_openings}</Typography>
                         </Box>
                         {
-                            applied?null:
-                            SeekerData.Seeker ?
-                                <Box sx={{ textAlign: 'center' }}>
-                                    <Link href={`type=job/apply=${data.Job_id}`} sx={{ textDecoration: 'none' }}>
-                                        <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none',cursor: 'pointer' }}>Apply Now </Button>
-                                    </Link>
-                                </Box>
-                                :
-                                <Tooltip title="Please Login before applying" key={data.name} placement="top" arrow>
-                                    <Box sx={{ textAlign: 'center' }}>
-                                        <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none', cursor: 'no-drop', pointerEvents: 'none' }}>Apply Now </Button>
-                                    </Box>
-                                </Tooltip>
-                        }
+                            applied === 'true' ? null :
+                                <>
+                                    {
+                                        SeekerData.Seeker ?
+                                            <Box sx={{ textAlign: 'center' }}>
+                                                <Link href={`type=job/apply=${data.Job_id}&employer=${data.User_id}`} sx={{ textDecoration: 'none' }}>
+                                                    <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none', cursor: 'pointer' }}>Apply Now </Button>
+                                                </Link>
+                                            </Box>
+                                            :
+                                            <Tooltip title="Please Login before applying" key={data.name} placement="top" arrow>
+                                                <Box sx={{ textAlign: 'center' }}>
+                                                    <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none', cursor: 'no-drop', pointerEvents: 'none' }}>Apply Now </Button>
+                                                </Box>
+                                            </Tooltip>
+                                    }
+                                </>
 
+                        }
                     </Box>
                     : <Typography sx={{ top: '50%', left: '50%', transform: 'translate(-50%,-50%)', fontSize: '30px', fontWeight: '700' }}>Something Went Wrong Try again Later.</Typography>
             }
@@ -153,7 +157,7 @@ function Content({ id, width,applied }) {
 }
 
 
-export default function Job({ id ,applied}) {
+export default function Job({ id, applied }) {
     const xlMax = useMediaQuery('(max-width:2000px)');
     const xlMin = useMediaQuery('(min-width:1100px)');
     const mdMax = useMediaQuery('(max-width:1100px)');

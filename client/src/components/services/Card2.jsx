@@ -37,7 +37,7 @@ function Content({ width, display, data, applied }) {
             }}>
                 <CardContent sx={{ textAlign: 'start', width: "100%" }}>
                     <Typography sx={{ color: 'rgb(156, 39, 176)', fontSize: '22px', fontWeight: '700', fontFamily: 'Fredoka' }}>{data.Internship_Type}</Typography>
-                    <Link sx={{ textDecoration: 'none', }} href={`/other=${data.User_id}`}>
+                    <Link sx={{ textDecoration: 'none', }} href={`/other=employer=${data.User_id}`}>
                         <Typography sx={{ color: 'black', fontSize: '16px', }}>{data.Organization_Name}</Typography>
                     </Link>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', }}>

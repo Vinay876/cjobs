@@ -3,9 +3,9 @@ import { employerContact, seekerContact } from "../controller/contact-controller
 import { employerFindAll, employerLogin, employerRegister, employerUpdate, employerView } from "../controller/employer-controller.js";
 import { internshipPosting, jobPosting } from "../controller/employerPosting.js";
 import { otpSend } from "../controller/otpSend.js";
-import { ApplicationFinding, internshipFinding, internshipFindingAll, internshipOtherFinding, internshipSingleFinding, jobFinding, jobFindingAll, jobOtherFinding, jobSingleFinding } from "../controller/postDetailsProvider.js";
-import { seekerLogin, seekerRegister, seekerUpdate } from "../controller/seeker-controller.js";
-import { applicationPost } from "../controller/seekerPosting.js";
+import { internshipFinding, internshipFindingAll, internshipOtherFinding, internshipSingleFinding, jobFinding, jobFindingAll, jobOtherFinding, jobSingleFinding,  } from "../controller/postDetailsProvider.js";
+import { seekerFind, seekerLogin, seekerRegister, seekerUpdate } from "../controller/seeker-controller.js";
+import { ApplicationFinding, applicationPost, getApplication, getSingleApplication } from "../controller/application-controller.js";
 
 
 const router = express.Router()
@@ -18,6 +18,7 @@ router.post('/update-employer', employerUpdate)
 router.post('/signup-seeker', seekerRegister)
 router.post('/login-seeker', seekerLogin)
 router.post('/update-seeker', seekerUpdate)
+router.post('/find-seeker', seekerFind)
 
 router.post('/send-otp', otpSend)
 
@@ -29,6 +30,10 @@ router.post('/find-job-other', jobOtherFinding)
 router.post('/find-internship-other', internshipOtherFinding)
 router.post('/find-employer', employerFindAll)
 router.post('/find-application', ApplicationFinding)
+
+router.post('/get-application', getApplication)
+router.post('/get-single-application', getSingleApplication)
+
 
 router.post('/view-employer', employerView)
 
