@@ -24,7 +24,7 @@ export default function MyThings() {
             }
             {
               id === 'my-applications' ?
-                <MyApplications id={''} applied={false} /> : null
+                <MyApplications id={''} applied={true} /> : null
             }
           </>
           :
