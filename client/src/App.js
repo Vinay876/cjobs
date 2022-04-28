@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import ContextProvider from './context/Context';
 import Unknown from './webpages/404';
 import About from './webpages/About';
+import Application from './webpages/Application';
 import LoginReportRegister from './webpages/Chosen';
 import Description from './webpages/Description';
 import Home from './webpages/Home';
@@ -28,10 +29,14 @@ function App() {
           {/* For jobs and internship pages */}
           <Route exact path="/type=:id&filter=&city=:city&category=:category" element={<Services />} />
 
-
+          {/* For viewing the profiles of others */}
           <Route exact path="/other=:id" element={<OtherProfiles />} />
 
-          <Route exact path="/:type=:id" element={<Description />} />
+          {/* For description oj jobs and internships */}
+          <Route exact path="/description-:type=:id&applied=:applied" element={<Description />} />
+
+          {/* for applying for jobs and internships */}
+          <Route exact path="/type=:id/apply=:typeId" element={<Application />} />
 
 
 

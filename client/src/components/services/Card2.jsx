@@ -14,7 +14,7 @@ import Chip from '@mui/material/Chip';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import InfoIcon from '@mui/icons-material/Info';
 
-function Content({ width, display, data }) {
+function Content({ width, display, data, applied }) {
     return (
         <>
             <Card sx={{
@@ -95,7 +95,7 @@ function Content({ width, display, data }) {
                             }
                         </Box>
                         <Box sx={{ marginTop: display === 'block' ? '20px' : 0 }}>
-                            <Link href={`/internship=${data.Internship_id}`} sx={{ textDecoration: 'none', color: 'rgb(156, 39, 176)', fontSize: '16px', fontFamily: "Fredoka", }}>View details</Link>
+                            <Link href={`/description-internship=${data.Internship_id}&applied=${applied}`} sx={{ textDecoration: 'none', color: 'rgb(156, 39, 176)', fontSize: '16px', fontFamily: "Fredoka", }}>View details</Link>
                         </Box>
                     </Box>
                 </CardContent>
@@ -106,7 +106,7 @@ function Content({ width, display, data }) {
 
 
 
-export default function ServiceCard2({ data }) {
+export default function ServiceCard2({ data, applied }) {
     const xlMax = useMediaQuery('(max-width:2000px)');
     const xlMin = useMediaQuery('(min-width:1000px)');
     const mdMax = useMediaQuery('(max-width:1000px)');
@@ -115,12 +115,12 @@ export default function ServiceCard2({ data }) {
     return (
         <>
             {xlMax && xlMin && (
-                <Content width={'50%'} display={'flex'} data={data} />
+                <Content width={'50%'} display={'flex'} data={data} applied={applied} />
             )}
             {!(xlMax && xlMin) && mdMax && mdMin && (
-                <Content width={'80%'} display={'flex'} data={data} />
+                <Content width={'80%'} display={'flex'} data={data} applied={applied} />
             )}
-            {sm && (<Content width={'90%'} display={'block'} data={data} />
+            {sm && (<Content width={'90%'} display={'block'} data={data} applied={applied} />
             )}
         </>
     )

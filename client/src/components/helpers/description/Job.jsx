@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Typography, Link, Button } from '@mui/material'
+import { Box, Typography, Link, Button, Tooltip } from '@mui/material'
 import { jobSingleFetching } from '../../../api/postFetch'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
@@ -7,8 +7,10 @@ import MoneyIcon from '@mui/icons-material/Money';
 import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import { useMediaQuery } from '@mui/material'
 import Chip from '@mui/material/Chip';
+import { LoginContext } from '../../../context/Context';
 
-function Content({ id, width }) {
+function Content({ id, width,applied }) {
+    const { SeekerData } = React.useContext(LoginContext)
     const [data, setData] = React.useState([])
     React.useEffect(() => {
         getData()
@@ -39,7 +41,7 @@ function Content({ id, width }) {
                             <Link sx={{ textDecoration: 'none' }} href={data.Organization_Website}>
                                 <Typography variant="h7" sx={{ fontFamily: 'Fredoka' }}>Website</Typography>
                             </Link>
-                            <Typography sx={{ color: 'black', fontSize: "16px", mt: 3 }}>Their headquarter is in -  <span style={{ color: 'black', fontSize: "16px", color: 'rgb(156, 39, 176)', fontFamily: 'Fredoka' }}>{data.Organization_Address}</span></Typography>
+                            <Typography sx={{ color: 'black', fontSize: "16px", mt: 3 }}>Their headquarter is in -  <span style={{ fontSize: "16px", color: 'rgb(156, 39, 176)', fontFamily: 'Fredoka' }}>{data.Organization_Address}</span></Typography>
 
                         </Box>
                         <Box sx={{ display: width === '60%' ? "flex" : 'block', justifyContent: 'flex-start', alignItems: 'center', width: width, m: '0px auto' }}>
@@ -127,9 +129,22 @@ function Content({ id, width }) {
                             <Typography variant="h6" sx={{ fontFamily: 'Fredoka', color: "rgb(156, 39, 176)" }}>Number Of Openings :</Typography>
                             <Typography variant="h7" sx={{ fontFamily: 'Fredoka', }}>{data.Number_of_openings}</Typography>
                         </Box>
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none' }}>Apply Now </Button>
-                        </Box>
+                        {
+                            applied?null:
+                            SeekerData.Seeker ?
+                                <Box sx={{ textAlign: 'center' }}>
+                                    <Link href={`type=job/apply=${data.Job_id}`} sx={{ textDecoration: 'none' }}>
+                                        <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none',cursor: 'pointer' }}>Apply Now </Button>
+                                    </Link>
+                                </Box>
+                                :
+                                <Tooltip title="Please Login before applying" key={data.name} placement="top" arrow>
+                                    <Box sx={{ textAlign: 'center' }}>
+                                        <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none', cursor: 'no-drop', pointerEvents: 'none' }}>Apply Now </Button>
+                                    </Box>
+                                </Tooltip>
+                        }
+
                     </Box>
                     : <Typography sx={{ top: '50%', left: '50%', transform: 'translate(-50%,-50%)', fontSize: '30px', fontWeight: '700' }}>Something Went Wrong Try again Later.</Typography>
             }
@@ -138,7 +153,7 @@ function Content({ id, width }) {
 }
 
 
-export default function Job({ id }) {
+export default function Job({ id ,applied}) {
     const xlMax = useMediaQuery('(max-width:2000px)');
     const xlMin = useMediaQuery('(min-width:1100px)');
     const mdMax = useMediaQuery('(max-width:1100px)');
@@ -150,12 +165,12 @@ export default function Job({ id }) {
     return (
         <>
             {xlMax && xlMin && (
-                <Content id={id} width={'60%'} />
+                <Content id={id} width={'60%'} applied={applied} />
             )}
             {!(xlMax && xlMin) && mdMax && mdMin && (
-                <Content id={id} width={'80%'} />
+                <Content id={id} width={'80%'} applied={applied} />
             )}
-            {sm && (<Content id={id} width={'95%'} />
+            {sm && (<Content id={id} width={'95%'} applied={applied} />
             )}
         </>
     )

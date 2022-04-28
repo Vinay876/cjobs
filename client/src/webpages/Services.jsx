@@ -98,7 +98,7 @@ export default function Services() {
                   return (
                     <ServiceCard key={index} data={datas} />
                   )
-                }) : <Typography sx={{my:5,fontWeight: '700', color: "black", fontFamily: 'Fredoka' }}>
+                }) : <Typography sx={{my:5,fontWeight: '700', color: "black", fontFamily: 'Fredoka',textAlign:'center' }}>
                   Not Posted Yet!
                 </Typography>
             }
@@ -115,7 +115,7 @@ export default function Services() {
                   return (
                     <ServiceCard2 key={index} data={datas} />
                   )
-                }) : <Typography sx={{my:5,fontWeight: '700', color: "black", fontFamily: 'Fredoka' }}>
+                }) : <Typography sx={{my:5,fontWeight: '700', color: "black", fontFamily: 'Fredoka',textAlign:'center' }}>
                   Not Posted Yet!
                 </Typography>
             }

@@ -3,8 +3,9 @@ import { employerContact, seekerContact } from "../controller/contact-controller
 import { employerFindAll, employerLogin, employerRegister, employerUpdate, employerView } from "../controller/employer-controller.js";
 import { internshipPosting, jobPosting } from "../controller/employerPosting.js";
 import { otpSend } from "../controller/otpSend.js";
-import { internshipFinding, internshipFindingAll, internshipOtherFinding, internshipSingleFinding, jobFinding, jobFindingAll, jobOtherFinding, jobSingleFinding } from "../controller/postDetailsProvider.js";
+import { ApplicationFinding, internshipFinding, internshipFindingAll, internshipOtherFinding, internshipSingleFinding, jobFinding, jobFindingAll, jobOtherFinding, jobSingleFinding } from "../controller/postDetailsProvider.js";
 import { seekerLogin, seekerRegister, seekerUpdate } from "../controller/seeker-controller.js";
+import { applicationPost } from "../controller/seekerPosting.js";
 
 
 const router = express.Router()
@@ -27,12 +28,18 @@ router.post('/find-internship', internshipFinding)
 router.post('/find-job-other', jobOtherFinding)
 router.post('/find-internship-other', internshipOtherFinding)
 router.post('/find-employer', employerFindAll)
+router.post('/find-application', ApplicationFinding)
 
 router.post('/view-employer', employerView)
 
 
 router.post('/find-job-all', jobFindingAll)
 router.post('/find-internship-all', internshipFindingAll)
+
+
+router.post('/application-post', applicationPost)
+
+
 
 router.post('/find-job-single', jobSingleFinding)
 router.post('/find-internship-single', internshipSingleFinding)

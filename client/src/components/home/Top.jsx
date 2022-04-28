@@ -2,6 +2,7 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import Link from '@mui/material/Link'
 import { LoginContext } from '../../context/Context'
 import { useMediaQuery } from '@mui/material'
 
@@ -24,15 +25,17 @@ function Content({ isResponsive }) {
                                 Post a Requirement in our website and get best employee for the job.
                             </Typography>
                             <Box sx={{ textAlign: 'center' }}>
-                                <Button variant='outlined' color='secondary' sx={{
-                                    boxShadow: 0,
-                                    textTransform: 'none',
-                                    mt: 7,
-                                    '&:hover': {
-                                        background: 'rgb(156, 39, 176)',
-                                        color: 'white'
-                                    }
-                                }}>Post Requirement</Button>
+                                <Link href='chosen=post-a-job' sx={{ textDecoration: 'none' }}>
+                                    <Button variant='outlined' color='secondary' sx={{
+                                        boxShadow: 0,
+                                        textTransform: 'none',
+                                        mt: 7,
+                                        '&:hover': {
+                                            background: 'rgb(156, 39, 176)',
+                                            color: 'white'
+                                        }
+                                    }}>Post Requirement</Button>
+                                </Link>
                             </Box>
                         </Box>
                         {
@@ -59,15 +62,18 @@ function Content({ isResponsive }) {
                                 Now no running from place to place and giving interviews<br /> Here in CJOBS you can apply for your dream job in your dream company
                             </Typography>
                             <Box sx={{ textAlign: 'center' }}>
-                                <Button variant='outlined' color='secondary' sx={{
-                                    boxShadow: 0,
-                                    textTransform: 'none',
-                                    mt: 7,
-                                    '&:hover': {
-                                        background: 'rgb(156, 39, 176)',
-                                        color: 'white'
-                                    }
-                                }}>Apply Now</Button>
+                                <Link href='/type=jobs&filter=&city=null&category=null' sx={{ textDecoration: 'none' }}>
+                                    <Button variant='outlined' color='secondary' sx={{
+                                        boxShadow: 0,
+                                        textTransform: 'none',
+                                        mt: 7,
+                                        '&:hover': {
+                                            background: 'rgb(156, 39, 176)',
+                                            color: 'white'
+                                        }
+                                    }}>Apply Now</Button>
+                                </Link>
+
                             </Box>
                         </Box>
                         {
@@ -95,15 +101,18 @@ function Content({ isResponsive }) {
                                 Now no running from place to place and giving interviews<br /> Here in CJOBS you can apply for your dream job in your dream company
                             </Typography>
                             <Box sx={{ textAlign: 'center' }}>
-                                <Button variant='outlined' color='secondary' sx={{
-                                    boxShadow: 0,
-                                    textTransform: 'none',
-                                    mt: 7,
-                                    '&:hover': {
-                                        background: 'rgb(156, 39, 176)',
-                                        color: 'white'
-                                    }
-                                }}>Apply Now</Button>
+                                <Link href='/type=jobs&filter=&city=null&category=null' sx={{ textDecoration: 'none' }}>
+                                    <Button variant='outlined' color='secondary' sx={{
+                                        boxShadow: 0,
+                                        textTransform: 'none',
+                                        mt: 7,
+                                        '&:hover': {
+                                            background: 'rgb(156, 39, 176)',
+                                            color: 'white'
+                                        }
+                                    }}>Apply Now</Button>
+                                </Link>
+
                             </Box>
                         </Box>
                         {

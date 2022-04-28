@@ -85,3 +85,21 @@ export const employerFetching = async (data) => {
         console.log('Error while calling employer' + error);
     }
 }
+
+export const postApplication = async (data) => {
+    try {
+        const response = await axios.post(`${URL}/application-post`, data)
+        return response.data
+    } catch (error) {
+        console.log('Error while calling employer' + error);
+    }
+}
+
+export const findApplication = async (data) => {
+    try {
+        const response = await axios.post(`${URL}/find-application`, data)
+        return response.data
+    } catch (error) {
+        console.log('Error while calling employer' + error);
+    }
+}

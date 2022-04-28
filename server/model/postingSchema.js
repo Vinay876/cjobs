@@ -190,5 +190,36 @@ const internshipSchema = new mongoose.Schema({
     }
 });
 
+
+
+const applicationSchema = new mongoose.Schema({
+    User_id: {
+        type: String,
+        required: true
+    },
+    Post_id: {
+        type: String,
+        required: true
+    },
+    Type: {
+        type: String,
+        required: true
+    },
+    Answer1: {
+        type: String,
+        required: true
+    },
+    Answer2: {
+        type: String,
+        required: true
+    },
+    Application_Post_Date:{
+        type: String,
+        required: true
+    },
+});
+
+
 export const Job = mongoose.model('jobs', jobSchema);
 export const Internship = mongoose.model('internships', internshipSchema);
+export const Application = mongoose.model('applications', applicationSchema);

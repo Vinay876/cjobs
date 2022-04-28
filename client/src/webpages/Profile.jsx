@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
-// import { useParams } from 'react-router-dom'
 import Header from '../components/head/Header'
 import Profile1 from '../components/profile/Profile1'
 import Profile2 from '../components/profile/Profile2'
@@ -8,8 +7,7 @@ import { LoginContext } from '../context/Context'
 
 export default function Profile() {
   const { EmployerData, SeekerData } = React.useContext(LoginContext)
-  // const {profile} = useParams()
-  // console.log(profile);
+  const [forOtherDisplay, setForOtherDisplay] = React.useState(false)
   return (
     <>
       <Header />
@@ -23,7 +21,7 @@ export default function Profile() {
 
       {
         SeekerData.Seeker ?
-          <Profile2 />
+          <Profile2 forOtherDisplay={forOtherDisplay} setForOtherDisplay={setForOtherDisplay} />
           :
           null
       }

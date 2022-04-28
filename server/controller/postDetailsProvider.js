@@ -1,4 +1,4 @@
-import { Internship, Job } from "../model/postingSchema.js";
+import { Application, Internship, Job } from "../model/postingSchema.js";
 
 export const jobFinding = async (req, res) => {
     try {
@@ -146,6 +146,25 @@ export const internshipFindingAll = async (req, res) => {
         const user = await Internship.find({}, {});
         if (user) {
             return res.send(user)
+        }
+        else {
+            return res.status(500).json('failed');
+        }
+
+    } catch (error) {
+        console.log('error in catch', error);
+        return res.status(500).json('failed');
+    }
+}
+
+
+export const ApplicationFinding = async (req, res) => {
+    try {
+        const user = await Application.find({
+            User_id: req.body.User_id
+        }, {});
+        if (user) {
+            return res.send(user.filter(data=>data.Type.toLowerCase().includes(req.body.type)))
         }
         else {
             return res.status(500).json('failed');

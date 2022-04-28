@@ -6,15 +6,14 @@ import Job from '../components/helpers/description/Job';
 
 
 export default function Description() {
-    const { type, id } = useParams()
-    console.log(type, id);
+    const { type, id,applied } = useParams()
     return (
         <>
             <Header />
             <div style={{ marginTop: '5rem' }}></div>
             {
-                type === 'job' ? <Job id={id} />
-                    : <Internship id={id} />
+                type === 'job' ? <Job id={id} applied={applied} />
+                    : <Internship id={id} applied={applied} />
             }
         </>
     )

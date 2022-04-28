@@ -15,8 +15,8 @@ import { seekerUpdate, seekerLogin } from '../../api/seeker'
 import { SkillsData } from '../../constants/data'
 
 
-function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
-    const { setMessage, setMessageType, setShow, decrypt, SeekerData, encrypt } = React.useContext(LoginContext)
+function Content({ display, width, align, inpwidth, txtWidth, datawidth, forOtherDisplay, setForOtherDisplay, id }) {
+    const { setMessage, setMessageType, setShow, decrypt, SeekerData, encrypt, toTitle } = React.useContext(LoginContext)
     const [skills, setSkills] = React.useState([])
     const [data, setData] = React.useState({
         User_id: '',
@@ -121,17 +121,36 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                 User_Number: encrypt(data.User_Number),
             }))
         }
+        if (forOtherDisplay) {
+            setForOtherDisplay(false)
+            return
+        }
         window.location.reload(false)
     }
 
     return (
         <>
-            <Typography variant="h5" sx={{ textAlign: "center", color: "rgb(156, 39, 176)", fontWeight: '800', textTransform: 'uppercase', py: 2, fontFamily: 'Fredoka', borderBottom: '2px solid rgb(156, 39, 176)', width: txtWidth, m: '0px auto' }}>
-                Your Profile
-            </Typography>
-            <Typography sx={{ textAlign: "center", fontWeight: '800', py: 2, fontFamily: 'Fredoka', }}>
-                Edit your profile to give people more information about yourself
-            </Typography>
+            {
+                forOtherDisplay ?
+                    <>
+                        <Typography variant="h5" sx={{ textAlign: "center", color: "rgb(156, 39, 176)", fontWeight: '800', textTransform: 'uppercase', py: 2, fontFamily: 'Fredoka', borderBottom: '2px solid rgb(156, 39, 176)', width: txtWidth, m: '0px auto' }}>
+                            Your Profile
+                        </Typography>
+                        <Typography sx={{ textAlign: "center", fontWeight: '800', py: 2, fontFamily: 'Fredoka', }}>
+                            Edit your profile to for this {toTitle(id)}
+                        </Typography>
+                    </>
+                    :
+                    <>
+                        <Typography variant="h5" sx={{ textAlign: "center", color: "rgb(156, 39, 176)", fontWeight: '800', textTransform: 'uppercase', py: 2, fontFamily: 'Fredoka', borderBottom: '2px solid rgb(156, 39, 176)', width: txtWidth, m: '0px auto' }}>
+                            Your Profile
+                        </Typography>
+                        <Typography sx={{ textAlign: "center", fontWeight: '800', py: 2, fontFamily: 'Fredoka', }}>
+                            Edit your profile to give people more information about yourself
+                        </Typography>
+                    </>
+            }
+
 
             <Box sx={{ display: display, alignItems: 'center', justifyContent: 'space-between', textAlign: align }}>
                 <Box>
@@ -257,11 +276,11 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                                     textAlign: 'center',
                                 }} />
                             {
-                                data.open ? <ExpandLessIcon sx={{ p: 1.2, fontSize: '25px', color: 'white', background: 'rgb(156,39,176)',cursor:'pointer'  }} onClick={() => setData(prev => {
+                                data.open ? <ExpandLessIcon sx={{ p: 1.2, fontSize: '25px', color: 'white', background: 'rgb(156,39,176)', cursor: 'pointer' }} onClick={() => setData(prev => {
                                     return { ...prev, open: !data.open }
                                 })} />
                                     :
-                                    <ExpandMoreIcon sx={{ p: 1.2, fontSize: '25px', color: 'white', background: 'rgb(156,39,176)',cursor:'pointer'  }} onClick={() => setData(prev => {
+                                    <ExpandMoreIcon sx={{ p: 1.2, fontSize: '25px', color: 'white', background: 'rgb(156,39,176)', cursor: 'pointer' }} onClick={() => setData(prev => {
                                         return { ...prev, open: !data.open }
                                     })} />
                             }
@@ -303,9 +322,17 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                                 null
                         }
                     </Box>
-                    <Box sx={{ textAlign: 'center' }}>
-                        <Button onClick={UpdateAsSeeker} color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none' }}>Update</Button>
-                    </Box>
+                    {
+                        forOtherDisplay ?
+                            <Box sx={{ textAlign: 'center' }}>
+                                <Button onClick={UpdateAsSeeker} color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none' }}>Update And Continue</Button>
+                            </Box>
+                            :
+                            <Box sx={{ textAlign: 'center' }}>
+                                <Button onClick={UpdateAsSeeker} color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none' }}>Update</Button>
+                            </Box>
+                    }
+
                 </Box>
             </Box>
 
@@ -315,7 +342,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
 
 
 
-export default function Profile2() {
+export default function Profile2({ forOtherDisplay, setForOtherDisplay, id }) {
 
     const xlMax = useMediaQuery('(max-width:2000px)');
     const xlMin = useMediaQuery('(min-width:1100px)');
@@ -328,12 +355,12 @@ export default function Profile2() {
     return (
         <>
             {xlMax && xlMin && (
-                <Content display={'flex'} width={'auto'} align={'unset'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'40%'} />
+                <Content display={'flex'} width={'auto'} align={'unset'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'40%'} forOtherDisplay={forOtherDisplay} setForOtherDisplay={setForOtherDisplay} id={id} />
             )}
             {!(xlMax && xlMin) && mdMax && mdMin && (
-                <Content display={'block'} width={'auto'} align={'center'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'60%'} />
+                <Content display={'block'} width={'auto'} align={'center'} inpwidth={'100%'} txtWidth={'350px'} datawidth={'60%'} forOtherDisplay={forOtherDisplay} setForOtherDisplay={setForOtherDisplay} id={id} />
             )}
-            {sm && (<Content display={'block'} width={'80%'} align={'center'} inpwidth={'100%'} txtWidth={'280px'} datawidth={'60%'} />
+            {sm && (<Content display={'block'} width={'80%'} align={'center'} inpwidth={'100%'} txtWidth={'280px'} datawidth={'60%'} forOtherDisplay={forOtherDisplay} setForOtherDisplay={setForOtherDisplay} id={id} />
             )}
         </>
     )

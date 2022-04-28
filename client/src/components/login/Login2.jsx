@@ -91,12 +91,12 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
             setMessage('Phone Number is not valid.')
             return
         }
-        if (!data.verified) {
-            setShow(true)
-            setMessageType('warning')
-            setMessage('User Number is not verified.')
-            return
-        }
+        // if (!data.verified) {
+        //     setShow(true)
+        //     setMessageType('warning')
+        //     setMessage('User Number is not verified.')
+        //     return
+        // }
         const response = await seekerLogin({
             User_Name: data.User_Name,
             User_Email: data.User_Email,

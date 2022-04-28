@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Typography, Link, Button } from '@mui/material'
+import { Box, Typography, Link, Button, Tooltip } from '@mui/material'
 import { internshipSingleFetching } from '../../../api/postFetch'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
@@ -8,9 +8,11 @@ import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import { useMediaQuery } from '@mui/material'
 import Chip from '@mui/material/Chip';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import { LoginContext } from '../../../context/Context';
 
-function Content({ id, width }) {
+function Content({ id, width, applied }) {
     const [data, setData] = React.useState([])
+    const { SeekerData } = React.useContext(LoginContext)
     React.useEffect(() => {
         getData()
     }, [])
@@ -150,9 +152,21 @@ function Content({ id, width }) {
                             <Typography variant="h6" sx={{ fontFamily: 'Fredoka', color: "rgb(156, 39, 176)" }}>Number Of Openings :</Typography>
                             <Typography variant="h7" sx={{ fontFamily: 'Fredoka', }}>{data.Number_of_openings}</Typography>
                         </Box>
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none' }}>Apply Now </Button>
-                        </Box>
+                        {
+                            applied ? null :
+                                SeekerData.Seeker ?
+                                    <Box sx={{ textAlign: 'center' }}>
+                                        <Link href={`type=internship/apply=${data.Internship_id}`} sx={{ textDecoration: 'none' }}>
+                                            <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none', cursor: 'pointer' }}>Apply Now </Button>
+                                        </Link>
+                                    </Box>
+                                    :
+                                    <Tooltip title="Please Login before appliying" key={data.name} placement="top" arrow>
+                                        <Box sx={{ textAlign: 'center' }}>
+                                            <Button color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none', cursor: 'no-drop', pointerEvents: 'none' }}>Apply Now </Button>
+                                        </Box>
+                                    </Tooltip>
+                        }
                     </Box>
                     : <Typography sx={{ top: '50%', left: '50%', transform: 'translate(-50%,-50%)', fontSize: '30px', fontWeight: '700' }}>Something Went Wrong Try again Later.</Typography>
             }
@@ -161,7 +175,7 @@ function Content({ id, width }) {
 }
 
 
-export default function Internship({ id }) {
+export default function Internship({ id, applied }) {
     const xlMax = useMediaQuery('(max-width:2000px)');
     const xlMin = useMediaQuery('(min-width:1100px)');
     const mdMax = useMediaQuery('(max-width:1100px)');
@@ -173,12 +187,12 @@ export default function Internship({ id }) {
     return (
         <>
             {xlMax && xlMin && (
-                <Content id={id} width={'60%'} />
+                <Content id={id} width={'60%'} applied={applied} />
             )}
             {!(xlMax && xlMin) && mdMax && mdMin && (
-                <Content id={id} width={'80%'} />
+                <Content id={id} width={'80%'} applied={applied} />
             )}
-            {sm && (<Content id={id} width={'95%'} />
+            {sm && (<Content id={id} width={'95%'} applied={applied} />
             )}
         </>
     )
