@@ -19,6 +19,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
     const navigate = useNavigate()
     const { setMessage, setMessageType, setShow, decrypt, SeekerData } = React.useContext(LoginContext)
     const [resendTime, setResendTime] = React.useState(60)
+    const autoRunFunction = React.useRef(() => { })
     const [data, setData] = React.useState({
         User_Name: '',
         User_Email: '',
@@ -34,6 +35,10 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
 
 
     React.useEffect(() => {
+        autoRunFunction.current()
+    }, [])
+
+    autoRunFunction.current = () => {
         if (SeekerData.Seeker) {
             setData(prev => {
                 return {
@@ -45,7 +50,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                 }
             })
         }
-    }, [])
+    }
 
     async function NumberVerifier() {
         clearInterval(timeRef.current);

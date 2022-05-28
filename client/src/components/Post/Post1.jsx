@@ -19,6 +19,9 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
     const navigate = useNavigate()
     const { setMessage, setMessageType, setShow, decrypt, EmployerData } = React.useContext(LoginContext)
     const [skills, setSkills] = React.useState([])
+
+    const GetData = React.useRef(() => { })
+
     const [tags, setTags] = React.useState([])
     var validRegexForEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const [data, setData] = React.useState({
@@ -46,10 +49,10 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
     })
 
     React.useEffect(() => {
-        GetData()
+        GetData.current()
     }, [])
 
-    const GetData = async () => {
+    GetData.current = async () => {
         if (EmployerData.Employer) {
             const response = await employerLogin({
                 Organization_Name: decrypt(EmployerData.Organization_Name),

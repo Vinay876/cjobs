@@ -44,9 +44,12 @@ TabPanel.propTypes = {
     value: PropTypes.number.isRequired,
 }
 export default function Recieved() {
-    const { EmployerData} = React.useContext(LoginContext)
+    const { EmployerData } = React.useContext(LoginContext)
     const [data, setData] = React.useState([])
     const [value, setValue] = React.useState(0);
+
+    const GetData = React.useRef(() => { })
+
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -54,10 +57,10 @@ export default function Recieved() {
 
 
     React.useState(() => {
-        GetData('Job')
+        GetData.current('Job')
     }, [])
 
-    async function GetData(type) {
+    GetData.current = async (type) => {
         const response = await getApplications({
             Employer_id: EmployerData.User_id,
             Type: type
@@ -144,18 +147,22 @@ function Content({ width, Post_id, Seeker_id, Type }) {
     const [data, setData] = React.useState([])  // contains user data
     const [data2, setData2] = React.useState([]) // contains post data
 
+    const GetSeekerData = React.useRef(() => { })
+    const GetPostData = React.useRef(() => { })
+
+
     React.useEffect(() => {
-        GetSeekerData()
-        GetPostData()
+        GetSeekerData.current()
+        GetPostData.current()
     }, [])
 
-    async function GetSeekerData() {
+    GetSeekerData.current = async () => {
         const response = await seekerFind({ User_id: Seeker_id })
         if (response) {
             setData(response)
         }
     }
-    async function GetPostData() {
+    GetPostData.current = async () => {
         if (Type === 'Job') {
             const response = await jobSingleFetching({
                 id: Post_id,

@@ -15,6 +15,9 @@ import { employerLogin } from '../../api/employer'
 
 function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
     const { setMessage, setMessageType, setShow, decrypt, EmployerData, encrypt } = React.useContext(LoginContext)
+
+    const GetData = React.useRef(() => { })
+
     const [data, setData] = React.useState({
         User_id: '',
         Organization_Name: '',
@@ -29,10 +32,10 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
         User_Number: '',
     })
     React.useEffect(() => {
-        GetData()
+        GetData.current()
     }, [])
 
-    const GetData = async () => {
+    GetData.current = async () => {
         if (EmployerData.Employer) {
             const response = await employerLogin({
                 Organization_Name: decrypt(EmployerData.Organization_Name),

@@ -1,5 +1,5 @@
 This is website I am creating for applying for jobs and internships.
-I am using MERN technology to create it.
+I am using MERN technology to create it. This website also has the authencity for checking real user but i have commented it out.
 
 To create server (backend) i used
 
@@ -32,7 +32,7 @@ To create client (frontend) i used
 
 // installing the required packages
 
-    -> npm i "@emotion/react @emotion/styled @mui/icons-material @mui/material axios crypto-js react-router-dom uuid
+    -> npm i "@emotion/react @emotion/styled @mui/icons-material @mui/material axios crypto-js react-router-dom uuid react-spinners
 
 Why i use these packages:
 
@@ -43,6 +43,7 @@ Why i use these packages:
     crypto-js - to encrypt the data we get from the server (backend) due to sefcurity reasons
     uuid - to create a new unique id for every element
     react-router-dom - to use the route feature in react-js.
+    react-spinners - for loading animations
 
 // ------------
 
@@ -137,7 +138,12 @@ The changes in the commits. ( Here i store what changes i made for every commit)
         And the applied bar will be appear on user my application internship or job section
         And also employer can see the data that is filled by the seeker
 
-    ->Eleventh Commit - Don't know (if I want to do)
+    ->Eleventh Commit - 28-05-2022
+        Bug Fixing
+        Added Loading animation
+        Uploaded website on Heroku
+
+    ->Twelvth Commit - Don't know (if I want to do)
         Do documentaion
         Do qna
         Write about us

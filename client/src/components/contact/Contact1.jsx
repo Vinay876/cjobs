@@ -18,6 +18,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
     const navigate = useNavigate()
     const { setMessage, setMessageType, setShow, decrypt, EmployerData } = React.useContext(LoginContext)
     const [resendTime, setResendTime] = React.useState(60)
+    const autoRunFunction = React.useRef(() => { })
     const [data, setData] = React.useState({
         Organization_Name: '',
         Organization_Email: '',
@@ -32,6 +33,14 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
     })
 
     React.useEffect(() => {
+        autoRunFunction.current()
+    }, [])
+
+    const timeRef = React.useRef()
+    const [displayForYourInformation, setDisplayForYourInformation] = React.useState(0)
+    var validRegexForEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    autoRunFunction.current = () => {
         if (EmployerData.Employer) {
             setData(prev => {
                 return {
@@ -46,11 +55,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth }) {
                 }
             })
         }
-    }, [])
-
-    const timeRef = React.useRef()
-    const [displayForYourInformation, setDisplayForYourInformation] = React.useState(0)
-    var validRegexForEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    }
 
     function OrganizationDataChecker() {
         if (!data.Organization_Email.match(validRegexForEmail)) {

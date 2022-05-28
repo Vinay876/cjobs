@@ -7,10 +7,11 @@ import MyApplications from '../../mythings/MyApplications';
 export default function Seeker({ id }) {
     const [data, setData] = React.useState([])
     const [Skills, setSkills] = React.useState([])
+    const getData = React.useRef(() => { })
     React.useEffect(() => {
-        getData()
+        getData.current()
     }, [])
-    async function getData() {
+    getData.current = async () => {
         const response = await seekerFind({ User_id: id })
         if (response) {
             setData(response)
@@ -23,13 +24,13 @@ export default function Seeker({ id }) {
                 <Typography sx={{ textAlign: 'center', fontSize: '30px', color: 'rgb(156, 39, 176)', fontFamily: 'Fredoka', my: 3 }}>{data.User_Name}</Typography>
                 <Box sx={{ width: '50%', m: '0px auto' }}>
                     <Typography sx={{ color: 'black', fontSize: "16px", textAlign: 'center', mt: 3 }}>He lives in</Typography>
-                    <Typography sx={{ color: 'black', fontSize: "16px", textAlign: 'center', color: 'rgb(156, 39, 176)', fontFamily: 'Fredoka' }}>{data.User_Address}</Typography>
+                    <Typography sx={{ fontSize: "16px", textAlign: 'center', color: 'rgb(156, 39, 176)', fontFamily: 'Fredoka' }}>{data.User_Address}</Typography>
 
 
                     <Box sx={{ display: "flex", justifyContent: 'center', alignItems: 'center' }}>
                         <Typography sx={{ fontSize: "16px", textAlign: 'center', my: 2 }}>Email Id - </Typography>
                         <Link href={`mailto:${data.User_Email}`} sx={{ textDecoration: 'none' }}>
-                            <Typography sx={{ fontSize: "16px", textAlign: 'center',  ml: 1, color: 'rgb(156, 39, 176)', fontFamily: 'Fredoka' }}>{data.User_Email}</Typography>
+                            <Typography sx={{ fontSize: "16px", textAlign: 'center', ml: 1, color: 'rgb(156, 39, 176)', fontFamily: 'Fredoka' }}>{data.User_Email}</Typography>
                         </Link>
                     </Box>
                 </Box>

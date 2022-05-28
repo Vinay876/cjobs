@@ -43,7 +43,7 @@ TabPanel.propTypes = {
     value: PropTypes.number.isRequired,
 }
 
-export default function MyApplications({id,applied}) {
+export default function MyApplications({ id, applied }) {
     const { SeekerData } = React.useContext(LoginContext)
     const [data, setData] = React.useState([])
     const [value, setValue] = React.useState(0);
@@ -52,26 +52,27 @@ export default function MyApplications({id,applied}) {
         setValue(newValue);
     };
 
+    const GetData = React.useRef(() => { })
 
     React.useEffect(() => {
-        GetData('job')
+        GetData.current('job')
     }, [])
 
-    async function GetData(type) {
+    GetData.current = async (type) => {
         var response = ''
         setData([])
-        if(id){
+        if (id) {
             response = await findApplication({
-                User_id:id,
+                User_id: id,
                 type: type
             })
-        }else {
+        } else {
             response = await findApplication({
                 User_id: SeekerData.User_id,
                 type: type
             })
         }
-        
+
         if (response) {
             setData(response)
         }
@@ -89,7 +90,7 @@ export default function MyApplications({id,applied}) {
                 {
                     data.length === 0 ?
                         <>
-                            <Typography sx={{mt:10,textAlign:'center',fontWeight: '700', color: "black", fontFamily: 'Fredoka' }}>
+                            <Typography sx={{ mt: 10, textAlign: 'center', fontWeight: '700', color: "black", fontFamily: 'Fredoka' }}>
                                 Not Applied Yet!
                             </Typography>
                         </>
@@ -108,7 +109,7 @@ export default function MyApplications({id,applied}) {
                 {
                     data.length === 0 ?
                         <>
-                            <Typography sx={{mt:10,textAlign:'center',fontWeight: '700', color: "black", fontFamily: 'Fredoka' }}>
+                            <Typography sx={{ mt: 10, textAlign: 'center', fontWeight: '700', color: "black", fontFamily: 'Fredoka' }}>
                                 Not Applied Yet!
                             </Typography>
                         </>
@@ -127,12 +128,13 @@ export default function MyApplications({id,applied}) {
 }
 
 
-function GetID({ Post_id, Type,applied }) {
+function GetID({ Post_id, Type, applied }) {
     const [data, setData] = React.useState([])
+    const GetPostData = React.useRef(() => { })
     React.useEffect(() => {
-        GetPostData()
+        GetPostData.current()
     }, [])
-    async function GetPostData() {
+    GetPostData.current = async() => {
         if (Type === 'Job') {
             const response = await jobSingleFetching({
                 id: Post_id,

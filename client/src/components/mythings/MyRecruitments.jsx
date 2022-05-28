@@ -48,16 +48,17 @@ export default function MyRecruitments() {
     const [data, setData] = React.useState([])
     const [value, setValue] = React.useState(0);
 
+    const getJobsData = React.useRef(() => [])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
     React.useEffect(() => {
-        getJobsData()
+        getJobsData.current()
     }, []);
 
-    async function getJobsData() {
+    getJobsData.current = async () => {
         setData([])
         const response = await jobFetching({
             Organization_Name: decrypt(EmployerData.Organization_Name),
@@ -102,7 +103,7 @@ export default function MyRecruitments() {
                         </Typography> :
                         data.map((datas, index) => {
                             return (
-                                <ServiceCard data={datas} />
+                                <ServiceCard data={datas} applied={true} />
                             )
                         })
                 }
@@ -116,7 +117,7 @@ export default function MyRecruitments() {
                         </Typography> :
                         data.map((datas, index) => {
                             return (
-                                <ServiceCard2 data={datas} />
+                                <ServiceCard2 data={datas} applied={true} />
                             )
                         })
                 }

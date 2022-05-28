@@ -14,15 +14,18 @@ export default function Forms() {
     const [data, setData] = React.useState([])  // contains user data
     const [data2, setData2] = React.useState([]) // contains post data
     const [data3, setData3] = React.useState([]) // contains application data
+    const GetSeekerData = React.useRef(() => { })
+    const GetPostData = React.useRef(() => { })
+    const GetApplicationData = React.useRef(() => { })
 
     React.useEffect(() => {
-        GetSeekerData()
-        GetPostData()
-        GetApplicationData(type)
-    }, [])
+        GetSeekerData.current()
+        GetPostData.current()
+        GetApplicationData.current(type)
+    }, [type])
 
 
-    async function GetApplicationData(type) {
+    GetApplicationData.current = async (type) => {
         const response = await getSingleApplications({
             Employer_id: EmployerData.User_id,
             Post_id: post,
@@ -34,13 +37,13 @@ export default function Forms() {
         }
     }
 
-    async function GetSeekerData() {
+    GetSeekerData.current = async() => {
         const response = await seekerFind({ User_id: user })
         if (response) {
             setData(response)
         }
     }
-    async function GetPostData() {
+    GetPostData.current = async() => {
         if (type === 'job') {
             const response = await jobSingleFetching({
                 id: post,
@@ -61,7 +64,6 @@ export default function Forms() {
             return
         }
     }
-    console.log(data2);
     return (
         <>
             <Header />
@@ -88,11 +90,11 @@ export default function Forms() {
                                         data3.map((datas, index) => {
                                             return (
                                                 <Box key={index}>
-                                                    <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: '700', fontFamily: 'Fredoka', textAlign: 'center',mt:5 }}>Question 1 :</Typography>
+                                                    <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: '700', fontFamily: 'Fredoka', textAlign: 'center', mt: 5 }}>Question 1 :</Typography>
                                                     <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: '700', fontFamily: 'Fredoka', textAlign: 'center', }}>From which date you can start? Are sure you match the requirements that are listed for this {type}?
                                                         How long you can work? When you are avaliable? Where do you live?</Typography>
                                                     <Typography sx={{ color: 'rgb(156, 39, 176)', fontSize: '16px', fontWeight: '700', fontFamily: 'Fredoka', mx: 1, textAlign: 'center' }}>{datas.Answer1} </Typography>
-                                                    <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: '700', fontFamily: 'Fredoka', textAlign: 'center',mt:5 }}>Question 2 :</Typography>
+                                                    <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: '700', fontFamily: 'Fredoka', textAlign: 'center', mt: 5 }}>Question 2 :</Typography>
                                                     <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: '700', fontFamily: 'Fredoka', textAlign: 'center', }}> Please Share the projects that you have worked in this field?</Typography>
                                                     <Typography sx={{ color: 'rgb(156, 39, 176)', fontSize: '16px', fontWeight: '700', fontFamily: 'Fredoka', mx: 1, textAlign: 'center' }}>{datas.Answer2} </Typography>
 
@@ -106,10 +108,10 @@ export default function Forms() {
                                     }
 
                                     {/* I wnat to add card here but it always causing an error so i jsut using the link to description  */}
-                                    <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: '700', fontFamily: 'Fredoka', textAlign: 'center', mt:5}}>Your Post :</Typography>
+                                    <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: '700', fontFamily: 'Fredoka', textAlign: 'center', mt: 5 }}>Your Post :</Typography>
                                     {/* <ServiceCard data={data2} applied={true} /> */}
                                     <Link sx={{ textDecoration: 'none' }} href={`/description-job=${post}&applied=true`}>
-                                        <Typography sx={{ color: 'rgb(156, 39, 176)', fontSize: '18px', fontWeight: '700', fontFamily: 'Fredoka',textAlign: 'center',  }}>Click here to see your post</Typography>
+                                        <Typography sx={{ color: 'rgb(156, 39, 176)', fontSize: '18px', fontWeight: '700', fontFamily: 'Fredoka', textAlign: 'center', }}>Click here to see your post</Typography>
                                     </Link>
                                 </Box>
 
@@ -162,11 +164,11 @@ export default function Forms() {
                                     }
 
 
-                                     {/* I wnat to add card here but it always causing an error so i jsut using the link to description  */}
-                                     <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: '700', fontFamily: 'Fredoka', textAlign: 'center', mt:5}}>Your Post :</Typography>
+                                    {/* I wnat to add card here but it always causing an error so i jsut using the link to description  */}
+                                    <Typography sx={{ color: 'black', fontSize: '16px', fontWeight: '700', fontFamily: 'Fredoka', textAlign: 'center', mt: 5 }}>Your Post :</Typography>
                                     {/* <ServiceCard2 data={data2} applied={true} /> */}
                                     <Link sx={{ textDecoration: 'none' }} href={`/description-internship=${post}&applied=true`}>
-                                        <Typography sx={{ color: 'rgb(156, 39, 176)', fontSize: '18px', fontWeight: '700', fontFamily: 'Fredoka',textAlign: 'center',  }}>Click here to see your post</Typography>
+                                        <Typography sx={{ color: 'rgb(156, 39, 176)', fontSize: '18px', fontWeight: '700', fontFamily: 'Fredoka', textAlign: 'center', }}>Click here to see your post</Typography>
                                     </Link>
                                 </Box>
 

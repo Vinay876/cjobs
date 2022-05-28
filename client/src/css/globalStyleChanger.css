@@ -1,0 +1,8 @@
+.MuiTabs-indicator{
+    background-color:rgb(156, 39, 176)!important;
+    /* display: none!important; */
+}
+
+.Mui-selected{
+    color: rgb(156, 39, 176)!important;
+}

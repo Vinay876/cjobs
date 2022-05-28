@@ -46,16 +46,17 @@ export default function Recruitments({ id }) {
     const [data, setData] = React.useState([])
     const [value, setValue] = React.useState(0);
 
+    const getJobsData = React.useRef(() => { })
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
     React.useEffect(() => {
-        getJobsData()
+        getJobsData.current()
     }, []);
 
-    async function getJobsData() {
+    getJobsData.current = async () => {
         setData([])
         const response = await jobOtherFetching({ id: id })
         if (response) {

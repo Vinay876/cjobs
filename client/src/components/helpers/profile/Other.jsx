@@ -4,10 +4,11 @@ import { employerView } from '../../../api/employer'
 
 export default function Other({ id }) {
     const [data, setData] = React.useState([])
+    const getData = React.useRef(()=>{})
     React.useEffect(() => {
-        getData()
+        getData.current()
     }, [])
-    async function getData() {
+    getData.current=async()=> {
         const response = await employerView({ id: id })
         if (response) {
             setData(response)
@@ -24,7 +25,7 @@ export default function Other({ id }) {
                                 <Box sx={{ width: '50%', m: '0px auto' }}>
                                     <Typography sx={{ color: 'black', fontSize: "16px", textAlign: 'center', my: 3, fontFamily: 'Fredoka' }}>{datas.Organization_Details}</Typography>
                                     <Typography sx={{ color: 'black', fontSize: "16px", textAlign: 'center', mt: 3 }}>Their headquarter is in</Typography>
-                                    <Typography sx={{ color: 'black', fontSize: "16px", textAlign: 'center', color: 'rgb(156, 39, 176)', fontFamily: 'Fredoka' }}>{datas.Organization_Address}</Typography>
+                                    <Typography sx={{  fontSize: "16px", textAlign: 'center', color: 'rgb(156, 39, 176)', fontFamily: 'Fredoka' }}>{datas.Organization_Address}</Typography>
 
                                     <Link href={datas.Organization_Website} sx={{ textDecoration: 'none' }}>
                                         <Typography sx={{ fontSize: "16px", textAlign: 'center', my: 2, color: 'rgb(156, 39, 176)', fontFamily: 'Fredoka' }}>Click here to visit their website</Typography>

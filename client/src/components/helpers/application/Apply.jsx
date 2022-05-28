@@ -41,7 +41,7 @@ function Content({ id, typeId, display, width, align, inpwidth, txtWidth, datawi
                 setMessage(`Already applied for this ${toTitle(id)}.`)
                 return
             }
-            else if (response == 'success') {
+            else if (response === 'success') {
                 navigate('/')
                 setShow(true)
                 setMessageType('success')

@@ -18,6 +18,9 @@ import { SkillsData } from '../../constants/data'
 function Content({ display, width, align, inpwidth, txtWidth, datawidth, forOtherDisplay, setForOtherDisplay, id }) {
     const { setMessage, setMessageType, setShow, decrypt, SeekerData, encrypt, toTitle } = React.useContext(LoginContext)
     const [skills, setSkills] = React.useState([])
+
+    const GetData = React.useRef(() => { })
+
     const [data, setData] = React.useState({
         User_id: '',
         User_Name: '',
@@ -27,7 +30,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth, forOthe
         open: false,
     })
     React.useEffect(() => {
-        GetData()
+        GetData.current()
     }, [])
 
     function skillAdder(event) {
@@ -41,7 +44,7 @@ function Content({ display, width, align, inpwidth, txtWidth, datawidth, forOthe
     }
 
 
-    const GetData = async () => {
+    GetData.current = async () => {
         if (SeekerData.Seeker) {
             const response = await seekerLogin({
                 User_Name: decrypt(SeekerData.User_Name),

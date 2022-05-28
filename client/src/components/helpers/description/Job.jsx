@@ -12,11 +12,12 @@ import { LoginContext } from '../../../context/Context';
 function Content({ id, width, applied }) {
     const { SeekerData } = React.useContext(LoginContext)
     const [data, setData] = React.useState([])
+    const getData = React.useRef(() => { })
     React.useEffect(() => {
-        getData()
+        getData.current()
     }, [])
 
-    async function getData() {
+    getData.current = async () => {
         const response = await jobSingleFetching({ id: id })
         if (response) {
             setData(response)

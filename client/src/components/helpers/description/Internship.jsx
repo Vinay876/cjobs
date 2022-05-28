@@ -13,11 +13,12 @@ import { LoginContext } from '../../../context/Context';
 function Content({ id, width, applied }) {
     const [data, setData] = React.useState([])
     const { SeekerData } = React.useContext(LoginContext)
+    const getData = React.useRef(() => { })
     React.useEffect(() => {
-        getData()
+        getData.current()
     }, [])
 
-    async function getData() {
+    getData.current = async () => {
         const response = await internshipSingleFetching({ id: id })
         if (response) {
             setData(response)
@@ -42,7 +43,7 @@ function Content({ id, width, applied }) {
                             <Link sx={{ textDecoration: 'none' }} href={data.Organization_Website}>
                                 <Typography variant="h7" sx={{ fontFamily: 'Fredoka' }}>Website</Typography>
                             </Link>
-                            <Typography sx={{ color: 'black', fontSize: "16px", mt: 3 }}>Their headquarter is in -  <span style={{ color: 'black', fontSize: "16px", color: 'rgb(156, 39, 176)', fontFamily: 'Fredoka' }}>{data.Organization_Address}</span></Typography>
+                            <Typography sx={{ color: 'black', fontSize: "16px", mt: 3 }}>Their headquarter is in -  <span style={{  fontSize: "16px", color: 'rgb(156, 39, 176)', fontFamily: 'Fredoka' }}>{data.Organization_Address}</span></Typography>
 
                         </Box>
                         <Box sx={{ display: width === '60%' ? "flex" : 'block', justifyContent: 'flex-start', alignItems: 'center', width: width, m: '0px auto' }}>
@@ -153,7 +154,7 @@ function Content({ id, width, applied }) {
                             <Typography variant="h7" sx={{ fontFamily: 'Fredoka', }}>{data.Number_of_openings}</Typography>
                         </Box>
                         {
-                             applied === 'true' ? null :
+                            applied === 'true' ? null :
                                 <>
                                     {
                                         SeekerData.Seeker ?

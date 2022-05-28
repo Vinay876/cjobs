@@ -11,7 +11,7 @@ import Tooltip from '@mui/material/Tooltip';
 import WarningIcon from '@mui/icons-material/Warning';
 import DoneIcon from '@mui/icons-material/Done';
 import { useMediaQuery } from '@mui/material'
-import { sendOTP } from '../../api/otpSend'
+// import { sendOTP } from '../../api/otpSend'
 import { employerLogin } from '../../api/employer'
 
 const userData = {
@@ -20,17 +20,17 @@ const userData = {
     User_Name: '',
     User_Email: '',
     User_Number: '',
-    otp: '',
+    // otp: '',
     verified: false,
-    enteredOtp: '',
+    // enteredOtp: '',
 }
 
 function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
     const navigate = useNavigate()
     const { setMessage, setMessageType, setShow, encrypt } = React.useContext(LoginContext)
-    const [resendTime, setResendTime] = React.useState(60)
+    // const [resendTime, setResendTime] = React.useState(60)
     const [data, setData] = React.useState(userData)
-    const timeRef = React.useRef()
+    // const timeRef = React.useRef()
     const [displayForYourInformation, setDisplayForYourInformation] = React.useState(0)
     var validRegexForEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -50,43 +50,43 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
         setDisplayForYourInformation(1)
     }
 
-    async function NumberVerifier() {
-        clearInterval(timeRef.current);
-        setResendTime(60);
-        const response = await sendOTP({ Number: `+91${data.User_Number}` })
-        if (response) {
-            setShow(true)
-            setMessageType('success')
-            setMessage('OTP sent.')
-            setData(prev => {
-                return { ...prev, otp: response.slice(0, 6) }
-            })
-        }
-        timeRef.current = setInterval(() => {
-            setResendTime((time) => time - 1)
-        }, 1000);
-    }
-    if (resendTime === 0) {
-        clearInterval(timeRef.current)
-    }
+    // async function NumberVerifier() {
+    //     clearInterval(timeRef.current);
+    //     setResendTime(60);
+    //     const response = await sendOTP({ Number: `+91${data.User_Number}` })
+    //     if (response) {
+    //         setShow(true)
+    //         setMessageType('success')
+    //         setMessage('OTP sent.')
+    //         setData(prev => {
+    //             return { ...prev, otp: response.slice(0, 6) }
+    //         })
+    //     }
+    //     timeRef.current = setInterval(() => {
+    //         setResendTime((time) => time - 1)
+    //     }, 1000);
+    // }
+    // if (resendTime === 0) {
+    //     clearInterval(timeRef.current)
+    // }
 
-    const verifyOTP = () => {
-        if (data.otp === data.enteredOtp) {
-            setData(prev => {
-                return { ...prev, verified: true, otp: '' }
-            })
-            setShow(true)
-            setMessageType('success')
-            setMessage('Number verified')
-        } else {
-            setShow(true)
-            setMessageType('error')
-            setMessage('Incorrect OTP')
-            setData(prev => {
-                return { ...prev, verified: false }
-            })
-        }
-    }
+    // const verifyOTP = () => {
+    //     if (data.otp === data.enteredOtp) {
+    //         setData(prev => {
+    //             return { ...prev, verified: true, otp: '' }
+    //         })
+    //         setShow(true)
+    //         setMessageType('success')
+    //         setMessage('Number verified')
+    //     } else {
+    //         setShow(true)
+    //         setMessageType('error')
+    //         setMessage('Incorrect OTP')
+    //         setData(prev => {
+    //             return { ...prev, verified: false }
+    //         })
+    //     }
+    // }
 
     async function RegisterAsEmployer() {
         if (!data.User_Email.match(validRegexForEmail)) {
@@ -279,7 +279,9 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
                                                 </Tooltip>
                                                 :
                                                 <Tooltip title="Click to verify" placement="top" arrow>
-                                                    <WarningIcon onClick={NumberVerifier} sx={{ cursor: 'pointer', fontSize: '20px', color: 'red', px: 1, }} />
+                                                    <WarningIcon 
+                                                    // onClick={NumberVerifier}
+                                                     sx={{ cursor: 'pointer', fontSize: '20px', color: 'red', px: 1, }} />
                                                 </Tooltip>
                                         }
                                     </Box>
@@ -288,7 +290,7 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
                             }
                         </Box>
                     </Box>
-                    {
+                    {/* {
                         data.otp ?
                             <Box sx={{ margin: '0px auto', }}>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -337,7 +339,7 @@ function Content({ display, width, align, inpwidth,txtWidth,datawidth }) {
                             </Box>
                             :
                             null
-                    }
+                    } */}
                     <Box sx={{ textAlign: 'center' }}>
                         <Button onClick={RegisterAsEmployer} color="secondary" variant='contained' sx={{ boxShadow: 0, textTransform: 'none' }}>Login</Button>
                     </Box>

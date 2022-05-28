@@ -31,7 +31,10 @@ import Minimum_CTC_of_3_LPA from '../assets/home/advantages/ctc.svg'
 import Dream_companies from '../assets/home/advantages/dream.svg'
 import Verified_jobs from '../assets/home/advantages/verified.svg'
 
-
+import Trainings from '../assets/about/training.svg'
+import Freshers from '../assets/about/fresherJobs.svg'
+import Interneships from '../assets/about/internships.svg'
+import Jobs from '../assets/about/job.svg'
 
 
 export const InternshipHelperData = {
@@ -344,3 +347,27 @@ export const AdvantageData = [
     { url: Verified_jobs, name: '100% verified jobs' },
 ]
 
+
+
+
+export const VisionImagesAboutusAboutData = [
+    {
+        url: Trainings, head: 'Trainings',
+        text: 'Learn new-age skills on the go with our short-term online trainings'
+    },
+
+    {
+        url: Jobs, head: 'Job-oriented specializations',
+        text: 'Specialize in industry-oriented programs that get you ready for a career in your dream profile'
+    },
+
+    {
+        url: Freshers, head: 'Fresher Jobs',
+        text: 'Get premium fresher jobs with a minimum CTC of 3LPA on your fingertips'
+    },
+
+    {
+        url: Interneships, head: 'Internships',
+        text: 'Find 10,000+ internships from great companies to give a kickstart to your career'
+    },
+]

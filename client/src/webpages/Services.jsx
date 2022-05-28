@@ -13,17 +13,18 @@ export default function Services() {
   const { id, city, category } = useParams()
   const [data, setData] = React.useState([])
   const { toTitle } = React.useContext(LoginContext)
-
+  const getJobsData = React.useRef(() => { })
+  const getInternshipsData = React.useRef(() => { })
 
 
   React.useEffect(() => {
     if (id === 'jobs') {
-      getJobsData()
+      getJobsData.current()
     } else if (id === 'internships') {
-      getInternshipsData()
+      getInternshipsData.current()
     }
-  }, [])
-  async function getJobsData() {
+  }, [id])
+  getJobsData.current = async () => {
     const response = await jobFetchingAll({})
     if (response) {
       selection(response)
@@ -68,7 +69,7 @@ export default function Services() {
     }
   }
 
-  async function getInternshipsData() {
+  getInternshipsData.current = async () => {
     const response = await internshipFetchingAll({})
     if (response) {
       selection(response)
@@ -98,7 +99,7 @@ export default function Services() {
                   return (
                     <ServiceCard key={index} data={datas} applied={false} />
                   )
-                }) : <Typography sx={{my:5,fontWeight: '700', color: "black", fontFamily: 'Fredoka',textAlign:'center' }}>
+                }) : <Typography sx={{ my: 5, fontWeight: '700', color: "black", fontFamily: 'Fredoka', textAlign: 'center' }}>
                   Not Posted Yet!
                 </Typography>
             }
@@ -115,7 +116,7 @@ export default function Services() {
                   return (
                     <ServiceCard2 key={index} data={datas} applied={false} />
                   )
-                }) : <Typography sx={{my:5,fontWeight: '700', color: "black", fontFamily: 'Fredoka',textAlign:'center' }}>
+                }) : <Typography sx={{ my: 5, fontWeight: '700', color: "black", fontFamily: 'Fredoka', textAlign: 'center' }}>
                   Not Posted Yet!
                 </Typography>
             }

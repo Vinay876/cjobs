@@ -26,13 +26,13 @@ function Content({ isResponsive }) {
                             </Typography>
                             <Box sx={{ textAlign: 'center' }}>
                                 <Link href='chosen=post-a-job' sx={{ textDecoration: 'none' }}>
-                                    <Button variant='outlined' color='secondary' sx={{
+                                    <Button variant='contained' color='secondary' sx={{
                                         boxShadow: 0,
                                         textTransform: 'none',
                                         mt: 7,
                                         '&:hover': {
-                                            background: 'rgb(156, 39, 176)',
-                                            color: 'white'
+                                            background: 'white',
+                                            color: 'rgb(156, 39, 176)'
                                         }
                                     }}>Post Requirement</Button>
                                 </Link>
@@ -63,13 +63,13 @@ function Content({ isResponsive }) {
                             </Typography>
                             <Box sx={{ textAlign: 'center' }}>
                                 <Link href='/type=jobs&filter=&city=null&category=null' sx={{ textDecoration: 'none' }}>
-                                    <Button variant='outlined' color='secondary' sx={{
+                                <Button variant='contained' color='secondary' sx={{
                                         boxShadow: 0,
                                         textTransform: 'none',
                                         mt: 7,
                                         '&:hover': {
-                                            background: 'rgb(156, 39, 176)',
-                                            color: 'white'
+                                            background: 'white',
+                                            color: 'rgb(156, 39, 176)'
                                         }
                                     }}>Apply Now</Button>
                                 </Link>
@@ -102,13 +102,13 @@ function Content({ isResponsive }) {
                             </Typography>
                             <Box sx={{ textAlign: 'center' }}>
                                 <Link href='/type=jobs&filter=&city=null&category=null' sx={{ textDecoration: 'none' }}>
-                                    <Button variant='outlined' color='secondary' sx={{
+                                <Button variant='contained' color='secondary' sx={{
                                         boxShadow: 0,
                                         textTransform: 'none',
                                         mt: 7,
                                         '&:hover': {
-                                            background: 'rgb(156, 39, 176)',
-                                            color: 'white'
+                                            background: 'white',
+                                            color: 'rgb(156, 39, 176)'
                                         }
                                     }}>Apply Now</Button>
                                 </Link>
