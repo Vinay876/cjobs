@@ -4,12 +4,16 @@
   "type": "module",
   "description": "This is work as backend for cjobs",
   "main": "index.js",
+  "engines" : { 
+    "npm" : ">=8.3.2",
+    "node" : ">=16.13.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodeindex.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ../FRONTEND && npm run build --prefix ../FRONTEND"
+    "start": "node index.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "author": "",
+  "author": "Yash Sharma",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
