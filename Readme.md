@@ -61,9 +61,7 @@ Why i use these packages:
 // ------------
 
 
-Here is the url where i am hosting the website right now
 
-    https://cjobs-3c223.firebaseapp.com/
 
 The theme of the website is
 
