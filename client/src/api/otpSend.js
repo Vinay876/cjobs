@@ -8,6 +8,6 @@ export const sendOTP = async (num) => {
     const response = await axios.post(`${URL}/send-otp`, num)
     return response.data
   } catch (error) {
-    console.log('Error while calling Payment' + error);
+    // console.log('Error while calling Payment' + error);
   }
 }

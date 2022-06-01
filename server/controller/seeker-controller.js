@@ -5,7 +5,6 @@ export const seekerRegister = async (req, res) => {
         const exist = await Seeker.findOne({
             User_Name: req.body.User_Name,
             User_Email: req.body.User_Email,
-            User_Name: req.body.User_Name,
             User_Number: req.body.User_Number,
         });
         if (exist) {
@@ -25,11 +24,13 @@ export const seekerRegister = async (req, res) => {
 
 export const seekerLogin = async (req, res) => {
     try {
+        console.log(req.body);
         const user = await Seeker.findOne({
             User_Name: req.body.User_Name,
             User_Email: req.body.User_Email,
             User_Number: req.body.User_Number,
         }, { "User_id": 1, "User_Name": 1, "User_Address": 1, "User_Email": 1, "User_Number": 1, "Skills": 1 });
+        console.log(user);
         if (user) {
             return res.send(user)
         }

@@ -8,7 +8,7 @@ export const jobPosting = async (data) => {
         const response = await axios.post(`${URL}/post-job`, data)
         return response.data
     } catch (error) {
-        console.log('Error while calling employer' + error);
+        // console.log('Error while calling employer' + error);
     }
 }
 export const internshipPosting = async (data) => {
@@ -16,6 +16,6 @@ export const internshipPosting = async (data) => {
         const response = await axios.post(`${URL}/post-internship`, data)
         return response.data
     } catch (error) {
-        console.log('Error while calling employer' + error);
+        // console.log('Error while calling employer' + error);
     }
 }
